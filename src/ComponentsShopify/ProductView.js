@@ -15,6 +15,8 @@ export default (props) => {
 	const [size, setSize] = useState("")
 	const [quantity, setQuantity] = useState(1)
 
+	console.log(product && product)
+
 	const description = product.description && product.description.split(".")
 
 	function changeSize(sizeId, quantity) {

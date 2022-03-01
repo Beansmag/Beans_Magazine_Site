@@ -5,6 +5,7 @@ import { useShopify } from "./hooks";
 import Cart from './ComponentsShopify/Cart';
 // import Home from './Components/Home';
 import Products from './ComponentsShopify/Products' ;
+import ProductView from './ComponentsShopify/ProductView';
 
 
 import About from './Components/About';
@@ -35,6 +36,7 @@ function App(props) {
 				{/* <Cart /> */}
 				<Switch>
 					<Route exact path='/' component={Products} />
+					<Route exact path='/:productId' component={ProductView}/>
 					<Route path='/lookbook' component={Lookbook} />
 					<Route path='/return' component={Return} />
 					<Route path='/contact' component={Contact} />
