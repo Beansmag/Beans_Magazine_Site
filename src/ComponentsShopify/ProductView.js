@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { useShopify } from "../hooks"
 
 export default (props) => {
+
+	// would I be able to access these action creators from the products page?
 	const {
 		product,
 		fetchProduct,
@@ -10,12 +12,11 @@ export default (props) => {
 		checkoutState,
 		addVariant,
 	} = useShopify()
+
 	const id = props.match.params.productId
 	const defaultSize = product.variants && product.variants[0].id.toString()
 	const [size, setSize] = useState("")
 	const [quantity, setQuantity] = useState(1)
-
-	console.log(product && product)
 
 	const description = product.description && product.description.split(".")
 
@@ -43,7 +44,7 @@ export default (props) => {
 
 	return (
 		<div id="individualProduct">
-			<Link className="homeButton button" to={"/Home"}>
+			<Link className="homeButton button" to={"/"}>
 				Home
 			</Link>
 			<div className="Product-wrapper2">

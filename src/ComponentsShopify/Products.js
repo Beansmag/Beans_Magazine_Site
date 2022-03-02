@@ -3,7 +3,7 @@ import React from "react";
 import Product from "./Product";
 import Navbar from '../Components/Navbar'
 
-import BGVideo from '../Assets/BackgroundVideo.mp4';
+// import BGVideo from '../Assets/BackgroundVideo.mp4';
 
 import '../Styles/Home.css'
 
