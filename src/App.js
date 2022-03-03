@@ -1,22 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { useShopify } from "./hooks";
 
 import Cart from './ComponentsShopify/Cart';
 // import Home from './Components/Home';
 import Products from './ComponentsShopify/Products' ;
-import ProductView from './ComponentsShopify/ProductView';
+// import ProductView from './ComponentsShopify/ProductView';
+import LoadingPage from './Components/LoadingPage';
+import Navbar from './Components/Navbar'
 
 
 import About from './Components/About';
-import Contact from './Components/About';
 import Lookbook from './Components/Lookbook';
-import Terms from './Components/Terms';
-import Return from './Components/Return';
 
 import './App.css';
 
 function App(props) {
+	const [completed, setCompleted] = useState(false)
+
+	useEffect(() => {
+		setTimeout(() => {
+			setCompleted(true)
+		  }, 3000);
+	  }, []);
 
 	const {
 		createShop,
@@ -32,16 +38,19 @@ function App(props) {
 
   return (
 	  <Router>
+		  	{!completed ?
+				<LoadingPage />
+				:
+				<span></span>
+			}
 			<div className="App">
-				{/* <Cart /> */}
+				<Cart />
+				<Navbar />
 				<Switch>
-					<Route exact path='/' component={Products} />
-					<Route exact path='/:productId' component={ProductView}/>
+					<Route exact path='/' component={LoadingPage} />
+					<Route path='/home' component={Products} />
 					<Route path='/lookbook' component={Lookbook} />
-					<Route path='/return' component={Return} />
-					<Route path='/contact' component={Contact} />
 					<Route path='/about' component={About} />
-					<Route path='/terms' component={Terms} />
 				</Switch>
 			</div>
 	</Router>

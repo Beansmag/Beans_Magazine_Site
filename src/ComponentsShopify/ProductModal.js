@@ -38,16 +38,101 @@ export default (props) => {
 	}
 
     //  //this doesn't work yet
-	// useEffect(() => {
-	// 	fetchProduct(id)
-	// }, [id])
+	useEffect(() => {
+		if (id !== "...Loading"){
+			fetchProduct(id)
+		}
+	}, [id])
 
     return (
         <div>
             Product Modal
-            <h1>{id}</h1>
-            <h1>{defaultSize}</h1>
-            <h1>{description}</h1>
+            <h6>{id}</h6>
+            <h6>{defaultSize}</h6>
+			<h6>{products[props.index] !== undefined ? products[props.index].title : "...Loading"}</h6>
+			<div className="Product-wrapper2">
+				<div className="Images">
+					{/* {products[props.index] ?
+						products[props.index].images.map((image, i) => {
+							return (
+								<img
+									key={image.id + i}
+									src={image.src}
+									alt={`${product.title} product shot`}
+								/>								
+							)
+						})
+						:
+						"...Loading"
+					} 
+				</div>*/}
+				{/* <ul className="Product__description">
+					{description === undefined ?
+						<span></span>
+						:
+						description.map((each, i) => {
+							return <li key={`line-description +${i}`}>{each}</li>
+						})}
+				</ul> */}
+				<div className="Product__info">
+					{/* <h2 className="Product__title2">{product.title}</h2>
+					<ul className="Product__description">
+						{description &&
+							description.map((each, i) => {
+								return <li key={`line-description +${i}`}>{each}</li>
+							})}
+					</ul> */}
+
+					<div>
+						<label htmlFor={"prodOptions"}>Size</label>
+						<select
+							id="prodOptions"
+							name={size}
+							onChange={(e) => {
+								setSize(e.target.value)
+							}}
+						>	
+							{products[props.index] === undefined ?
+								"...Loading"
+								:
+								products[props.index].variants.map((item, i) => {
+									return (
+										<option
+										value={item.id.toString()}
+										key={item.title + i}
+									>{`${item.title}`}</option>
+									)
+								})
+							}
+						</select>
+					</div>
+
+					<div>
+						<label>Quantity</label>
+						<input
+							className="quantity"
+							type="number"
+							min={1}
+							value={quantity}
+							onChange={(e) => {
+								setQuantity(e.target.value)
+							}}
+						></input>
+					</div>
+
+					<h3 className="Product__price">
+						${products[props.index] === undefined ? "...Loading" : products[props.index].variants[0].price}
+					</h3>
+					<button
+						className="prodBuy button"
+						onClick={(e) => changeSize(size, quantity)}
+					>
+						Add to Cart
+					</button>
+					
+					</div>
+				</div>
+			</div>
         </div>
     )
 }

@@ -10,7 +10,6 @@ import '../Styles/Home.css'
 export default (props) => {
 	return (
 		<div className="Products-wrapper" style={{ overflow: "hidden" }}>
-			<Navbar />
 			<Product history={props.history} />
 			{/* <video loop autoPlay muted className="home-bg-vid">
             	<source src={BGVideo} type="video/mp4" />
