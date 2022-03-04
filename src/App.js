@@ -3,9 +3,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { useShopify } from "./hooks";
 
 import Cart from './ComponentsShopify/Cart';
-// import Home from './Components/Home';
 import Products from './ComponentsShopify/Products' ;
-// import ProductView from './ComponentsShopify/ProductView';
 import LoadingPage from './Components/LoadingPage';
 import Navbar from './Components/Navbar'
 
@@ -47,8 +45,8 @@ function App(props) {
 				<Cart />
 				<Navbar />
 				<Switch>
-					<Route exact path='/' component={LoadingPage} />
-					<Route path='/home' component={Products} />
+					<Route exact path='/' component={Products} />
+					{/* <Route path='/home' component={Products} /> */}
 					<Route path='/lookbook' component={Lookbook} />
 					<Route path='/about' component={About} />
 				</Switch>
