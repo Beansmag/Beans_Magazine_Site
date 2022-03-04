@@ -1,4 +1,3 @@
-import { Center } from '@react-three/drei'
 import React from 'react'
 
 import BGVideo from '../Assets/Backprint_1.mp4'
