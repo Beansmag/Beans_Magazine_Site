@@ -16,6 +16,11 @@ import Client from "shopify-buy/index.unoptimized.umd"
 	domain: 'jeromejahmal.myshopify.com'
   });
 
+//   const client = Client.buildClient({
+// 	storefrontAccessToken: 'cf54d30fe1ebe608e5affc7a5fbccaaf',
+// 	domain: 'beansmag.myshopify.com/'
+//   });
+
 const PRODUCTS_FOUND = "shopify/PRODUCTS_FOUND"
 const PRODUCT_FOUND = "shopify/PRODUCT_FOUND"
 const COLLECTION_FOUND = "shopify/COLLECTION_FOUND"

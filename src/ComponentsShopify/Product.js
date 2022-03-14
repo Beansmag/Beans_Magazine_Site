@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react"
-import { useShopify } from "../hooks"
-import { Container, Col, Row } from 'react-bootstrap'
+import React, { useState, useEffect } from "react";
+import { useShopify } from "../hooks";
+import { Container, Col, Row } from 'react-bootstrap';
+import { useDrag } from 'react-use-gesture'
 
-import ProductModal from "./ProductModal"
+import ProductModal from "./ProductModal";
 
-import Arrow from '../Assets/Arrow.svg'
+import Arrow from '../Assets/Arrow.svg';
 
 export default (props) => {
 	const { products } = useShopify()
@@ -12,9 +13,10 @@ export default (props) => {
 	const [index, setIndex] = useState(null)
 	const [prodModal, setProdModal] = useState(false)
 	const [rowWidth, setRowWidth] = useState()
+	const [dragX, setDragX] = useState({x: 0})
+	// const [dragPos, setDragPos] = useState(0)
 
 	useEffect(() => {
-		//Sets the initial value of index which is half the length of amount of products
 		const indexStart = Math.trunc(products.length / 2) 
 		const halfIndex = 100 / products.length
 		if (products[1] !== undefined) {
@@ -23,9 +25,30 @@ export default (props) => {
 		}
 	},[products])
 
+	// need to make a function here where you can only go to a certain index
+	const bind = useDrag((params) => {
+		setDragX({ x: params.offset[0] })
+	  })
 
+	//must be lower than 2 and higher than -2 
+
+	console.log(Math.trunc(dragX.x / 150))
+  
+	useEffect(() => {
+	const indexStart = Math.trunc(products.length / 2) 
+	const amount = products.length - 1
+		if(index > 0 && index <= amount){
+			setIndex(indexStart - Math.trunc(dragX.x / 150))
+			setTranslate(Math.trunc(dragX.x / 150) * rowWidth)
+		}else {
+			
+		}
+	},[dragX])
+
+	//
+
+//show a click left with drag
 	function clickLeft() {
-		const inc = 100 / products.length
 		if (index <= 0) {
 			setTranslate(translate)
 			setIndex(0)
@@ -35,6 +58,7 @@ export default (props) => {
 		}
 	}
 
+//show a click right with drag 
 	function clickRight() {
 		const amount = products.length - 1
 		if (index >= amount) {
@@ -47,7 +71,7 @@ export default (props) => {
 	}
 
 	return (
-		<Container fluid>
+		<Container fluid >
 			<div className="prod-button-left">
 				<img 
 					src={Arrow} 
@@ -57,13 +81,13 @@ export default (props) => {
 					/>
 			</div>
 			<div className="prod-button-right">
-				<img 
+				{/* <img 
 					src={Arrow} 
 					alt="Move clothing carousel right" 
 					className="arrow"
 					onClick={() => clickRight()}
 					style={{ transform: "rotate(180deg)" }}
-					/>
+					/> */}
 			</div>
 			<Row>
 				<Col lg={{ offset: 4, span: 8 }} className="prod-title">
@@ -78,16 +102,15 @@ export default (props) => {
 			<div style={{ position: "fixed", zIndex: "9", marginTop: "200px", transform: `${prodModal ? "translateX(0vw)" : "translateX(100vw)"}` }}>
 				<ProductModal index={index} />
 			</div>
-				<div className="Product-wrapper" style={{ transform: `translateX(${-16 + translate}%)`, width: "150vw",}} >
+				<div className="Product-wrapper" style={{ transform: `translateX(${-16 + translate}%)`, width: "150vw"}} {...bind()}>
 					{products &&
 					products.map((product, i) => {
 						const image = product.images[0]
 						return (
-							<div className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }}>
+							<div className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} {...bind()}>
 									{image ? (
-										<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img"
+										<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
 											style={{ 
-												// marginTop: `${ Math.floor(Math.random() * 20)}0px`, 
 												cursor: "pointer",
 												transform: `${i === index ? "scale(2)" : "scale(1.6)"}`,
 												// background: "red",
