@@ -30,3 +30,31 @@
 li {
     list-style: none;
 }
+
+.nav-logo {
+    height: 5vw;
+    min-height: 40px;
+    position: fixed;
+    left: 2vw;
+    padding-top: 1vh;
+}
+
+.row-style {
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    top: 2vh;
+}
+
+.nav_text-cart {
+    font-family: sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 25px;
+    float: right;
+    /* align-items: baseline; */
+    padding-top: 3vh;
+    cursor: pointer;
+}

@@ -9,7 +9,7 @@ import Navbar from './Components/Navbar'
 
 
 import About from './Components/About';
-import Lookbook from './Components/Lookbook';
+import LookbookPage from './Components/LookbookPage';
 
 import './App.css';
 
@@ -36,18 +36,17 @@ function App(props) {
 
   return (
 	  <Router>
-		  	{!completed ?
+		  	{/* {!completed ?
 				<LoadingPage />
 				:
 				<span></span>
-			}
+			} */}
 			<div className="App">
 				<Cart />
 				<Navbar />
 				<Switch>
 					<Route exact path='/' component={Products} />
-					{/* <Route path='/home' component={Products} /> */}
-					<Route path='/lookbook' component={Lookbook} />
+					<Route path='/lookbook' component={LookbookPage} />
 					<Route path='/about' component={About} />
 				</Switch>
 			</div>

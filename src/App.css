@@ -68,6 +68,7 @@
      margin-top: 25vh;
      transition: transform 1s;
      background: red;
+     touch-action: none;
  }
 
  .prod-button-left {

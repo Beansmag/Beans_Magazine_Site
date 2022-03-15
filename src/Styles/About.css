@@ -1,0 +1,20 @@
+.about-nav {
+    cursor: pointer;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: clamp(18pt, 4vw, 18pt);
+    color: black;
+    text-decoration: none;
+}
+
+.about-header {
+    font-family: sans-serif;
+    font-size: clamp(30pt, 4vw, 40pt);
+    font-weight: 800;
+}
+
+.about-body {
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: clamp(10pt, 4vw, 12pt);
+}
