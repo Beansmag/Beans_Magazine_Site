@@ -18,11 +18,8 @@ const About = () => {
         .catch(console.error)
       },[])
 
-      console.log(section, "current section")
-      console.log(aboutData && aboutData.length, "section length")
-
     return (
-        <Container fluid style={{ marginTop: "40vh" }}>
+        <Container fluid style={{ marginTop: `${document.documentElement.clientWidth > 600 ? "40vh" : "10vh"}` }}>
             <Row>
                 <Col 
                     lg={{ offset: 1, span: 3}}

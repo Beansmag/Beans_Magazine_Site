@@ -114,7 +114,7 @@ const LookbookPage = () => {
     return (
         <Container fluid style={{ paddingTop: "30vh", overflowX: "hidden", height: "100vh"}}>
             <Row>
-                <Col>
+                <Col lg={4} sm={6}>
                     <img 
                         src={postData && postData[0].mainImage.asset.url} 
                         alt="lookbook image 1" 
@@ -127,7 +127,7 @@ const LookbookPage = () => {
                         onPointerOut={() => setZIndex(0)}
                     />
                 </Col>
-                <Col>
+                <Col lg={4} sm={6}>
                     <img 
                         src={postData && postData[0].mainImage2.asset.url} 
                         alt="lookbook image 2" 
@@ -140,7 +140,7 @@ const LookbookPage = () => {
                         onPointerOut={() => setZIndex2(0)}
                     />
                 </Col>
-                <Col>
+                <Col lg={4} sm={6}>
                     <img 
                         src={postData && postData[0].mainImage3.asset.url} 
                         alt="lookbook image 3" 
@@ -155,7 +155,7 @@ const LookbookPage = () => {
                 </Col>
             </Row>
             <Row>
-                <Col>
+                <Col lg={4} sm={6}>
                     <img 
                         src={postData && postData[0].mainImage4.asset.url} 
                         alt="lookbook image 1" 
@@ -168,7 +168,7 @@ const LookbookPage = () => {
                         onPointerOut={() => setZIndex4(0)}
                     />
                 </Col>
-                <Col>
+                <Col lg={4} sm={6}>
                     <img 
                         src={postData && postData[0].mainImage5.asset.url} 
                         alt="lookbook image 2" 
@@ -181,7 +181,7 @@ const LookbookPage = () => {
                         onPointerOut={() => setZIndex5(0)}
                     />
                 </Col>
-                <Col>
+                <Col lg={4} sm={6}>
                     <img 
                         src={postData && postData[0].mainImage6.asset.url} 
                         alt="lookbook image 3" 

@@ -28,19 +28,19 @@ const Navbar = (props) => {
         <Container fluid className="nav_master_container" >
            <img src={Branding} alt='Beans Logo' className="nav-logo" />
             <Row className="row-style">
-                <Col lg={{ offset: 3, span: 6}} className="d-xs-none d-none d-lg-block d-md-block">
+                <Col lg={{ offset: 3, span: 6}} md={{ offset: 3, span: 6 }} className="d-xs-none d-none d-lg-block d-md-block">
                     <ul className="nav-container">
                         <li><Link className="nav_text" to="/">Home</Link></li>
                         <li><Link className="nav_text" to="/lookbook">Lookbook</Link></li>
                         <li><Link className="nav_text" to="/about">About</Link></li>
                     </ul>
                 </Col>
-                <Col lg={3}>
+                <Col lg={3} md={3}>
                     <h1 
                         onClick={(e) => { cartStatus ? handleClose(e) : handleOpen(e) }} 
                         className="nav_text-cart"
                     >
-                            Cart
+                        Cart
                     </h1>
                 </Col>
             </Row>
