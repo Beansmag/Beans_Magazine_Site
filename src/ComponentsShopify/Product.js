@@ -31,16 +31,8 @@ export default (props) => {
 	},[products])
 
 	const bind = useDrag(({movement: [mx], direction: [xDir], cancel, active }) => {
-		// if(Math.trunc(mx / 100) > 2) {
-		// 	cancel()
-		// }else{
-		// 	setDragX(mx)
-		// }
-
 		setDragX(mx)
 	  })
-
-	console.log(Math.trunc(dragX / 100))
 
 	useEffect(() => {
 	const indexStart = Math.trunc(products.length / 2) 
@@ -55,37 +47,40 @@ export default (props) => {
 	},[dragX])
 
 	return (
-		<Container fluid style={{ position: "fixed"}} >
+		<Container fluid style={{ position: "fixed", height: "100vh", width: "100vw"}} >
 			<Row>
 				<Col lg={{ offset: 4, span: 8 }} className="prod-title">
 					<h1 className="prod-title-text" >{products[index] !== undefined ? products[index].title : "...Loading"}</h1>
 				</Col>
 			</Row>
-			<div style={{ position: "fixed", zIndex: "9", marginTop: "200px", transform: `${prodModal ? "translateX(0vw)" : "translateX(100vw)"}` }}>
-				<ProductModal index={index} />
-			</div>
-				<animated.div className="Product-wrapper" style={{ transform: `translateX(${-16 + translate}%)`, width: "150vw"}} {...bind()} >
-					{products &&
-					products.map((product, i) => {
-						const image = product.images[0]
-						return (
-							<div className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} >
-									{image ? (
-										<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
-											style={{ 
-												cursor: "pointer",
-												transform: `${i === index ? "scale(2)" : "scale(1.6)"}`,
-												// background: "red",
-												transition: "transform 0.5s",
-												zIndex: "10"
-											}}
-											onClick={() => setProdModal(!prodModal)}
-										/>
-									) : null}
-							</div>
-						)
-					})
-					}
+			{prodModal ? 
+				<div className="product-container-bg" onClick={() => setProdModal(!prodModal)}>
+					<ProductModal index={index} />
+				</div>
+				:
+				<span></span>
+			} 
+			<animated.div className="Product-wrapper" style={{ transform: `translateX(${-16 + translate}%)`, width: "150vw"}} {...bind()} >
+				{products &&
+				products.map((product, i) => {
+					const image = product.images[0]
+					return (
+						<div className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} >
+							{image ? (
+								<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
+									style={{ 
+										cursor: "pointer",
+										transform: `${i === index ? "scale(2)" : "scale(1.6)"}`,
+										transition: "transform 0.5s",
+										zIndex: "10"
+									}}
+									onClick={() => setProdModal(!prodModal)}
+								/>
+							) : null}
+						</div>
+					)
+				})
+				}
 				</animated.div>
 		</Container>
 	)

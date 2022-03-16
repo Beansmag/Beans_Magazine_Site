@@ -1,0 +1,36 @@
+.product-modal-background {
+    height: 80vh;
+    width: 80vw;
+    background-color: rgba(255, 255, 255, 0.8); 
+    position: fixed; 
+    top: 10vh; 
+    right: 10vw;
+    z-index: 20;
+}
+
+.prod-modal-title {
+    color: black;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: clamp(20pt, 5vw, 25pt);
+    padding-top: 30px;
+}
+
+.prod-modal-description {
+    color: black;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: clamp(8pt, 3vw, 12pt);
+    padding-top: 20px;
+}
+
+.prod-modal-price {
+    color: black;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: clamp(30pt, 5vw, 35pt);
+    padding-top: 10px;
+}

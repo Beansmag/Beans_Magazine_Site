@@ -130,12 +130,18 @@
  }
  
  .button {
-     background-color: #2752ff;
-     color: white;
-     border: none;
-     font-size: 1.2rem;
-     padding: 10px 17px;
-     cursor: pointer;
+    margin-top: 20px;
+    background-color: red;
+    border: none;
+    width: 70%;
+    font-size: clamp(18pt, 5vw, 25pt);
+    font-family: sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    color: white;
+     /* padding: 10px 17px; */
+    
+    cursor: pointer;
  }
  
  .button:hover,
@@ -460,6 +466,28 @@
      flex-direction: column;
      align-items: center;
      justify-content: center;
+ }
+
+ #prodOptions {
+    border: black solid 2px;
+    color: black;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: clamp(25pt, 5vw, 20pt);
+    background: none;
+    width: 200px;
+ }
+
+ .quantity {
+    border: black solid 2px;
+    color: black;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: clamp(25pt, 5vw, 20pt);
+    background: none;
+    width: 200px;
  }
  
  /* CUSTOMER AUTH
