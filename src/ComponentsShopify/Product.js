@@ -17,7 +17,8 @@ export default (props) => {
 	const [index, setIndex] = useState(null)
 	const [prodModal, setProdModal] = useState(false)
 	const [rowWidth, setRowWidth] = useState()
-	const [dragX, setDragX] = useState({x: 0})
+	const [dragX, setDragX] = useState(0)
+	const [count, setCount] = useState(0)
 	// const [dragPos, setDragPos] = useState(0)
 
 	useEffect(() => {
@@ -30,15 +31,23 @@ export default (props) => {
 	},[products])
 
 	const bind = useDrag(({movement: [mx], direction: [xDir], cancel, active }) => {
-		setDragX(mx)
-		// cancel()
+		if (active && mx > 100 && index > 0) {
+			setCount(count + 1)
+			cancel()
+		}
+		if (active && mx < -100 && index < products.length - 1) {
+			setCount(count - 1)
+			cancel()
+		}
 	  })
+
+console.log(count)
 
 	useEffect(() => {
 	const indexStart = Math.trunc(products.length / 2) 
-		setIndex(indexStart - Math.trunc(dragX / 100))
-		setTranslate(Math.trunc(dragX / 100) * rowWidth)
-	},[dragX])
+		setIndex(indexStart - count)
+		setTranslate(count * rowWidth)
+	},[count])
 
 	return (
 		<Container fluid style={{ position: "fixed", height: "100vh", width: "100vw"}}>
@@ -53,7 +62,7 @@ export default (props) => {
 			} */}
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
 				<Col lg={{ offset: 4, span: 8 }} className="prod-title">
-					<h1 className="prod-title-text" >{products[index] !== undefined ? products[index].title : "...Loading"}</h1>
+					<h1 className="prod-title-text" >{products[index] !== undefined ? products[index].title : ""}</h1>
 				</Col>
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
@@ -61,13 +70,11 @@ export default (props) => {
 					<h1 className="prod-view-text" onClick={() => setProdModal(true)}>View</h1>
 				</Col>
 				<Col lg={{ offset: 7, span: 3 }} className="prod-price">
-					<h1 className="prod-price-text">{`$${products[index] !== undefined ? products[index].variants[0].price : "...Loading"}*`}</h1>
+					<h1 className="prod-price-text">{`$${products[index] !== undefined ? products[index].variants[0].price : ""}*`}</h1>
 				</Col>
 			</Row>
 			{prodModal ? 
-				// <div className="product-container-bg">
 					<ProductModal index={index} />
-				//  </div>
 				:
 				<span></span>
 			} 

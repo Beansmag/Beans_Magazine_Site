@@ -3,7 +3,6 @@ import { Container, Col, Row } from 'react-bootstrap'
 import { useShopify } from "../hooks";
 
 import "../Styles/productModal.css"
-// import { Container, Col, Row } from 'react-bootstrap'
 
 export default (props) => {
 

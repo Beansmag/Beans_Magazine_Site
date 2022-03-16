@@ -31,11 +31,11 @@ export default (props) => {
 			{/* <video loop autoPlay muted className="home-bg-vid">
             	<source src={BGVideo} type="video/mp4" />
          	</video> */}
-			<img 
+			{/* <img 
 				src={videoData && videoData[0].backgroundGif.asset.url} 
 				alt="background Video" 
 				className="home-bg-vid"
-			/>
+			/> */}
 		</div>
 	)
 }
