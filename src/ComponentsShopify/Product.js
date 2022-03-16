@@ -18,7 +18,6 @@ export default (props) => {
 	const [prodModal, setProdModal] = useState(false)
 	const [rowWidth, setRowWidth] = useState()
 	const [dragX, setDragX] = useState({x: 0})
-	const [boundValue, setBoundValue] = useState()
 	// const [dragPos, setDragPos] = useState(0)
 
 	useEffect(() => {
@@ -32,35 +31,47 @@ export default (props) => {
 
 	const bind = useDrag(({movement: [mx], direction: [xDir], cancel, active }) => {
 		setDragX(mx)
+		// cancel()
 	  })
 
 	useEffect(() => {
 	const indexStart = Math.trunc(products.length / 2) 
-		// if(index < 0) {
-		// 	setIndex(0)
-		// } else {
-		// 	setIndex(indexStart - Math.trunc(dragX / 100))
-		// 	setTranslate(Math.trunc(dragX / 100) * rowWidth)
-		// }
 		setIndex(indexStart - Math.trunc(dragX / 100))
 		setTranslate(Math.trunc(dragX / 100) * rowWidth)
 	},[dragX])
 
 	return (
-		<Container fluid style={{ position: "fixed", height: "100vh", width: "100vw"}} >
-			<Row>
+		<Container fluid style={{ position: "fixed", height: "100vh", width: "100vw"}}>
+			{/* {prodModal ?
+				<div 
+					style={{ height: "100vh", width: "100vw", opacity: "0.5", backgroundColor: "red", position: "fixed" }}
+					onClick={() => setProdModal(false)}
+				>
+				</div>
+				:
+				<span></span>
+			} */}
+			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
 				<Col lg={{ offset: 4, span: 8 }} className="prod-title">
 					<h1 className="prod-title-text" >{products[index] !== undefined ? products[index].title : "...Loading"}</h1>
 				</Col>
 			</Row>
+			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
+				<Col lg={{ offset: 4, span: 2 }} className="prod-view">
+					<h1 className="prod-view-text" onClick={() => setProdModal(true)}>View</h1>
+				</Col>
+				<Col lg={{ offset: 7, span: 3 }} className="prod-price">
+					<h1 className="prod-price-text">{`$${products[index] !== undefined ? products[index].variants[0].price : "...Loading"}*`}</h1>
+				</Col>
+			</Row>
 			{prodModal ? 
-				<div className="product-container-bg" onClick={() => setProdModal(!prodModal)}>
+				// <div className="product-container-bg">
 					<ProductModal index={index} />
-				</div>
+				//  </div>
 				:
 				<span></span>
 			} 
-			<animated.div className="Product-wrapper" style={{ transform: `translateX(${-16 + translate}%)`, width: "150vw"}} {...bind()} >
+			<animated.div className="Product-wrapper" style={{ transform: `translateX(${-16 + translate}%)`, width: "150vw", opacity: `${prodModal ? "0" : "1"}`}} {...bind()} >
 				{products &&
 				products.map((product, i) => {
 					const image = product.images[0]
@@ -74,14 +85,14 @@ export default (props) => {
 										transition: "transform 0.5s",
 										zIndex: "10"
 									}}
-									onClick={() => setProdModal(!prodModal)}
+									onClick={() => setProdModal(false)}
 								/>
 							) : null}
 						</div>
 					)
 				})
 				}
-				</animated.div>
+			</animated.div>
 		</Container>
 	)
 }

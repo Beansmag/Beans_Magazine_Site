@@ -37,33 +37,29 @@ const CustomForm = ({ status, message, onValidated }) => {
         setFirstName('');
         setLastName('');
         setEmail('');
+        setBirthday('');
     }
 
     return (
         <form
-            // className="mc__form"
             onSubmit={(e) => handleSubmit(e)}
         >
             <h3>
-            {/* <h3 className="mc__title"> */}
                 {status === "success" ? "Success!" :
                     "Join our email list for future updates."}
             </h3>
 
             {status === "sending" && (
                 <div
-                    // className="mc__alert mc__alert--sending"
                 >sending...</div>
             )}
             {status === "error" && (
                 <div
-                    // className="mc__alert mc__alert--error"
                     dangerouslySetInnerHTML={{ __html: message }}
                 />
             )}
             {status === "success" && (
                 <div
-                    // className="mc__alert mc__alert--success"
                     dangerouslySetInnerHTML={{ __html: message }}
                 />
             )}
@@ -88,14 +84,14 @@ const CustomForm = ({ status, message, onValidated }) => {
                         onChangeHandler={setEmail}
                         type="email"
                         value={email}
-                        isRequired
+                        // isRequired
                     />
                     <InputField
                         label="Birthday"
                         onChangeHandler={setBirthday}
                         type="birthday"
                         value={birthday}
-                        isRequired
+                        // isRequired
                     />
                 </div>
             ) : null}

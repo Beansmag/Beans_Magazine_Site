@@ -2,8 +2,7 @@ import React from 'react';
 import '../../Styles/Newsletter.css'
 
 const InputField = props => {
-
-  const validateInput = values => {
+    const validateInput = values => {
         if (values.some(f => f === "") || values[0].indexOf("@") === -1) {
             return true
         } else {

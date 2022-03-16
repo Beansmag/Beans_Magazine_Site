@@ -93,8 +93,7 @@
  .prod-title {
     position: fixed;
     z-index: 0;
-    margin-top: 20px;
-    padding-top: 10vh;
+    padding-top: 20vh;
  }
 
  .prod-title-text {
@@ -103,7 +102,39 @@
     font-style: normal;
     color: black;
     text-decoration: none;
-    font-size: clamp(30pt, 5vw, 80pt);
+    font-size: clamp(20pt, 5vw, 40pt);
+ }
+
+ .prod-price {
+    position: fixed;
+    z-index: 10;
+    margin-top: 80vh;
+ }
+
+ .prod-price-text {
+    font-family: sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: clamp(20pt, 5vw, 40pt);
+ }
+
+ .prod-view {
+    position: fixed;
+    z-index: 10;
+    margin-top: 65vh;
+ }
+
+ .prod-view-text {
+    font-family: sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: clamp(20pt, 5vw, 40pt);
+    cursor: pointer;
+    text-decoration: underline;
  }
  
  .App__view-cart-wrapper {

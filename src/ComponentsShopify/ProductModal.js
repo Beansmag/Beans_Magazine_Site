@@ -52,10 +52,10 @@ export default (props) => {
     return (
         <Container className="product-modal-background" >
 			<Row>
-				<Col lg={6}>
+				<Col lg={6} style={{ borderBottom: `${document.documentElement.clientWidth < 600 ? "solid 1px black" : ""}` }}>
 					<img src={products[props.index] !== undefined ? products[props.index].images[0].src : "...Loading"} /> 
 				</Col>
-				<Col lg={6} style={{ borderLeft: "solid 1px black" }}>
+				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}` }}>
 					<h1 className="prod-modal-title" >{products[props.index] !== undefined ? products[props.index].title : "...Loading"}</h1>
 					<h1 className="prod-modal-price" >{`$${products[props.index] !== undefined ? products[props.index].variants[0].price : "...Loading"}`}</h1>
 					<h5 className="prod-modal-description" >{description}</h5>

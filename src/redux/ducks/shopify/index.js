@@ -1,16 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import Client from "shopify-buy/index.unoptimized.umd"
 
-// const client = Client.buildClient({
-// 	storefrontAccessToken: process.env.REACT_APP_SHOPIFY_API,
-// 	domain: process.env.REACT_APP_SHOPIFY_DOMAIN
-// })
-
-// const client = Client.buildClient({
-// 	storefrontAccessToken: 'dd4d4dc146542ba7763305d71d1b3d38',
-// 	domain: 'graphql.myshopify.com'
-//   });
-
   const client = Client.buildClient({
 	storefrontAccessToken: '1cb28a121122df7d9998e35450a29f6a',
 	domain: 'jeromejahmal.myshopify.com'

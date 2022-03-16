@@ -4,7 +4,8 @@
     bottom: 0;
     min-width: 100%;
     min-height: 100%;
-    z-index: 1;
+    z-index: -2;
+    opacity: 0.5;
   }
 
   .home-prod-row{
