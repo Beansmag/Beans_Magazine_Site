@@ -1,0 +1,57 @@
+.menu { 
+    position: fixed; 
+    background-color: white; 
+    opacity: 0.8;
+    z-index: 999999990; 
+    padding-top: 20vh;
+  }
+
+  #overflow_Menu {
+    overflow-y: none;
+  }
+
+  .menu--right { 
+    right: 0; 
+    width: 100vw; 
+    height: 100vh;
+    text-align: center;
+  }
+
+  .menu-list { 
+    list-style: none;
+  }
+      
+.menu-list-item { 
+	font-family: futura-pt, sans-serif;
+	font-weight: 200;
+	font-style: normal; 
+  
+  font-size: 12vw;
+  list-style: none; 
+}
+    
+.menu-list-item--right { 
+  margin: 15px 40px; 
+}
+
+  .menu a { 
+    text-decoration: none; 
+    color: black;
+  }
+      
+  .menu a:hover, 
+  .menu a:focus { 
+    color: grey; 
+    text-decoration: none;
+  }
+
+  .menu-button { 
+    height: 2.6vh;
+    top: 3.5vh;
+    outline: none;
+    z-index: 99999999999999; 
+    border: none; 
+    position: fixed;
+    right: 20%; 
+    cursor: pointer; 
+  }

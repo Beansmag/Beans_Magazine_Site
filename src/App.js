@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { useShopify } from "./hooks";
 
-import Cart from './ComponentsShopify/Cart';
 import Products from './ComponentsShopify/Products' ;
 // import LoadingPage from './Components/LoadingPage';
-import Navbar from './Components/Navbar'
+import Navbar from './Components/navigation/Navbar'
 
 
 import About from './Components/About';
@@ -42,7 +41,6 @@ function App(props) {
 				<span></span>
 			} */}
 			<div className="App">
-				<Cart />
 				<Navbar />
 				<Switch>
 					<Route exact path='/' component={Products} />

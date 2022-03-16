@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
-import { useShopify } from "../hooks"
+import { useShopify } from "../../hooks"
+import Cart from '../../ComponentsShopify/Cart'
+import HamburgerMenu from './HamburgerMenu.js'
 
-import Branding from '../Assets/Branding.svg'
+import Branding from '../../Assets/Branding.svg'
 
-import '../Styles/navbar.css'
+import './navbar.css'
 
 const Navbar = (props) => {
     const {
@@ -35,14 +37,14 @@ const Navbar = (props) => {
                         <li><Link className="nav_text" to="/about">About</Link></li>
                     </ul>
                 </Col>
-                <Col lg={3} md={3}>
-                    <h1 
-                        onClick={(e) => { cartStatus ? handleClose(e) : handleOpen(e) }} 
-                        className="nav_text-cart"
-                    >
-                        Cart
-                    </h1>
+                <Col
+                    className='d-block d-md-none'
+                    lg={3}
+                    xs={3}
+                >   
+                    <HamburgerMenu />
                 </Col>
+                <Cart />
             </Row>
         </Container>
     )

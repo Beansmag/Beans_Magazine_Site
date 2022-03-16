@@ -111,17 +111,22 @@
  }
  
  .App__view-cart-wrapper2 {
-     position: absolute;
-     top: 10px;
-     left: -65px;
+     position: fixed;
+     right: 10px;
  }
  
  .App__view-cart {
-     font-size: 45px;
+     /* position: fixed; */
      border: none;
      background: none;
+     font-family: sans-serif;
+     font-weight: 800;
+     font-style: normal;
+     color: black;
+     text-decoration: none;
+     font-size: 25px;
+     padding-top: 1.5vw;
      cursor: pointer;
-     color: grey;
  }
  
  .button {

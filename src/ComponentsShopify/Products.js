@@ -1,7 +1,7 @@
 import React from "react";
 
 import Product from "./Product";
-import Navbar from '../Components/Navbar'
+import Navbar from '../Components/navigation/Navbar'
 
 // import BGVideo from '../Assets/BackgroundVideo.mp4';
 
