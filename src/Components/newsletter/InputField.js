@@ -1,5 +1,5 @@
 import React from 'react';
-// import './inputFieldStyles.scss';
+import '../../Styles/Newsletter.css'
 
 const InputField = props => {
 

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import '../../Styles/Newsletter.css'
 
 const GHSContext = React.createContext();
 
@@ -8,8 +9,6 @@ export const useGHStContext = () => {
 
 
 export function GHSProvider({ children }) {
-
-    // State that controls if modal should open/close
     const [modalOpen, setModalOpen] = useState(false);
 
     return (

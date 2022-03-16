@@ -3,31 +3,28 @@ import MailchimpSubscribe from "react-mailchimp-subscribe"
 import PrimaryCTAButton from "./PrimaryCTAButton";
 import InputField from "./InputField";
 
+import '../../Styles/Newsletter.css'
+
 const CustomForm = ({ status, message, onValidated }) => {
 
-    // const {modalOpen, setModalOpen} = useGHStContext();
     const [modalOpen, setModalOpen] = useState()
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [phone, setPhone] = useState('')
-    const [tUAYR, settUAYR] = useState('')
-    const [instaHandle, setinstaHandle] = useState('')
+    const [birthday, setBirthday] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault();
         email &&
         firstName &&
         lastName &&
-        phone &&
+        birthday &&
         email.indexOf("@") > -1 &&
         onValidated({
             MERGE0: email,
             MERGE1: firstName,
             MERGE2: lastName,
-            MERGE4: phone,
-            MERGE6: tUAYR,
-            MERGE7: instaHandle,
+            MERGE3: birthday,
         });
     }
 
@@ -40,9 +37,6 @@ const CustomForm = ({ status, message, onValidated }) => {
         setFirstName('');
         setLastName('');
         setEmail('');
-        setPhone('');
-        settUAYR('');
-        setinstaHandle('')
     }
 
     return (
@@ -97,24 +91,10 @@ const CustomForm = ({ status, message, onValidated }) => {
                         isRequired
                     />
                     <InputField
-                        label="Phone"
-                        onChangeHandler={setPhone}
-                        type="phone"
-                        value={phone}
-                        isRequired
-                    />
-                    <InputField
-                        label="Tell us about your Ride"
-                        onChangeHandler={settUAYR}
-                        type="text"
-                        value={tUAYR}
-                        isRequired
-                    />
-                    <InputField
-                        label="Instagram Handle"
-                        onChangeHandler={setinstaHandle}
-                        type="text"
-                        value={instaHandle}
+                        label="Birthday"
+                        onChangeHandler={setBirthday}
+                        type="birthday"
+                        value={birthday}
                         isRequired
                     />
                 </div>
@@ -126,9 +106,9 @@ const CustomForm = ({ status, message, onValidated }) => {
                     size="big"
                     customClass="submitButtonNews"
                 /> : <InputField
-                    label="subscribe"
+                    label="Subscribe"
                     type="submit"
-                    formValues={[email, firstName, lastName, phone, tUAYR, instaHandle]}
+                    formValues={[email, firstName, lastName, birthday]}
                 />
 
             }
@@ -138,7 +118,7 @@ const CustomForm = ({ status, message, onValidated }) => {
 
 
 const MailchimpForm = props => {
-    const url = `https://westcoastcustoms.us19.list-manage.com/subscribe/post?u=${process.env.REACT_APP_MAILCHIMP_U}&id=${process.env.REACT_APP_MAILCHIMP_ID}`;
+    const url = `https://beans-magazine.us14.list-manage.com/subscribe/post?u=${process.env.REACT_APP_MAILCHIMP_U}&id=${process.env.REACT_APP_MAILCHIMP_ID}`;
 
     return (
         <div className="formDiv">

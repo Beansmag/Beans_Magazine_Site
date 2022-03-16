@@ -3,6 +3,8 @@ import { Container, Col, Row } from 'react-bootstrap';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '../client';
 
+import MailChimpForm from '../Components/newsletter/MailchimpForm';
+
 import '../Styles/About.css'
 
 const About = () => {
@@ -57,7 +59,7 @@ const About = () => {
                     { aboutData && aboutData.length === section  ?
                         <div>
                             <h1 className="about-header">Newsletter</h1>
-                            <h3>Newsletter stuff</h3>
+                            <MailChimpForm />
                         </div>
                         :
                         <span></span>
