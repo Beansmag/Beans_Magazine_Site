@@ -16,16 +16,6 @@ const Navbar = (props) => {
 		openCart,
 	} = useShopify()
 
-    function handleOpen(e) {
-		e.preventDefault()
-		openCart()
-	}
-
-	function handleClose(e) {
-		e.preventDefault()
-		closeCart()
-	}
-
     return (
         <Container fluid className="nav_master_container" >
            <img src={Branding} alt='Beans Logo' className="nav-logo" />

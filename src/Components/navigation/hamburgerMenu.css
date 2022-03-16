@@ -47,11 +47,11 @@
 
   .menu-button { 
     height: 2.6vh;
-    top: 3.5vh;
+    top: 3.7vh;
     outline: none;
     z-index: 99999999999999; 
     border: none; 
     position: fixed;
-    right: 20%; 
+    right: 25%; 
     cursor: pointer; 
   }

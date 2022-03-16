@@ -9,7 +9,7 @@
     font-family: futura-pt, sans-serif;
     font-weight: 300;
     font-style: normal;
-    font-size: max(5vw, 12px);
+    font-size: clamp(10pt, 5vw, 15pt);
   }
   
   .inputNewsletter {
@@ -26,7 +26,7 @@
     font-family: sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 5rem;
+    font-size: clamp(10pt, 5vw, 15pt);
     text-align: right;
   }
   
@@ -38,7 +38,7 @@
     font-family: sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 5rem;
+    font-size: clamp(10pt, 5vw, 15pt);
     text-align: right;
   }
   
