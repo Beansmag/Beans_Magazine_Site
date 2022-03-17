@@ -18,18 +18,19 @@ export default (props) => {
 	const [prodModal, setProdModal] = useState(false)
 	const [rowWidth, setRowWidth] = useState()
 	const [count, setCount] = useState(0)
-	const [prodLength, setProdLength] = useState()
+	// const [prodLength, setProdLength] = useState()
 	const window = document.documentElement.clientWidth 
-	const carStart = window > 600 ? -22 : -48.
+	// const margTop = window / 
+	// const carStart = window > 600 ? -22 : -48
 
 	useEffect(() => {
 		const indexStart = Math.trunc(products.length / 2) 
 		const halfIndex = 100 / products.length
-		const prodIndexLength = products.length
+		// const prodIndexLength = products.length
 		if (products[1] !== undefined) {
 			setIndex(indexStart)
 			setRowWidth(halfIndex)
-			setProdLength(prodIndexLength)
+			// setProdLength(prodIndexLength)
 		}
 	},[products])
 
@@ -53,16 +54,16 @@ export default (props) => {
 	return (
 		<Container  style={{ position: "fixed", height: "100vh", width: "100vw"}}>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
-				<Col lg={{ offset: 4, span: 8 }} xs={{ offset: 2, span: 10 }} className="prod-title">
+				<Col lg={{ offset: 4, span: 8 }} xs={12} className="prod-title" style={{ marginTop: `${window > 600 ? "23vh" : "30vh"}` }} >
 					<h1 className="prod-title-text" >{products[index] !== undefined ? products[index].title : ""}</h1>
 				</Col>
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
-				<Col lg={{ offset: 4, span: 1 }} xs={{ offset: 1, span: 3 }} className="prod-view" >
+				<Col lg={{ offset: 4, span: 1 }} xs={{ offset: 1, span: 3 }} className="prod-view" style={{ marginTop: `${window > 600 ? "65vh" : "58vh"}` }}>
 					<img src={Arrow} onClick={() => setProdModal(true)} alt="click to view clothes" style={{ height: "90px", transform: "rotate(135deg)" }} />
 					<h1 className="prod-view-text" onClick={() => setProdModal(true)} >View</h1>
 				</Col>
-				<Col lg={{ offset: 6, span: 3 }} xs={{ offset: 5, span: 3 }} className="prod-price">
+				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 6, span: 3 }} className="prod-price" style={{ marginTop: `${window > 600 ? "70vh" : "57vh"}` }}>
 					<h1 className="prod-price-text">{`$${products[index] !== undefined ? products[index].variants[0].price : ""}*`}</h1>
 				</Col>
 			</Row>
@@ -82,8 +83,9 @@ export default (props) => {
 				className="Product-wrapper" 
 				style={{ 
 					// transform: `translateX(${carStart + translate}%)`, 
-					transform: `translateX(${-29 + translate}%)`, 
+					transform: `translateX(${-31 + translate}%)`, 
 					// width: `${prodLength * 320}px`,
+					marginTop: `${window > 600 ? "30vh" : "40vh"}`,
 					width: "200vw",
 					opacity: `${prodModal ? "0" : "1"}`
 					}} 
