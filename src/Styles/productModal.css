@@ -1,10 +1,9 @@
 .product-modal-background {
     height: 80vh;
     width: 80vw;
+    margin-left: 10vw;
     background-color: rgba(255, 255, 255, 0.8); 
-    position: fixed; 
-    top: 10vh; 
-    right: 10vw;
+    margin-top: -6vh; 
     z-index: 20;
     overflow-y: auto;
     overflow-X: hidden;

@@ -12,7 +12,8 @@ const LoadingPage = () => {
                 width: "100vw", 
                 position: "relative",
                 backgroundColor: "white",
-                zIndex: "20"
+                zIndex: "20",
+                overflow: 'hidden',
             }}
         >
             <video loop autoPlay muted 

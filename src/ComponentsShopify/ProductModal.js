@@ -47,16 +47,16 @@ export default (props) => {
 	}, [id])
 
     return (
-        <Container className="product-modal-background" >
-			<Row>
-				<Col lg={6} style={{ borderBottom: `${document.documentElement.clientWidth < 600 ? "solid 1px black" : ""}`, height: "100%", background: "red" }}>
+        <div className="product-modal-background">
+			<Row style={{ height: "100%" }}>
+				<Col lg={6} style={{ borderBottom: `${document.documentElement.clientWidth < 600 ? "solid 1px black" : ""}`, height: "100%"}}>
 					<img 
 						src={products[props.index] !== undefined ? products[props.index].images[0].src : "...Loading"}
 						alt={`${products[props.index] !== undefined ? products[props.index].images[0].src : "...Loading"} product image`}
 						className="prod-modal-product-image"
-						/> 
+					/> 
 				</Col>
-				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: "100%", background: "red" }}>
+				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: "100%" }} >
 					<h1 className="prod-modal-title" >{products[props.index] !== undefined ? products[props.index].title : "...Loading"}</h1>
 					<h1 className="prod-modal-price" >{`$${products[props.index] !== undefined ? products[props.index].variants[0].price : "...Loading"}`}</h1>
 					<h5 className="prod-modal-description" >{description}</h5>
@@ -105,61 +105,6 @@ export default (props) => {
 					</div>
 				</Col>      
 			</Row> 
-			{/* 
-            <h6>{defaultSize}</h6>
-			<h6>{products[props.index] !== undefined ? products[props.index].title : "...Loading"}</h6>
-			<div className="Product-wrapper2">
-				<div className="Images">
-				<div className="Product__info">
-					<div>
-						<label htmlFor={"prodOptions"}>Size</label>
-						<select
-							id="prodOptions"
-							name={size}
-							onChange={(e) => {
-								setSize(e.target.value)
-							}}
-						>	
-							{products[props.index] === undefined ?
-								"...Loading"
-								:
-								products[props.index].variants.map((item, i) => {
-									return (
-										<option
-										value={item.id.toString()}
-										key={item.title + i}
-									>{`${item.title}`}</option>
-									)
-								})
-							}
-						</select>
-					</div>
-					<div>
-						<label>Quantity</label>
-						<input
-							className="quantity"
-							type="number"
-							min={1}
-							value={quantity}
-							onChange={(e) => {
-								setQuantity(e.target.value)
-							}}
-						></input>
-					</div>
-
-					<h3 className="Product__price">
-						${products[props.index] === undefined ? "...Loading" : products[props.index].variants[0].price}
-					</h3>
-					<button
-						className="prodBuy button"
-						onClick={(e) => changeSize(size, quantity)}
-					>
-						Add to Cart
-					</button>
-					
-					</div>
-				</div>
-			</div> */}
-        </Container>
+        </div>
     )
 }

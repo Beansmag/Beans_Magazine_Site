@@ -48,16 +48,7 @@ export default (props) => {
 	},[count])
 
 	return (
-		<Container fluid style={{ position: "fixed", height: "100vh", width: "100vw"}}>
-			{/* {prodModal ?
-				<div 
-					style={{ height: "100vh", width: "100vw", opacity: "0.5", backgroundColor: "red", position: "fixed" }}
-					onClick={() => setProdModal(false)}
-				>
-				</div>
-				:
-				<span></span>
-			} */}
+		<Container  style={{ position: "fixed", height: "100vh", width: "100vw"}}>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
 				<Col lg={{ offset: 4, span: 8 }} xs={{ offset: 2, span: 10 }} className="prod-title">
 					<h1 className="prod-title-text" >{products[index] !== undefined ? products[index].title : ""}</h1>
@@ -72,7 +63,7 @@ export default (props) => {
 				</Col>
 			</Row>
 			{prodModal ? 
-					<div>
+					<div style={{ width: "100vw", height: "100vh", display: "table", marginLeft: "-15px"}}>
 						<img 
 							src={Close} alt="close modal window" 
 							className="close-product-modal"
@@ -83,7 +74,6 @@ export default (props) => {
 				:
 				<span></span>
 			} 
-			{/* carStart */}
 			<animated.div 
 				className="Product-wrapper" 
 				style={{ 
