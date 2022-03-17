@@ -48,3 +48,12 @@
     right: 0px;
     z-index: 10;
   }
+
+  .close-product-modal{
+    height: 30px;
+    margin-top: 12vh;
+    margin-left: 12vw;
+    cursor: pointer;
+    position: relative;
+    z-index: 21;
+  }

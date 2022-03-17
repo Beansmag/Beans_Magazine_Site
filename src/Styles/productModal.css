@@ -6,6 +6,8 @@
     top: 10vh; 
     right: 10vw;
     z-index: 20;
+    overflow-y: auto;
+    overflow-X: hidden;
 }
 
 .prod-modal-title {
@@ -14,16 +16,16 @@
     font-weight: 800;
     font-style: normal;
     font-size: clamp(20pt, 5vw, 25pt);
-    padding-top: 30px;
+    padding: 5% 2% 2% 2%;
 }
 
 .prod-modal-description {
     color: black;
     font-family: sans-serif;
-    font-weight: 500;
+    font-weight: 300;
     font-style: normal;
     font-size: clamp(8pt, 3vw, 12pt);
-    padding-top: 20px;
+    padding: 2%;
 }
 
 .prod-modal-price {
@@ -32,5 +34,9 @@
     font-weight: 800;
     font-style: normal;
     font-size: clamp(30pt, 5vw, 35pt);
-    padding-top: 10px;
+    padding: 2% 2% 2% 2%;
+}
+
+.prod-modal-product-image {
+    width: 100%;
 }

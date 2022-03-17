@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { useShopify } from "../hooks";
 import { Container, Col, Row } from 'react-bootstrap';
 import { useSprings, animated } from '@react-spring/web';
-// import clamp from 'lodash.clamp';
-
 import { useDrag } from '@use-gesture/react';
 
-import '../Styles/Home.css'
-
 import ProductModal from "./ProductModal";
+
+import Close from '../Assets/Close.svg'
+
+import '../Styles/Home.css'
 // import Arrow from '../Assets/Arrow.svg';
 
 export default (props) => {
@@ -47,8 +47,6 @@ export default (props) => {
 		setTranslate(count * rowWidth)
 	},[count])
 
-	console.log(translate)
-
 	return (
 		<Container fluid style={{ position: "fixed", height: "100vh", width: "100vw"}}>
 			{/* {prodModal ?
@@ -66,7 +64,7 @@ export default (props) => {
 				</Col>
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
-				<Col lg={{ offset: 4, span: 2 }} xs={{ offset: 7, span: 3 }} className="prod-view">
+				<Col lg={{ offset: 4, span: 2 }} xs={{ offset: 1, span: 3 }} className="prod-view">
 					<h1 className="prod-view-text" onClick={() => setProdModal(true)}>View</h1>
 				</Col>
 				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 7, span: 3 }} className="prod-price">
@@ -74,12 +72,27 @@ export default (props) => {
 				</Col>
 			</Row>
 			{prodModal ? 
-					<ProductModal index={index} />
+					<div>
+						<img 
+							src={Close} alt="close modal window" 
+							className="close-product-modal"
+							onClick={() => setProdModal(false)}
+						/>
+						<ProductModal index={index} />
+					</div>
 				:
 				<span></span>
 			} 
 			{/* carStart */}
-			<animated.div className="Product-wrapper" style={{ transform: `translateX(${-37 + translate}%)`, width: `${window > 600 ? "4000px" : "4000px"}`, opacity: `${prodModal ? "0" : "1"}`}} {...bind()} >
+			<animated.div 
+				className="Product-wrapper" 
+				style={{ 
+					transform: `translateX(${-37 + translate}%)`, 
+					width: `${window > 600 ? "5000px" : "5000px"}`, 
+					opacity: `${prodModal ? "0" : "1"}`
+					}} 
+				{...bind()} 
+			>
 				{products &&
 				products.map((product, i) => {
 					const image = product.images[0]

@@ -102,7 +102,7 @@
     font-style: normal;
     color: black;
     text-decoration: none;
-    font-size: clamp(20pt, 5vw, 40pt);
+    font-size: clamp(25pt, 5vw, 40pt);
  }
 
  .prod-price {
@@ -117,7 +117,7 @@
     font-style: normal;
     color: black;
     text-decoration: none;
-    font-size: clamp(20pt, 5vw, 40pt);
+    font-size: clamp(30pt, 5vw, 40pt);
  }
 
  .prod-view {
@@ -132,7 +132,7 @@
     font-style: normal;
     color: black;
     text-decoration: none;
-    font-size: clamp(20pt, 5vw, 40pt);
+    font-size: clamp(30pt, 5vw, 40pt);
     cursor: pointer;
     text-decoration: underline;
  }
@@ -143,7 +143,7 @@
  
  .App__view-cart-wrapper2 {
      position: fixed;
-     right: 10px;
+     right: 35px;
  }
  
  .App__view-cart {
@@ -493,21 +493,23 @@
  }
  
  .Product__info {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
+     width: 90%;
+     margin-left: 50px;
  }
 
  #prodOptions {
+    float: left;
+    width: 40%;
     border: black solid 2px;
     color: black;
     font-family: sans-serif;
     font-weight: 800;
     font-style: normal;
-    font-size: clamp(25pt, 5vw, 20pt);
+    font-size: clamp(8pt, 4vw, 15pt);
     background: none;
-    width: 200px;
+    margin: 10px;
+    height: 50px;
+    text-align: center;
  }
 
  .quantity {
@@ -516,9 +518,12 @@
     font-family: sans-serif;
     font-weight: 800;
     font-style: normal;
-    font-size: clamp(25pt, 5vw, 20pt);
+    font-size: clamp(8pt, 4vw, 15pt);
     background: none;
-    width: 200px;
+    height: 50px;
+    margin: 10px;
+    width: 40%;
+    text-align: center;
  }
  
  /* CUSTOMER AUTH

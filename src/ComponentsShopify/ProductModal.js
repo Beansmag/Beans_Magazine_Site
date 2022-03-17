@@ -46,15 +46,17 @@ export default (props) => {
 		}
 	}, [id])
 
-	console.log(products[props.index] !== undefined ? products[props.index].variants[0].price : "...Loading")
-
     return (
         <Container className="product-modal-background" >
 			<Row>
-				<Col lg={6} style={{ borderBottom: `${document.documentElement.clientWidth < 600 ? "solid 1px black" : ""}` }}>
-					<img src={products[props.index] !== undefined ? products[props.index].images[0].src : "...Loading"} /> 
+				<Col lg={6} style={{ borderBottom: `${document.documentElement.clientWidth < 600 ? "solid 1px black" : ""}`, height: "100%", background: "red" }}>
+					<img 
+						src={products[props.index] !== undefined ? products[props.index].images[0].src : "...Loading"}
+						alt={`${products[props.index] !== undefined ? products[props.index].images[0].src : "...Loading"} product image`}
+						className="prod-modal-product-image"
+						/> 
 				</Col>
-				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}` }}>
+				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: "100%", background: "red" }}>
 					<h1 className="prod-modal-title" >{products[props.index] !== undefined ? products[props.index].title : "...Loading"}</h1>
 					<h1 className="prod-modal-price" >{`$${products[props.index] !== undefined ? products[props.index].variants[0].price : "...Loading"}`}</h1>
 					<h5 className="prod-modal-description" >{description}</h5>
@@ -92,6 +94,8 @@ export default (props) => {
 								}}
 							></input>
 						</div>
+					</div>
+					<div style={{ width: "100%", textAlign: "center"}}>
 						<button
 							className="prodBuy button"
 							onClick={(e) => changeSize(size, quantity)}
