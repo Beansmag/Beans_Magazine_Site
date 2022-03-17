@@ -8,7 +8,7 @@ import './hamburgerMenu.css';
     const [rightMenuVisible, setRightMenuVisible] = useState(false);
 
     return (
-      <div style={{ position: "fixed", zIndex: "9999" }}>
+      <div style={{ position: "fixed", zIndex: "9999", top: "0" }}>
         <img
         	alt="menu"
 					className="menu-button"

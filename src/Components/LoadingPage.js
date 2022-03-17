@@ -7,15 +7,21 @@ import '../Styles/Home.css'
 const LoadingPage = () => {
 
     return (
-        <div style={{ height: "100vh", width: "100vw", backgroundColor: "white", position: "fixed", zIndex: "30" }}>
+        <div style={{ 
+                height: "100vh", 
+                width: "100vw", 
+                position: "relative",
+                backgroundColor: "white",
+                zIndex: "20"
+            }}
+        >
             <video loop autoPlay muted 
                 style={{   
-                    position: "fixed",
-                    right: "25%",
-                    bottom: "0",
-                    width: "auto",
-                    height: "100vh",
-                    alignContent: "Center",
+                    width: "80%",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
                 }}>
                 <source src={BGVideo} type="video/mp4" />
             </video>

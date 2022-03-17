@@ -3,7 +3,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { useShopify } from "./hooks";
 
 import Products from './ComponentsShopify/Products' ;
-// import LoadingPage from './Components/LoadingPage';
+import LoadingPage from './Components/LoadingPage';
 import Navbar from './Components/navigation/Navbar'
 
 
@@ -35,11 +35,11 @@ function App(props) {
 
   return (
 	  <Router>
-		  	{/* {!completed ?
+		  	{!completed ?
 				<LoadingPage />
 				:
 				<span></span>
-			} */}
+			}
 			<div className="App">
 				<Navbar />
 				<Switch>

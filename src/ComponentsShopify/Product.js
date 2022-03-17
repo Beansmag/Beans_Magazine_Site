@@ -19,9 +19,7 @@ export default (props) => {
 	const [rowWidth, setRowWidth] = useState()
 	const [count, setCount] = useState(0)
 	const window = document.documentElement.clientWidth 
-	const carStart = window > 600 ? -16 : -34
-
-	console.log(carStart)
+	const carStart = window > 600 ? -32 : -34
 
 	useEffect(() => {
 		const indexStart = Math.trunc(products.length / 2) 
@@ -30,11 +28,9 @@ export default (props) => {
 			setIndex(indexStart)
 			setRowWidth(halfIndex)
 		}
-
-
 	},[products])
 
-	const bind = useDrag(({movement: [mx], direction: [xDir], cancel, active }) => {
+	const bind = useDrag(({movement: [mx], cancel, active }) => {
 		if (active && mx > 100 && index > 0) {
 			setCount(count + 1)
 			cancel()
@@ -50,6 +46,8 @@ export default (props) => {
 		setIndex(indexStart - count)
 		setTranslate(count * rowWidth)
 	},[count])
+
+	console.log(translate)
 
 	return (
 		<Container fluid style={{ position: "fixed", height: "100vh", width: "100vw"}}>
@@ -80,8 +78,8 @@ export default (props) => {
 				:
 				<span></span>
 			} 
-			{/* `${window > 600 ? -37 : -10}` */}
-			<animated.div className="Product-wrapper" style={{ transform: `translateX(${carStart + translate}%)`, width: `${window > 600 ? "150vw" : "300vw"}`, opacity: `${prodModal ? "0" : "1"}`}} {...bind()} >
+			{/* carStart */}
+			<animated.div className="Product-wrapper" style={{ transform: `translateX(${-37 + translate}%)`, width: `${window > 600 ? "4000px" : "4000px"}`, opacity: `${prodModal ? "0" : "1"}`}} {...bind()} >
 				{products &&
 				products.map((product, i) => {
 					const image = product.images[0]
