@@ -9,7 +9,7 @@ import ProductModal from "./ProductModal";
 import Close from '../Assets/Close.svg'
 
 import '../Styles/Home.css'
-// import Arrow from '../Assets/Arrow.svg';
+import Arrow from '../Assets/Arrow.svg';
 
 export default (props) => {
 	const { products } = useShopify()
@@ -18,15 +18,18 @@ export default (props) => {
 	const [prodModal, setProdModal] = useState(false)
 	const [rowWidth, setRowWidth] = useState()
 	const [count, setCount] = useState(0)
+	const [prodLength, setProdLength] = useState()
 	const window = document.documentElement.clientWidth 
-	const carStart = window > 600 ? -32 : -34
+	// const carStart = window > 600 ? -32 : -34
 
 	useEffect(() => {
 		const indexStart = Math.trunc(products.length / 2) 
 		const halfIndex = 100 / products.length
+		const prodIndexLength = products.length
 		if (products[1] !== undefined) {
 			setIndex(indexStart)
 			setRowWidth(halfIndex)
+			setProdLength(prodIndexLength)
 		}
 	},[products])
 
@@ -55,8 +58,9 @@ export default (props) => {
 				</Col>
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
-				<Col lg={{ offset: 4, span: 2 }} xs={{ offset: 1, span: 3 }} className="prod-view">
-					<h1 className="prod-view-text" onClick={() => setProdModal(true)}>View</h1>
+				<Col lg={{ offset: 4, span: 2 }} xs={{ offset: 1, span: 3 }} className="prod-view"  onClick={() => setProdModal(true)}>
+					<img src={Arrow} alt="click to view clothes" style={{ height: "90px", transform: "rotate(135deg)" }} />
+					<h1 className="prod-view-text" >View</h1>
 				</Col>
 				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 7, span: 3 }} className="prod-price">
 					<h1 className="prod-price-text">{`$${products[index] !== undefined ? products[index].variants[0].price : ""}*`}</h1>
@@ -77,8 +81,8 @@ export default (props) => {
 			<animated.div 
 				className="Product-wrapper" 
 				style={{ 
-					transform: `translateX(${-37 + translate}%)`, 
-					width: `${window > 600 ? "5000px" : "5000px"}`, 
+					transform: `translateX(${-30 + translate}%)`, 
+					width: `${prodLength * 420}px`,
 					opacity: `${prodModal ? "0" : "1"}`
 					}} 
 				{...bind()} 
