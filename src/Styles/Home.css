@@ -13,8 +13,9 @@
 
   .home-prod-row{
     float: left;
-    height: 75vh;
     touch-action: none;
+
+    /* background: green; */
   }
 
   .page {

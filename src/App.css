@@ -64,11 +64,18 @@
 
  .Product-wrapper {
      overflow: none;
-     justify-content: center;
-     margin-top: 25vh;
      transition: transform 1s;
-     background: red;
      touch-action: none;
+
+     top: 30vh;
+
+     right: 0;
+     left: 0;
+     margin-right: auto;
+     margin-left: auto;
+     position: fixed;
+
+    /* parent div */
  }
 
  .prod-button-left {
@@ -92,7 +99,7 @@
 
  .prod-title {
     position: fixed;
-    z-index: 0;
+    z-index: 5;
     padding-top: 20vh;
  }
 
@@ -108,7 +115,7 @@
  .prod-price {
     position: fixed;
     z-index: 10;
-    margin-top: 80vh;
+    margin-top: 70vh;
  }
 
  .prod-price-text {
@@ -123,7 +130,7 @@
  .prod-view {
     position: fixed;
     z-index: 10;
-    margin-top: 65vh;
+    margin-top: 47vh;
     cursor: pointer;
  }
 
@@ -135,6 +142,10 @@
     text-decoration: none;
     font-size: clamp(2pt, 5vw, 30pt);
     cursor: pointer;
+ }
+
+ .prod-view-text:hover {
+     color: white;
  }
  
  .App__view-cart-wrapper {

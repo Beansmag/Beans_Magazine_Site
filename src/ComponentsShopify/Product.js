@@ -20,7 +20,7 @@ export default (props) => {
 	const [count, setCount] = useState(0)
 	const [prodLength, setProdLength] = useState()
 	const window = document.documentElement.clientWidth 
-	// const carStart = window > 600 ? -32 : -34
+	const carStart = window > 600 ? -22 : -48.
 
 	useEffect(() => {
 		const indexStart = Math.trunc(products.length / 2) 
@@ -58,11 +58,11 @@ export default (props) => {
 				</Col>
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
-				<Col lg={{ offset: 4, span: 2 }} xs={{ offset: 1, span: 3 }} className="prod-view"  onClick={() => setProdModal(true)}>
-					<img src={Arrow} alt="click to view clothes" style={{ height: "90px", transform: "rotate(135deg)" }} />
-					<h1 className="prod-view-text" >View</h1>
+				<Col lg={{ offset: 4, span: 1 }} xs={{ offset: 1, span: 3 }} className="prod-view" >
+					<img src={Arrow} onClick={() => setProdModal(true)} alt="click to view clothes" style={{ height: "90px", transform: "rotate(135deg)" }} />
+					<h1 className="prod-view-text" onClick={() => setProdModal(true)} >View</h1>
 				</Col>
-				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 7, span: 3 }} className="prod-price">
+				<Col lg={{ offset: 6, span: 3 }} xs={{ offset: 5, span: 3 }} className="prod-price">
 					<h1 className="prod-price-text">{`$${products[index] !== undefined ? products[index].variants[0].price : ""}*`}</h1>
 				</Col>
 			</Row>
@@ -81,8 +81,10 @@ export default (props) => {
 			<animated.div 
 				className="Product-wrapper" 
 				style={{ 
-					transform: `translateX(${-30 + translate}%)`, 
-					width: `${prodLength * 420}px`,
+					// transform: `translateX(${carStart + translate}%)`, 
+					transform: `translateX(${-29 + translate}%)`, 
+					// width: `${prodLength * 320}px`,
+					width: "200vw",
 					opacity: `${prodModal ? "0" : "1"}`
 					}} 
 				{...bind()} 
@@ -96,9 +98,9 @@ export default (props) => {
 								<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
 									style={{ 
 										cursor: "pointer",
-										transform: `${i === index ? "scale(1.8)" : "scale(1.4)"}`,
+										transform: `${i === index ? "scale(2.4)" : "scale(1.5)"}`,
 										transition: "transform 0.5s",
-										zIndex: "10"
+										zIndex: `${i === index ? 20 : 5}`
 									}}
 									onClick={() => setProdModal(false)}
 								/>
