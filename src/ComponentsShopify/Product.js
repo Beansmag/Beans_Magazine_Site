@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useShopify } from "../hooks";
 import { Container, Col, Row } from 'react-bootstrap';
 import { useSprings, animated } from '@react-spring/web';
@@ -83,10 +83,10 @@ export default (props) => {
 				className="Product-wrapper" 
 				style={{ 
 					// transform: `translateX(${carStart + translate}%)`, 
-					transform: `translateX(${-31 + translate}%)`, 
+					transform: `translateX(${0 + translate}%)`, 
 					// width: `${prodLength * 320}px`,
 					marginTop: `${window > 600 ? "30vh" : "40vh"}`,
-					width: "200vw",
+					width: "100vw",
 					opacity: `${prodModal ? "0" : "1"}`
 					}} 
 				{...bind()} 

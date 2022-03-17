@@ -59,3 +59,7 @@
     position: relative;
     z-index: 21;
   }
+
+  .home-prod-img {
+    width: 100%;
+  }
