@@ -79,19 +79,18 @@
  .prod-button-left {
     position: fixed;
     z-index: 20;
-    top: 35%;
-    left: 10%;
+    left: 6%;
  }
 
  .prod-button-right {
     position: fixed;
     z-index: 20;
-    top: 35%;
-    right: 10%;
+    right: 6%;
  }
 
  .arrow {
-    height: 20vh;
+    height: 4vw;
+    min-height: 40px;
     cursor: pointer;
  }
 

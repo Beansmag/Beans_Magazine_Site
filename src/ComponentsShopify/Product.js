@@ -18,8 +18,8 @@ export default (props) => {
 	const [prodModal, setProdModal] = useState(false)
 	const [rowWidth, setRowWidth] = useState()
 	const [count, setCount] = useState(0)
-	// const [prodLength, setProdLength] = useState()
 	const window = document.documentElement.clientWidth 
+	const prodLength = products && products.length
 	// const margTop = window / 
 	// const carStart = window > 600 ? -22 : -48
 
@@ -30,6 +30,7 @@ export default (props) => {
 		if (products[1] !== undefined) {
 			setIndex(indexStart)
 			setRowWidth(halfIndex)
+			setTranslate(0)
 			// setProdLength(prodIndexLength)
 		}
 	},[products])
@@ -51,19 +52,59 @@ export default (props) => {
 		setTranslate(count * rowWidth)
 	},[count])
 
+	function clickLeft() {
+		if (index <= 0) {
+			setTranslate(translate)
+			setIndex(0)
+		} else {
+			setIndex(index - 1)
+			setTranslate(translate + rowWidth)
+		}
+	}
+
+	function clickRight() {
+		const amount = products.length - 1
+		if (index >= amount) {
+			setTranslate(translate)
+			setIndex(amount)
+		} else {
+			setIndex(index + 1)
+			setTranslate(translate - rowWidth)
+		}
+	}
+
+	console.log(translate)
+
 	return (
-		<Container  style={{ position: "fixed", height: "100vh", width: "100vw"}}>
+		<Container style={{ position: "fixed", height: "100vh", width: "100vw"}}>
+			<div className="prod-button-left" style={{ top: `${window > 600 ? "72vh" : "49vh"}` }}>
+				<img 
+					src={Arrow} 
+					alt="Move clothing carousel left" 
+					className="arrow"
+					onClick={() => clickLeft()}
+					/>
+			</div>
+			<div className="prod-button-right" style={{ top: `${window > 600 ? "72vh" : "49vh"}` }}>
+				<img 
+					src={Arrow} 
+					alt="Move clothing carousel right" 
+					className="arrow"
+					onClick={() => clickRight()}
+					style={{ transform: "rotate(180deg)" }}
+					/>
+			</div>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
-				<Col lg={{ offset: 4, span: 8 }} xs={12} className="prod-title" style={{ marginTop: `${window > 600 ? "23vh" : "30vh"}` }} >
+				<Col lg={{ offset: 4, span: 8 }} xs={12} className="prod-title" style={{ marginTop: `${window > 600 ? "23vh" : "28vh"}` }} >
 					<h1 className="prod-title-text" >{products[index] !== undefined ? products[index].title : ""}</h1>
 				</Col>
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
-				<Col lg={{ offset: 4, span: 1 }} xs={{ offset: 1, span: 3 }} className="prod-view" style={{ marginTop: `${window > 600 ? "65vh" : "58vh"}` }}>
+				<Col lg={{ offset: 4, span: 1 }} xs={{ offset: 2, span: 3 }} className="prod-view" style={{ marginTop: `${window > 600 ? "72vh" : "55vh"}` }}>
 					<img src={Arrow} onClick={() => setProdModal(true)} alt="click to view clothes" style={{ height: "90px", transform: "rotate(135deg)" }} />
 					<h1 className="prod-view-text" onClick={() => setProdModal(true)} >View</h1>
 				</Col>
-				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 6, span: 3 }} className="prod-price" style={{ marginTop: `${window > 600 ? "70vh" : "57vh"}` }}>
+				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 6, span: 3 }} className="prod-price" style={{ marginTop: `${window > 600 ? "72vh" : "60vh"}` }}>
 					<h1 className="prod-price-text">{`$${products[index] !== undefined ? products[index].variants[0].price : ""}*`}</h1>
 				</Col>
 			</Row>
@@ -82,13 +123,11 @@ export default (props) => {
 			<animated.div 
 				className="Product-wrapper" 
 				style={{ 
-					// transform: `translateX(${carStart + translate}%)`, 
-					transform: `translateX(${0 + translate}%)`, 
-					// width: `${prodLength * 320}px`,
+					transform: `translateX(${-26 + translate}%)`, 
+					width: `${prodLength * 20}vw`,
 					marginTop: `${window > 600 ? "30vh" : "40vh"}`,
-					width: "100vw",
 					opacity: `${prodModal ? "0" : "1"}`
-					}} 
+				}} 
 				{...bind()} 
 			>
 				{products &&
@@ -100,7 +139,7 @@ export default (props) => {
 								<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
 									style={{ 
 										cursor: "pointer",
-										transform: `${i === index ? "scale(2.4)" : "scale(1.5)"}`,
+										transform: `${i === index ? "scale(2)" : "scale(1.5)"}`,
 										transition: "transform 0.5s",
 										zIndex: `${i === index ? 20 : 5}`
 									}}
@@ -115,140 +154,3 @@ export default (props) => {
 		</Container>
 	)
 }
-
-
-{/* <div className="prod-button-left">
-<img 
-	src={Arrow} 
-	alt="Move clothing carousel left" 
-	className="arrow"
-	onClick={() => clickLeft()}
-	/>
-</div>
-<div className="prod-button-right">
-<img 
-	src={Arrow} 
-	alt="Move clothing carousel right" 
-	className="arrow"
-	onClick={() => clickRight()}
-	style={{ transform: "rotate(180deg)" }}
-	/>
-</div> */}
-
-// function clickLeft() {
-// 	if (index <= 0) {
-// 		setTranslate(translate)
-// 		setIndex(0)
-// 	} else {
-// 		setIndex(index - 1)
-// 		setTranslate(translate + rowWidth)
-// 	}
-// }
-
-// function clickRight() {
-// 	const amount = products.length - 1
-// 	if (index >= amount) {
-// 		setTranslate(translate)
-// 		setIndex(amount)
-// 	} else {
-// 		setIndex(index + 1)
-// 		setTranslate(translate - rowWidth)
-// 	}
-// }
-
-
-{/* <div className="prod-button-left">
-<img 
-	src={Arrow} 
-	alt="Move clothing carousel left" 
-	className="arrow"
-	onClick={() => clickLeft()}
-	/>
-</div>
-<div className="prod-button-right">
-<img 
-	src={Arrow} 
-	alt="Move clothing carousel right" 
-	className="arrow"
-	onClick={() => clickRight()}
-	style={{ transform: "rotate(180deg)" }}
-	/>
-</div> */}
-
-			
-			{/* <div style={{ position: "fixed", zIndex: "9", marginTop: "60px" }}>
-				<h1>{products[index] !== undefined ? products[index].variants[0].price : "...Loading"}</h1>
-			</div> */}
-
-
-// function clickLeft() {
-// 	if (index <= 0) {
-// 		setTranslate(translate)
-// 		setIndex(0)
-// 	} else {
-// 		setIndex(index - 1)
-// 		setTranslate(translate + rowWidth)
-// 	}
-// }
-
-// function clickRight() {
-// 	const amount = products.length - 1
-// 	if (index >= amount) {
-// 		setTranslate(translate)
-// 		setIndex(amount)
-// 	} else {
-// 		setIndex(index + 1)
-// 		setTranslate(translate - rowWidth)
-// 	}
-// }
-
-// const pages = [
-// 	'https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-// 	'https://images.pexels.com/photos/733853/pexels-photo-733853.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-// 	'https://images.pexels.com/photos/4016596/pexels-photo-4016596.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-// 	'https://images.pexels.com/photos/351265/pexels-photo-351265.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-// 	'https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-// 	'https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-// 	'https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-//   ]
-
-// export default () => {
-// 		//index is probably the amount of images total is 7
-// 		const index = useRef(0)
-// 		//width is the size of window in width
-// 		const width = window.innerWidth
-	  
-// 		//pages.length is 7 i is always 1 more than what it actuall is 
-// 		// x is index * width       --->   1 x width       2 x width etc
-// 		const [props, api] = useSprings(pages.length, i => ({
-// 		  x: i * width,
-// 		  scale: 1,
-// 		  display: 'block',
-// 		}))
-	  
-// 		let count = 0
-// 		const bind = useDrag(({ canceled, first, last, active, movement: [mx], direction: [xDir], cancel }) => {
-// 		  if (active && Math.abs(mx) > width / 2) {
-// 			count++
-// 			console.log(count)
-// 			index.current = clamp(index.current + (xDir > 0 ? -1 : 1), 0, pages.length - 1)
-// 			cancel()
-// 		  }
-// 		  api.start(i => {
-// 			if (i < index.current - 1 || i > index.current + 1) return { display: 'none' }
-// 			const x = (i - index.current) * width + (active ? mx : 0)
-// 			const scale = active ? 1 - Math.abs(mx) / width / 2 : 1
-// 			return { x, scale, display: 'block' }
-// 		  })
-// 		})
-
-// 		return (
-// 		  <div className="wrapper" style={{position: "fixed"}}>
-// 			{props.map(({ x, display, scale }, i) => (
-// 			  <animated.div className="page" {...bind()} key={i} style={{ display, x }}>
-// 				<animated.div style={{ scale, backgroundImage: `url(${pages[i]})` }} />
-// 			  </animated.div>
-// 			))}
-// 		  </div>
-// 		)
-// }
