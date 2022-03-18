@@ -77,23 +77,29 @@ export default (props) => {
 
 	return (
 		<Container style={{ position: "fixed", height: "100vh", width: "100vw"}}>
-			<div className="prod-button-left" style={{ top: `${window > 600 ? "72vh" : "49vh"}` }}>
-				<img 
-					src={Arrow} 
-					alt="Move clothing carousel left" 
-					className="arrow"
-					onClick={() => clickLeft()}
-					/>
-			</div>
-			<div className="prod-button-right" style={{ top: `${window > 600 ? "72vh" : "49vh"}` }}>
-				<img 
-					src={Arrow} 
-					alt="Move clothing carousel right" 
-					className="arrow"
-					onClick={() => clickRight()}
-					style={{ transform: "rotate(180deg)" }}
-					/>
-			</div>
+			{!prodModal ? 
+				<div>
+					<div className="prod-button-left" style={{ top: `${window > 600 ? "72vh" : "49vh"}` }}>
+						<img 
+							src={Arrow} 
+							alt="Move clothing carousel left" 
+							className="arrow"
+							onClick={() => clickLeft()}
+							/>
+					</div>
+					<div className="prod-button-right" style={{ top: `${window > 600 ? "72vh" : "49vh"}` }}>
+						<img 
+							src={Arrow} 
+							alt="Move clothing carousel right" 
+							className="arrow"
+							onClick={() => clickRight()}
+							style={{ transform: "rotate(180deg)" }}
+							/>
+					</div>	
+				</div>	
+				:
+				<span></span>	
+			}
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
 				<Col lg={{ offset: 4, span: 8 }} xs={12} className="prod-title" style={{ marginTop: `${window > 600 ? "23vh" : "28vh"}` }} >
 					<h1 className="prod-title-text" >{products[index] !== undefined ? products[index].title : ""}</h1>
@@ -124,7 +130,7 @@ export default (props) => {
 				className="Product-wrapper" 
 				style={{ 
 					transform: `translateX(${-26 + translate}%)`, 
-					width: `${prodLength * 20}vw`,
+					width: `${prodLength * 19}vw`,
 					marginTop: `${window > 600 ? "30vh" : "40vh"}`,
 					opacity: `${prodModal ? "0" : "1"}`
 				}} 
