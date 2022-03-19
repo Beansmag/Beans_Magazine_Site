@@ -91,7 +91,7 @@
  .arrow {
     height: 4vw;
     min-height: 40px;
-    cursor: pointer;
+    /* cursor: pointer; */
  }
 
  .prod-title {
@@ -125,7 +125,7 @@
  .prod-view {
     position: fixed;
     z-index: 10;
-    cursor: pointer;
+    /* cursor: pointer; */
  }
 
  .prod-view-text {
@@ -135,7 +135,7 @@
     color: black;
     text-decoration: none;
     font-size: clamp(20pt, 5vw, 30pt);
-    cursor: pointer;
+    /* cursor: pointer; */
  }
 
  .prod-view-text:hover {
@@ -162,7 +162,7 @@
      text-decoration: none;
      font-size: 25px;
      padding-top: 1.5vw;
-     cursor: pointer;
+     /* cursor: pointer; */
  }
  
  .button {
@@ -175,9 +175,8 @@
     font-weight: 800;
     font-style: normal;
     color: white;
-     /* padding: 10px 17px; */
     
-    cursor: pointer;
+    /* cursor: pointer; */
  }
  
  .button:hover,
@@ -193,7 +192,7 @@
  .login {
      font-size: 1.2rem;
      color: #b8b8b8;
-     cursor: pointer;
+     /* cursor: pointer; */
  }
  
  .login:hover {
@@ -218,7 +217,7 @@
      border-radius: 3px;
      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
      color: #ffffff;
-     cursor: default;
+     /* cursor: default; */
      display: -webkit-flex;
      display: -ms-flexbox;
      display: none;
@@ -264,7 +263,7 @@
      border: none;
      background: transparent;
      transition: transform 100ms ease;
-     cursor: pointer;
+     /* cursor: pointer; */
  }
  
  .Cart__header {
@@ -390,7 +389,7 @@
      border: none;
      background: transparent;
      box-shadow: none;
-     cursor: pointer;
+     /* cursor: pointer; */
      font-size: 18px;
      text-align: center;
  }
@@ -430,7 +429,7 @@
  
  .Line-item__remove:hover {
      opacity: 1;
-     cursor: pointer;
+     /* cursor: pointer; */
  }
  
  /* PRODUCTS
@@ -564,7 +563,7 @@
      border: none;
      background: transparent;
      transition: transform 100ms ease;
-     cursor: pointer;
+     /* cursor: pointer; */
  }
  
  .CustomerAuth__body {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import BGVideo from '../Assets/Backprint_1.mp4'
+import BGVideo from '../Assets/Backprint_1.webm'
 
 import '../Styles/Home.css'
 
@@ -25,6 +25,7 @@ const LoadingPage = () => {
                     transform: "translate(-50%, -50%)",
                 }}>
                 <source src={BGVideo} type="video/mp4" />
+
             </video>
         </div>
     )

@@ -55,7 +55,7 @@
     height: 30px;
     margin-top: 12vh;
     margin-left: 12vw;
-    cursor: pointer;
+    /* cursor: pointer; */
     position: relative;
     z-index: 21;
   }

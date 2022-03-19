@@ -73,8 +73,6 @@ export default (props) => {
 		}
 	}
 
-	console.log(translate)
-
 	return (
 		<Container style={{ position: "fixed", height: "100vh", width: "100vw"}}>
 			{!prodModal ? 
@@ -144,7 +142,6 @@ export default (props) => {
 							{image ? (
 								<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
 									style={{ 
-										cursor: "pointer",
 										transform: `${i === index ? "scale(2)" : "scale(1.5)"}`,
 										transition: "transform 0.5s",
 										zIndex: `${i === index ? 20 : 5}`
