@@ -73,7 +73,7 @@ export default (props) => {
 		<Container style={{ position: "fixed", height: "100vh", width: "100vw"}}>
 			{!prodModal ? 
 				<div>
-					<div className="prod-button-left" style={{ top: `${window > 600 ? "40vh" : "43vh"}` }}>
+					<div className="prod-button-left" style={{ top: `${window > 600 ? "70vh" : "51vh"}` }}>
 						<img 
 							src={Arrow} 
 							alt="Move clothing carousel left" 
@@ -81,7 +81,7 @@ export default (props) => {
 							onClick={() => clickLeft()}
 							/>
 					</div>
-					<div className="prod-button-right" style={{ top: `${window > 600 ? "40vh" : "43vh"}` }}>
+					<div className="prod-button-right" style={{ top: `${window > 600 ? "70vh" : "51vh"}` }}>
 						<img 
 							src={Arrow} 
 							alt="Move clothing carousel right" 
