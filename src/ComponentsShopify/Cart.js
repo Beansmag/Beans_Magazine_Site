@@ -55,7 +55,10 @@ export default (props) => {
 	return (
 		<div style={{ position: "fixed", zIndex: "999999999999" }}>
 			<div className="App__view-cart-wrapper2">
-				<button onClick={(e) => { cartStatus ? handleClose(e) : handleOpen(e) }} className="App__view-cart">
+				<button 
+					onClick={(e) => { cartStatus ? handleClose(e) : handleOpen(e) }} 
+					className="App__view-cart"
+				>
 					Cart
 				</button>
 			</div>

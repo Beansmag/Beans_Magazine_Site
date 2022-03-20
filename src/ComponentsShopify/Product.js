@@ -20,8 +20,6 @@ export default (props) => {
 	const [count, setCount] = useState(0)
 	const window = document.documentElement.clientWidth 
 	const prodLength = products && products.length
-	// const margTop = window / 
-	// const carStart = window > 600 ? -22 : -48
 
 	useEffect(() => {
 		const indexStart = Math.trunc(products.length / 2) 
@@ -77,7 +75,7 @@ export default (props) => {
 		<Container style={{ position: "fixed", height: "100vh", width: "100vw"}}>
 			{!prodModal ? 
 				<div>
-					<div className="prod-button-left" style={{ top: `${window > 600 ? "72vh" : "49vh"}` }}>
+					<div className="prod-button-left" style={{ top: `${window > 600 ? "40vh" : "43vh"}` }}>
 						<img 
 							src={Arrow} 
 							alt="Move clothing carousel left" 
@@ -85,7 +83,7 @@ export default (props) => {
 							onClick={() => clickLeft()}
 							/>
 					</div>
-					<div className="prod-button-right" style={{ top: `${window > 600 ? "72vh" : "49vh"}` }}>
+					<div className="prod-button-right" style={{ top: `${window > 600 ? "40vh" : "43vh"}` }}>
 						<img 
 							src={Arrow} 
 							alt="Move clothing carousel right" 
@@ -93,10 +91,10 @@ export default (props) => {
 							onClick={() => clickRight()}
 							style={{ transform: "rotate(180deg)" }}
 							/>
-					</div>	
+					</div>
 				</div>	
 				:
-				<span></span>	
+				<span></span>
 			}
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
 				<Col lg={{ offset: 4, span: 8 }} xs={12} className="prod-title" style={{ marginTop: `${window > 600 ? "23vh" : "28vh"}` }} >
@@ -113,7 +111,7 @@ export default (props) => {
 				</Col>
 			</Row>
 			{prodModal ? 
-					<div style={{ width: "100vw", height: "100vh", display: "table", marginLeft: "-15px"}}>
+					<div style={{ width: "100vw", height: "100vh", position: "fixed", marginLeft: "-15px", zIndex: "25"}}>
 						<img 
 							src={Close} alt="close modal window" 
 							className="close-product-modal"

@@ -10,8 +10,13 @@
     font-weight: 800;
     font-style: normal;
     color: black;
-    text-decoration: none;
     font-size: 25px;
+}
+
+.nav_text:hover {
+    text-decoration: none;
+    color: grey;
+    cursor: url('../../Assets/diamondSword.png'),auto;
 }
 
 .nav_master_container {

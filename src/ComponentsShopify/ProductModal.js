@@ -8,18 +8,17 @@ export default (props) => {
 
     const {
         products,
-		product,
 		fetchProduct,
 		openCart,
 		checkoutState,
 		addVariant,
 	} = useShopify()
 
-    // const id = props.match.params.productId
     const id = products[props.index] !== undefined ? products[props.index].id : "...Loading"
     const defaultSize = products[props.index] !== undefined ? products[props.index].variants[0].id.toString() : "...Loading"
     const [size, setSize] = useState("")
 	const [quantity, setQuantity] = useState(1)
+	const [imageIndex, setImageIndex ] = useState(0)
     const description = products[props.index] !== undefined ? products[props.index].description.split(".") : "...Loading"
 
     function changeSize(sizeId, quantity) {
@@ -47,21 +46,73 @@ export default (props) => {
 	}, [id])
 
     return (
-        <div className="product-modal-background">
-			<Row style={{ height: "100%" }}>
+        <Container className="product-modal-background" >
+			<Row style={{ height: "100%" }} >
 				<Col lg={6} style={{ borderBottom: `${document.documentElement.clientWidth < 600 ? "solid 1px black" : ""}`}}>
-					<img 
-						src={products[props.index] !== undefined ? products[props.index].images[0].src : "...Loading"}
-						alt={`${products[props.index] !== undefined ? products[props.index].images[0].src : "...Loading"} product image`}
-						className="prod-modal-product-image"
-					/> 
-				</Col>
-				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`}} >
-					<h1 className="prod-modal-title" >{products[props.index] !== undefined ? products[props.index].title : "...Loading"}</h1>
-					<h1 className="prod-modal-price" >{`$${products[props.index] !== undefined ? products[props.index].variants[0].price : "...Loading"}`}</h1>
-					<h5 className="prod-modal-description" >{description}</h5>
-					<div className="Product__info">
+					{/* <div style={{ position: "relative", backgroundColor: "blue" }}> */}
+						{/* <img 
+							src={products[props.index] !== undefined ? products[props.index].images[imageIndex].src : "...Loading"}
+							alt={`${products[props.index] !== undefined ? products[props.index].images[imageIndex].src : "...Loading"} product image`}
+							className="prod-modal-product-image"
+						/>  */}
+					<div style={{ display: 'table', content: "", position: "relative" }} >
+						<img 
+							src={products[props.index].images[0] !== undefined ? products[props.index].images[imageIndex].src : ""}
+							alt={`${products[props.index] !== undefined ? products[props.index].images[imageIndex].src : "...Loading"}`}
+							className="prod-modal-product-image"
+						/> 
+					{ products[props.index].images.length > 1 ?
 						<div>
+							<img 
+									src={products[props.index].images[0] !== undefined ? products[props.index].images[0].src : ""}
+									alt={`${products[props.index].images[0] !== undefined ? products[props.index].images[0].src : ""}`}
+									className="prod-modal-product-image-below"
+									onClick={() => setImageIndex(0)}
+								/> 
+							<img 
+									src={products[props.index].images[1] !== undefined ? products[props.index].images[1].src : ""}
+									alt={`${products[props.index].images[1] !== undefined ? products[props.index].images[1].src : ""}`}
+									className="prod-modal-product-image-below"
+									onClick={() => setImageIndex(1)}
+								/> 
+							<img 
+									src={products[props.index].images[2] !== undefined ? products[props.index].images[2].src : ""}
+									alt={`${products[props.index].images[2] !== undefined ? products[props.index].images[2].src : ""}`}
+									className="prod-modal-product-image-below"
+									onClick={() => setImageIndex(2)}
+								/> 
+						</div>
+						:
+						<span></span>
+					}
+					{/* <img 
+							src={products[props.index].images[0] !== undefined ? products[props.index].images[0].src : ""}
+							alt={`${products[props.index].images[0] !== undefined ? products[props.index].images[0].src : ""}`}
+							className="prod-modal-product-image-below"
+							onClick={() => setImageIndex(0)}
+						/> 
+					<img 
+							src={products[props.index].images[1] !== undefined ? products[props.index].images[1].src : ""}
+							alt={`${products[props.index].images[1] !== undefined ? products[props.index].images[1].src : ""}`}
+							className="prod-modal-product-image-below"
+							onClick={() => setImageIndex(1)}
+						/> 
+					<img 
+							src={products[props.index].images[2] !== undefined ? products[props.index].images[2].src : ""}
+							alt={`${products[props.index].images[2] !== undefined ? products[props.index].images[2].src : ""}`}
+							className="prod-modal-product-image-below"
+							onClick={() => setImageIndex(2)}
+						/>  */}
+					</div>
+				</Col>
+				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: "100%" }} >
+					<div style={{ height: "70%"}}>
+						<h1 className="prod-modal-title" >{products[props.index] !== undefined ? products[props.index].title : "...Loading"}</h1>
+						<h1 className="prod-modal-price" >{`$${products[props.index] !== undefined ? products[props.index].variants[0].price : "...Loading"}`}</h1>
+						<h5 className="prod-modal-description" >{description}</h5>
+					</div>
+					<div className="Product__info" style={{ padding: "10px" }}>
+						<div style={{ marginBottom: "0px" }}>
 							<select
 								id="prodOptions"
 								name={size}
@@ -94,17 +145,17 @@ export default (props) => {
 								}}
 							></input>
 						</div>
-					</div>
-					<div style={{ width: "100%", textAlign: "center"}}>
-						<button
-							className="prodBuy button"
-							onClick={(e) => changeSize(size, quantity)}
-						>
-							ADD TO CART
-						</button>
+						<div style={{ width: "100%", textAlign: "center"}}>
+							<button
+								className="prodBuy button"
+								onClick={(e) => changeSize(size, quantity)}
+							>
+								ADD TO CART
+							</button>
+						</div>
 					</div>
 				</Col>      
 			</Row> 
-        </div>
+        </Container>
     )
 }

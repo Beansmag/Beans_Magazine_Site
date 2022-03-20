@@ -164,6 +164,11 @@
      padding-top: 1.5vw;
      /* cursor: pointer; */
  }
+
+ .App__view-cart:hover {
+    cursor: url('./Assets/diamondSword.png'),auto;
+    color: grey;
+ }
  
  .button {
     margin-top: 20px;
@@ -498,12 +503,13 @@
  
  .Product__info {
      width: 90%;
-     margin-left: 50px;
+     /* margin-left: 50px; */
+     margin-left: 4.2%;
  }
 
  #prodOptions {
     float: left;
-    width: 40%;
+    width: 50%;
     border: black solid 2px;
     color: black;
     font-family: sans-serif;
@@ -511,7 +517,6 @@
     font-style: normal;
     font-size: clamp(8pt, 4vw, 15pt);
     background: none;
-    margin: 10px;
     height: 50px;
     text-align: center;
  }
@@ -519,14 +524,14 @@
  .quantity {
     border: black solid 2px;
     color: black;
+    border-radius: 0px;
     font-family: sans-serif;
     font-weight: 800;
     font-style: normal;
     font-size: clamp(8pt, 4vw, 15pt);
     background: none;
     height: 50px;
-    margin: 10px;
-    width: 40%;
+    width: 50%;
     text-align: center;
  }
  

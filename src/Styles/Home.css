@@ -56,7 +56,7 @@
     margin-top: 12vh;
     margin-left: 12vw;
     /* cursor: pointer; */
-    position: relative;
+    position: fixed;
     z-index: 21;
   }
 
