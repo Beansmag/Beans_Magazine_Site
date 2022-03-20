@@ -3,6 +3,7 @@ import { useShopify } from "../hooks";
 import { Container, Col, Row } from 'react-bootstrap';
 import { useSprings, animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
+import ReactGa from 'react-ga'
 
 import ProductModal from "./ProductModal";
 
@@ -27,6 +28,8 @@ export default (props) => {
 		if (products[1] !== undefined) {
 			setIndex(indexStart)
 			setRowWidth(halfIndex)
+			// ReactGa.initialize('UA-135117574-2')
+			// ReactGa.pageview('/home')
 			setTranslate(0)
 		}
 	},[products])
@@ -123,11 +126,11 @@ export default (props) => {
 			<animated.div 
 				className="Product-wrapper" 
 				style={{ 
-					transform: `translateX(${-26 + translate}%)`, 
+					transform: `translateX(${-34 + translate}%)`, 
 					width: `${prodLength * 19}vw`,
 					marginTop: `${window > 600 ? "30vh" : "40vh"}`,
 					opacity: `${prodModal ? "0" : "1"}`
-				}} 
+				}}
 				{...bind()} 
 			>
 				{products &&
