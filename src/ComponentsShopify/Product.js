@@ -24,12 +24,10 @@ export default (props) => {
 	useEffect(() => {
 		const indexStart = Math.trunc(products.length / 2) 
 		const halfIndex = 100 / products.length
-		// const prodIndexLength = products.length
 		if (products[1] !== undefined) {
 			setIndex(indexStart)
 			setRowWidth(halfIndex)
 			setTranslate(0)
-			// setProdLength(prodIndexLength)
 		}
 	},[products])
 
