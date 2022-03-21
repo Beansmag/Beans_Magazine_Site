@@ -4,9 +4,9 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import ReactGa from 'react-ga'
+import sanityClient from '../client';
 
 import ProductModal from "./ProductModal";
-
 import Close from '../Assets/Close.svg'
 
 import '../Styles/Home.css'
@@ -21,6 +21,26 @@ export default (props) => {
 	const [count, setCount] = useState(0)
 	const window = document.documentElement.clientWidth 
 	const prodLength = products && products.length
+	const [videoData, setVideoData] = useState()
+
+	useEffect(() => {
+        sanityClient.fetch(`*[_type == "backgroundVideo"]{
+			title,
+			backgroundGif{
+                asset->{
+                  _id,
+                  url
+                },
+                alt
+              },
+        }`)
+        .then((data) => setVideoData(data))
+        .catch(console.error)
+      },[])
+
+	  console.log(videoData && videoData[index + 1])
+
+	  console.log(index)
 
 	useEffect(() => {
 		const indexStart = Math.trunc(products.length / 2) 
@@ -51,16 +71,12 @@ export default (props) => {
 		setTranslate(count === "null" ? 0 * rowWidth : count * rowWidth)
 	},[count])
 
-console.log(translate)
-	// console.log(count)
-
 	function clickLeft() {
 		if (index <= 0) {
 			setTranslate(translate)
 			setIndex(0)
 		} else {
 			setIndex(index - 1)
-			// setTranslate(translate + rowWidth)
 			setCount(count + 1)
 		}
 	}
@@ -72,7 +88,6 @@ console.log(translate)
 			setIndex(amount)
 		} else {
 			setIndex(index + 1)
-			// setTranslate(translate - rowWidth)
 			setCount(count - 1)
 		}
 	}
@@ -158,6 +173,21 @@ console.log(translate)
 				})
 				}
 			</animated.div>
+			{prodModal && videoData[index + 1] !== undefined  ? 
+				<div 
+					alt="background Video" 
+					className="home-bg-vid"
+					style={{ backgroundImage: `url(${videoData[(index + 1)].backgroundGif !== null ? videoData[(index + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})` }}
+				>
+				</div>
+				:
+				<div 
+					alt="background Video" 
+					className="home-bg-vid"
+					style={{ backgroundImage: `url(${videoData && videoData[0].backgroundGif.asset.url})` }}
+				>
+				</div>
+			}
 		</Container>
 	)
 }

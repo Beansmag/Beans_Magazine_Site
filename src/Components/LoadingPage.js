@@ -17,17 +17,6 @@ const LoadingPage = () => {
                 overflow: 'hidden',
             }}
         >
-            {/* <video loop autoPlay muted 
-                style={{   
-                    width: "80%",
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                }}>
-                <source src={BGVideo} type="video/mp4" />
-
-            </video> */}
             <img src={BGGif} alt="Loading Video"
                 style={{ 
                     width: "auto",
