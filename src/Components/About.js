@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '../client';
+import ReactGa from 'react-ga'
 
 import MailChimpForm from '../Components/newsletter/MailchimpForm';
 
@@ -18,6 +19,10 @@ const About = () => {
         }`)
         .then((data) => setAboutData(data))
         .catch(console.error)
+
+        ReactGa.initialize('UA-211860604-30')
+        ReactGa.pageview('/about')
+
       },[])
 
     return (

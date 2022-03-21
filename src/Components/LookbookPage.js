@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import sanityClient from '../client';
+import ReactGa from 'react-ga'
 
 import "../Styles/Lookbook.css"
 
@@ -109,6 +110,9 @@ const LookbookPage = () => {
         }`)
         .then((data) => setPostData(data))
         .catch(console.error)
+
+        ReactGa.initialize('UA-211860604-30')
+        ReactGa.pageview('/lookbook')
       },[])
 
     return (

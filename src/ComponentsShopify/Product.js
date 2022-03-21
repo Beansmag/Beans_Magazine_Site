@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useShopify } from "../hooks";
 import { Container, Col, Row } from 'react-bootstrap';
-import { useSprings, animated } from '@react-spring/web';
+import { animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import ReactGa from 'react-ga'
 
@@ -28,11 +28,13 @@ export default (props) => {
 		if (products[1] !== undefined) {
 			setIndex(indexStart)
 			setRowWidth(halfIndex)
-			// ReactGa.initialize('UA-135117574-2')
-			// ReactGa.pageview('/home')
+			ReactGa.initialize('UA-211860604-30')
+			ReactGa.pageview('/home')
 			setTranslate(0)
 		}
 	},[products])
+
+	console.log(translate)
 
 	const bind = useDrag(({movement: [mx], cancel, active }) => {
 		if (active && mx > 100 && index > 0) {
@@ -64,11 +66,11 @@ export default (props) => {
 	function clickRight() {
 		const amount = products.length - 1
 		if (index >= amount) {
-			setTranslate(translate)
+			setTranslate(translate !== "NaN" ? translate : 0)
 			setIndex(amount)
 		} else {
 			setIndex(index + 1)
-			setTranslate(translate - rowWidth)
+			setTranslate(translate !== "Nan" ? translate - rowWidth : 0 - rowWidth)
 		}
 	}
 
