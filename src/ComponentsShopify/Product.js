@@ -38,10 +38,6 @@ export default (props) => {
         .catch(console.error)
       },[])
 
-	  console.log(videoData && videoData[index + 1])
-
-	  console.log(index)
-
 	useEffect(() => {
 		const indexStart = Math.trunc(products.length / 2) 
 		const halfIndex = 100 / products.length
@@ -49,10 +45,19 @@ export default (props) => {
 			setIndex(indexStart)
 			setRowWidth(halfIndex)
 			ReactGa.initialize('UA-211860604-30')
-			ReactGa.pageview('/home')
+			ReactGa.pageview(`/home`)
 		}
 		setTranslate(0)
 	},[products])
+
+	useEffect(()=> {
+		if(prodModal) {
+			if(prodModal){
+				ReactGa.initialize('UA-211860604-30')
+				ReactGa.pageview(`/home/${products[index].title}`)
+			}
+		}
+	},[prodModal])
 
 	const bind = useDrag(({movement: [mx], cancel, active }) => {
 		if (active && mx > 100 && index > 0) {
