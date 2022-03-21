@@ -105,8 +105,8 @@ export default (props) => {
 						/>  */}
 					</div>
 				</Col>
-				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: "100%" }} >
-					<div style={{ height: "70%"}}>
+				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: `${document.documentElement.clientWidth > 600 ? "100%" : "70%"}` }} >
+					<div style={{ height: "70%" }}>
 						<h1 className="prod-modal-title" >{products[props.index] !== undefined ? products[props.index].title : "...Loading"}</h1>
 						<h1 className="prod-modal-price" >{`$${products[props.index] !== undefined ? products[props.index].variants[0].price : "...Loading"}`}</h1>
 						<h5 className="prod-modal-description" >{description}</h5>
