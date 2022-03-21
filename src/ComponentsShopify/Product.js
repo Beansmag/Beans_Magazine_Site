@@ -30,11 +30,9 @@ export default (props) => {
 			setRowWidth(halfIndex)
 			ReactGa.initialize('UA-211860604-30')
 			ReactGa.pageview('/home')
-			setTranslate(0)
 		}
+		setTranslate(0)
 	},[products])
-
-	console.log(translate)
 
 	const bind = useDrag(({movement: [mx], cancel, active }) => {
 		if (active && mx > 100 && index > 0) {
@@ -50,8 +48,11 @@ export default (props) => {
 	useEffect(() => {
 	const indexStart = Math.trunc(products.length / 2) 
 		setIndex(indexStart - count)
-		setTranslate(count * rowWidth)
+		setTranslate(count === "null" ? 0 * rowWidth : count * rowWidth)
 	},[count])
+
+console.log(translate)
+	// console.log(count)
 
 	function clickLeft() {
 		if (index <= 0) {
@@ -59,18 +60,20 @@ export default (props) => {
 			setIndex(0)
 		} else {
 			setIndex(index - 1)
-			setTranslate(translate + rowWidth)
+			// setTranslate(translate + rowWidth)
+			setCount(count + 1)
 		}
 	}
 
 	function clickRight() {
 		const amount = products.length - 1
 		if (index >= amount) {
-			setTranslate(translate !== "NaN" ? translate : 0)
+			setTranslate(translate)
 			setIndex(amount)
 		} else {
 			setIndex(index + 1)
-			setTranslate(translate !== "Nan" ? translate - rowWidth : 0 - rowWidth)
+			// setTranslate(translate - rowWidth)
+			setCount(count - 1)
 		}
 	}
 
