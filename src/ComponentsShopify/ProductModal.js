@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Col, Row } from 'react-bootstrap'
 import { useShopify } from "../hooks";
+import ReactGA from 'react-ga';
 
 import "../Styles/productModal.css"
 
@@ -13,6 +14,10 @@ export default (props) => {
 		checkoutState,
 		addVariant,
 	} = useShopify()
+
+	useEffect(() => {
+		ReactGA.initialize('UA-211860604-30');
+	},[])
 
     const id = products[props.index] !== undefined ? products[props.index].id : "...Loading"
     const defaultSize = products[props.index] !== undefined ? products[props.index].variants[0].id.toString() : "...Loading"
@@ -45,16 +50,18 @@ export default (props) => {
 		}
 	}, [id])
 
+	function GAEvent() {
+		ReactGA.event({
+			category: 'User',
+			action: 'Add to Cart',
+			label: `${products[props.index].title} added to cart`
+		  });
+	}
+
     return (
         <Container className="product-modal-background" >
 			<Row style={{ height: "100%" }} >
 				<Col lg={6} style={{ borderBottom: `${document.documentElement.clientWidth < 600 ? "solid 1px black" : ""}`}}>
-					{/* <div style={{ position: "relative", backgroundColor: "blue" }}> */}
-						{/* <img 
-							src={products[props.index] !== undefined ? products[props.index].images[imageIndex].src : "...Loading"}
-							alt={`${products[props.index] !== undefined ? products[props.index].images[imageIndex].src : "...Loading"} product image`}
-							className="prod-modal-product-image"
-						/>  */}
 					<div style={{ display: 'table', content: "", position: "relative" }} >
 						<img 
 							src={products[props.index].images[0] !== undefined ? products[props.index].images[imageIndex].src : ""}
@@ -85,24 +92,6 @@ export default (props) => {
 						:
 						<span></span>
 					}
-					{/* <img 
-							src={products[props.index].images[0] !== undefined ? products[props.index].images[0].src : ""}
-							alt={`${products[props.index].images[0] !== undefined ? products[props.index].images[0].src : ""}`}
-							className="prod-modal-product-image-below"
-							onClick={() => setImageIndex(0)}
-						/> 
-					<img 
-							src={products[props.index].images[1] !== undefined ? products[props.index].images[1].src : ""}
-							alt={`${products[props.index].images[1] !== undefined ? products[props.index].images[1].src : ""}`}
-							className="prod-modal-product-image-below"
-							onClick={() => setImageIndex(1)}
-						/> 
-					<img 
-							src={products[props.index].images[2] !== undefined ? products[props.index].images[2].src : ""}
-							alt={`${products[props.index].images[2] !== undefined ? products[props.index].images[2].src : ""}`}
-							className="prod-modal-product-image-below"
-							onClick={() => setImageIndex(2)}
-						/>  */}
 					</div>
 				</Col>
 				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: `${document.documentElement.clientWidth > 600 ? "100%" : "60%"}` }} >
@@ -148,7 +137,10 @@ export default (props) => {
 						<div style={{ width: "100%", textAlign: "center"}}>
 							<button
 								className="prodBuy button"
-								onClick={(e) => changeSize(size, quantity)}
+								onClick={e => {
+									changeSize(size, quantity)
+									GAEvent()
+								}}
 							>
 								ADD TO CART
 							</button>

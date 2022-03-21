@@ -1,8 +1,8 @@
 import React, { useEffect } from "react"
 import LineItem from "./LineItem"
 import { useShopify } from "../hooks"
-import { MdRemoveShoppingCart, MdShoppingCart } from "react-icons/md"
-
+import { MdRemoveShoppingCart } from "react-icons/md"
+import ReactGA from 'react-ga';
 
 export default (props) => {
 	const {
@@ -52,6 +52,16 @@ export default (props) => {
 		getCount()
 	}, [cartStatus, checkoutState])
 
+	console.log()
+
+	function GAEvent() {
+		ReactGA.event({
+			category: 'User',
+			action: 'Checkout Clicked',
+			label: `$${checkoutState.totalPrice}`
+		  });
+	}
+
 	return (
 		<div style={{ position: "fixed", zIndex: "999999999999" }}>
 			<div className="App__view-cart-wrapper2">
@@ -62,8 +72,8 @@ export default (props) => {
 					Cart
 				</button>
 			</div>
-			<div id="cart">
-				<div className={`Cart ${cartStatus ? "Cart--open" : ""}`}>
+			<div id="cart" >
+				<div className={`Cart ${cartStatus ? "Cart--open" : ""}`} style={{ width: `${document.documentElement.clientWidth > 600 ? "350px" : " 100%"}` }}>
 					<header className="Cart__header">
 						<h4>CART</h4>
 						<button className="Cart__close" onClick={(e) => handleClose(e)}>
@@ -94,7 +104,10 @@ export default (props) => {
 						</div>
 						<button
 							className="Cart__checkout button"
-							onClick={(e) => openCheckout(e)}
+							onClick={(e) => { 
+								openCheckout(e) 
+								GAEvent()
+							}}
 						>
 							Checkout
 						</button>
