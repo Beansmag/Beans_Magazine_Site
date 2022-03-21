@@ -11,20 +11,17 @@ const CustomForm = ({ status, message, onValidated }) => {
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [birthday, setBirthday] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault();
         email &&
         firstName &&
         lastName &&
-        birthday &&
         email.indexOf("@") > -1 &&
         onValidated({
             MERGE0: email,
             MERGE1: firstName,
             MERGE2: lastName,
-            MERGE3: birthday,
         });
     }
 
@@ -37,7 +34,6 @@ const CustomForm = ({ status, message, onValidated }) => {
         setFirstName('');
         setLastName('');
         setEmail('');
-        setBirthday('');
     }
 
     return (
@@ -84,14 +80,7 @@ const CustomForm = ({ status, message, onValidated }) => {
                         onChangeHandler={setEmail}
                         type="email"
                         value={email}
-                        // isRequired
-                    />
-                    <InputField
-                        label="Birthday"
-                        onChangeHandler={setBirthday}
-                        type="birthday"
-                        value={birthday}
-                        // isRequired
+                        isRequired
                     />
                 </div>
             ) : null}
@@ -104,7 +93,7 @@ const CustomForm = ({ status, message, onValidated }) => {
                 /> : <InputField
                     label="Subscribe"
                     type="submit"
-                    formValues={[email, firstName, lastName, birthday]}
+                    formValues={[email, firstName, lastName]}
                 />
 
             }
