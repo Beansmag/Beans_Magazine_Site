@@ -19,10 +19,8 @@ const About = () => {
         }`)
         .then((data) => setAboutData(data))
         .catch(console.error)
-
         ReactGa.initialize('UA-211860604-30')
         ReactGa.pageview('/about')
-
       },[])
 
     return (
