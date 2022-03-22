@@ -42,7 +42,7 @@ const About = () => {
                     <h1 className="about-nav" onClick={() => setSection(aboutData && aboutData.length )}>Newsletter</h1>
                     <a 
                         className="about-nav" 
-                        href = "mailto: abc@example.com" 
+                        href = "mailto: Beans.magazinee@gmail.com" 
                         onClick={() => setSection(aboutData && aboutData.length + 1)}
                     >Contact</a>
                 </Col>
