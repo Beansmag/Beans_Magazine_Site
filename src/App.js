@@ -25,12 +25,14 @@ function App(props) {
 		createShop,
 		createCheckout,
 		fetchProducts,
+		fetchCollection,
 	} = useShopify()
 
 	useEffect(() => {
 		createShop()
 		fetchProducts()
 		createCheckout()
+		fetchCollection()
 	},[])
 
   return (

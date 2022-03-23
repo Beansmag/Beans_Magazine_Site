@@ -1,11 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import Client from "shopify-buy/index.unoptimized.umd"
 
-//   const client = Client.buildClient({
-// 	storefrontAccessToken: '1cb28a121122df7d9998e35450a29f6a',
-// 	domain: 'jeromejahmal.myshopify.com'
-//   });
-
   const client = Client.buildClient({
 	storefrontAccessToken: 'cf54d30fe1ebe608e5affc7a5fbccaaf',
 	domain: 'beansmag.myshopify.com/'
@@ -93,17 +88,19 @@ function getProduct(id) {
 }
 
 // Gets a  collection based on that collection's id
-// function getCollection() {
-// 	const collectionId = "Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzIwODAyMDYwMzAzMw=="
-// 	return (dispatch) => {
-// 		client.collection.fetchWithProducts(collectionId).then((resp) => {
-// 			dispatch({
-// 				type: COLLECTION_FOUND,
-// 				payload: resp.products,
-// 			})
-// 		})
-// 	}
-// }
+// gid://shopify/Collections/272383311919 base64encoded
+function getCollection() {
+	const collectionId = "Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzI3MDMxODAxMDQxNQ=="
+	return (dispatch) => {
+		client.collection.fetchWithProducts(collectionId).then((resp) => {
+			dispatch({
+				type: COLLECTION_FOUND,
+				payload: resp.products,
+			})
+			// console.log(resp.products)
+		})
+	}
+}
 
 function checkout() {
 	return (dispatch) => {
@@ -223,7 +220,7 @@ export function useShopify() {
 	const shopDetails = useSelector((appState) => appState.shopifyState.shop)
 	const fetchProducts = () => dispatch(getProducts())
 	const fetchProduct = (id) => dispatch(getProduct(id))
-	// const fetchCollection = () => dispatch(getCollection())
+	const fetchCollection = () => dispatch(getCollection())
 	const createCheckout = () => dispatch(checkout())
 	const fetchedCheckout = (checkoutId) => dispatch(fetchCheckout(checkoutId))
 	const createShop = () => dispatch(shopInfo())
@@ -249,7 +246,7 @@ export function useShopify() {
 		addVariant,
 		fetchProducts,
 		fetchProduct,
-		// fetchCollection,
+		fetchCollection,
 		createCheckout,
 		createShop,
 		closeCart,

@@ -52,8 +52,6 @@ export default (props) => {
 		getCount()
 	}, [cartStatus, checkoutState])
 
-	console.log()
-
 	function GAEvent() {
 		ReactGA.event({
 			category: 'User',

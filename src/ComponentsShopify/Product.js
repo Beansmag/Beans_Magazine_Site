@@ -13,15 +13,16 @@ import '../Styles/Home.css'
 import Arrow from '../Assets/Arrow.svg';
 
 export default (props) => {
-	const { products } = useShopify()
+	const { products, featured } = useShopify()
 	const [translate, setTranslate] = useState(0)
 	const [index, setIndex] = useState(null)
 	const [prodModal, setProdModal] = useState(false)
 	const [rowWidth, setRowWidth] = useState()
 	const [count, setCount] = useState(0)
 	const window = document.documentElement.clientWidth 
-	const prodLength = products && products.length
+	const prodLength = featured && featured.length
 	const [videoData, setVideoData] = useState()
+	const isEven =  prodLength % 2 == 0 ? -38 : -34
 
 	useEffect(() => {
         sanityClient.fetch(`*[_type == "backgroundVideo"]{
@@ -39,8 +40,8 @@ export default (props) => {
       },[])
 
 	useEffect(() => {
-		const indexStart = Math.trunc(products.length / 2) 
-		const halfIndex = 100 / products.length
+		const indexStart = Math.trunc(featured.length / 2) 
+		const halfIndex = 100 / featured.length
 		if (products[1] !== undefined) {
 			setIndex(indexStart)
 			setRowWidth(halfIndex)
@@ -48,30 +49,30 @@ export default (props) => {
 			ReactGa.pageview(`/home`)
 		}
 		setTranslate(0)
-	},[products])
+	},[featured])
 
 	useEffect(()=> {
 		if(prodModal) {
 			if(prodModal){
 				ReactGa.initialize('UA-211860604-30')
-				ReactGa.pageview(`/home/${products[index].title}`)
+				ReactGa.pageview(`/home/${featured[index].title}`)
 			}
 		}
 	},[prodModal])
 
-	const bind = useDrag(({movement: [mx], cancel, active }) => {
-		if (active && mx > 100 && index > 0) {
-			setCount(count + 1)
-			cancel()
-		}
-		if (active && mx < -100 && index < products.length - 1) {
-			setCount(count - 1)
-			cancel()
-		}
-	  })
+	// const bind = useDrag(({movement: [mx], cancel, active }) => {
+	// 	if (active && mx > 100 && index > 0) {
+	// 		setCount(count + 1)
+	// 		cancel()
+	// 	}
+	// 	if (active && mx < -100 && index < products.length - 1) {
+	// 		setCount(count - 1)
+	// 		cancel()
+	// 	}
+	//   })
 
 	useEffect(() => {
-	const indexStart = Math.trunc(products.length / 2) 
+	const indexStart = Math.trunc(featured.length / 2) 
 		setIndex(indexStart - count)
 		setTranslate(count === "null" ? 0 * rowWidth : count * rowWidth)
 	},[count])
@@ -87,7 +88,7 @@ export default (props) => {
 	}
 
 	function clickRight() {
-		const amount = products.length - 1
+		const amount = featured.length - 1
 		if (index >= amount) {
 			setTranslate(translate)
 			setIndex(amount)
@@ -123,17 +124,17 @@ export default (props) => {
 				<span></span>
 			}
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
-				<Col lg={{ offset: 4, span: 8 }} xs={12} className="prod-title" style={{ marginTop: `${window > 600 ? "23vh" : "28vh"}` }} >
-					<h1 className="prod-title-text" >{products[index] !== undefined ? products[index].title : ""}</h1>
+				<Col lg={{ offset: 4, span: 8 }} xs={{offset: 2, span: 10}} className="prod-title" style={{ marginTop: `${window > 600 ? "23vh" : "28vh"}` }} >
+					<h1 className="prod-title-text" >{featured[index] !== undefined ? featured[index].title : ""}</h1>
 				</Col>
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
-				<Col lg={{ offset: 4, span: 1 }} xs={{ offset: 2, span: 3 }} className="prod-view" style={{ marginTop: `${window > 600 ? "72vh" : "55vh"}` }}>
+				{/* <Col lg={{ offset: 4, span: 1 }} xs={{ offset: 2, span: 3 }} className="prod-view" style={{ marginTop: `${window > 600 ? "72vh" : "55vh"}` }}>
 					<img src={Arrow} onClick={() => setProdModal(true)} alt="click to view clothes" style={{ height: "90px", transform: "rotate(135deg)" }} />
 					<h1 className="prod-view-text" onClick={() => setProdModal(true)} >View</h1>
-				</Col>
+				</Col> */}
 				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 6, span: 3 }} className="prod-price" style={{ marginTop: `${window > 600 ? "72vh" : "60vh"}` }}>
-					<h1 className="prod-price-text">{`$${products[index] !== undefined ? products[index].variants[0].price : ""}*`}</h1>
+					<h1 className="prod-price-text">{`$${featured[index] !== undefined ? featured[index].variants[0].price : ""}*`}</h1>
 				</Col>
 			</Row>
 			{prodModal ? 
@@ -151,22 +152,23 @@ export default (props) => {
 			<animated.div 
 				className="Product-wrapper" 
 				style={{ 
-					transform: `translateX(${-34 + translate}%)`, 
+
+					transform: `translateX(${isEven + translate}%)`, 
 					width: `${prodLength * 19}vw`,
 					marginTop: `${window > 600 ? "30vh" : "40vh"}`,
 					opacity: `${prodModal ? "0" : "1"}`
 				}}
-				{...bind()} 
+				// {...bind()} 
 			>
-				{products &&
-				products.map((product, i) => {
+				{featured &&
+				featured.map((product, i) => {
 					const image = product.images[0]
 					return (
-						<div className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} >
+						<div className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} onClick={() => setProdModal(i === index ? true : false)} >
 							{image ? (
 								<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
 									style={{ 
-										transform: `${i === index ? "scale(2)" : "scale(1.5)"}`,
+										transform: `${i === index ? "scale(2.2)" : "scale(1.5)"}`,
 										transition: "transform 0.5s",
 										zIndex: `${i === index ? 20 : 5}`
 									}}

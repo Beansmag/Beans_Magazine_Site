@@ -14,8 +14,8 @@
     font-family: sans-serif;
     font-weight: 800;
     font-style: normal;
-    font-size: clamp(30pt, 5vw, 35pt);
-    padding: 5% 2% 2% 2%;
+    font-size: clamp(20pt, 5vw, 35pt);
+    padding: 8% 2% 2% 2%;
 }
 
 .prod-modal-description {
@@ -32,19 +32,18 @@
     font-family: sans-serif;
     font-weight: 500;
     font-style: normal;
-    font-size: clamp(30pt, 5vw, 35pt);
-    padding: 2% 2% 2% 2%;
+    font-size: clamp(18pt, 5vw, 35pt);
+    padding: 0% 2% 2% 2%;
 }
 
 .prod-modal-product-image {
-    width: 87%;
     height: auto;
     margin-left: auto;
     margin-right: auto;
 }
 
 .prod-modal-product-image-below{
-    width: 33.33%;
+    /* width: 33.33%; */
     float: left;
     height: auto;
 }
