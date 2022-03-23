@@ -24,6 +24,8 @@ export default (props) => {
 	const [videoData, setVideoData] = useState()
 	const isEven =  prodLength % 2 == 0 ? -38 : -34
 
+	console.log(prodLength)
+
 	useEffect(() => {
         sanityClient.fetch(`*[_type == "backgroundVideo"]{
 			title,
@@ -154,7 +156,9 @@ export default (props) => {
 				style={{ 
 
 					transform: `translateX(${isEven + translate}%)`, 
-					width: `${prodLength * 19}vw`,
+					// fix prod length
+					// width: `${prodLength * 19}vw`,
+					width: `${18 * 19}vw`,
 					marginTop: `${window > 600 ? "30vh" : "40vh"}`,
 					opacity: `${prodModal ? "0" : "1"}`
 				}}
