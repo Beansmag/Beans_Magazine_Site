@@ -24,7 +24,7 @@ export default (props) => {
 	const [videoData, setVideoData] = useState()
 	const isEven =  prodLength % 2 == 0 ? -38 : -34
 
-	console.log(prodLength)
+	// console.log(prodLength)
 
 	useEffect(() => {
         sanityClient.fetch(`*[_type == "backgroundVideo"]{
@@ -44,7 +44,7 @@ export default (props) => {
 	useEffect(() => {
 		const indexStart = Math.trunc(featured.length / 2) 
 		const halfIndex = 100 / featured.length
-		if (products[1] !== undefined) {
+		if (featured[1] !== undefined) {
 			setIndex(indexStart)
 			setRowWidth(halfIndex)
 			ReactGa.initialize('UA-211860604-30')
@@ -156,7 +156,7 @@ export default (props) => {
 				style={{ 
 
 					transform: `translateX(${isEven + translate}%)`, 
-					// fix prod length
+					// fix prod length = this isn't the problem
 					// width: `${prodLength * 19}vw`,
 					width: `${18 * 19}vw`,
 					marginTop: `${window > 600 ? "30vh" : "40vh"}`,
@@ -174,7 +174,7 @@ export default (props) => {
 									style={{ 
 										transform: `${i === index ? "scale(2.2)" : "scale(1.5)"}`,
 										transition: "transform 0.5s",
-										zIndex: `${i === index ? 20 : 5}`
+										// zIndex: `${i === index ? 20 : 5}`
 									}}
 									onClick={() => setProdModal(false)}
 								/>
