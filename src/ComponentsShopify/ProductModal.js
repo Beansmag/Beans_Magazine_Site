@@ -125,9 +125,9 @@ export default (props) => {
 				</Col>
 				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: `${document.documentElement.clientWidth > 600 ? "100%" : "40%"}` }} >
 					<div style={{ height: "70%" }}>
-						<h1 className="prod-modal-title" >{featured[props.index] !== undefined ? featured[props.index].title : "...Loading"}</h1>
-						<h1 className="prod-modal-price" >{`$${featured[props.index] !== undefined ? featured[props.index].variants[0].price : "...Loading"}`}</h1>
-						<h5 className="prod-modal-description" >{description}</h5>
+						<h1 className="prod-modal-title" ><mark style={{ backgroundColor: "grey" }}>{featured[props.index] !== undefined ? featured[props.index].title : "...Loading"}</mark></h1>
+						<h1 className="prod-modal-price" ><mark style={{ backgroundColor: "grey" }}>{`$${featured[props.index] !== undefined ? featured[props.index].variants[0].price : "...Loading"}`}</mark></h1>
+						<h5 className="prod-modal-description" ><mark style={{ backgroundColor: "grey" }}>{description}</mark></h5>
 					</div>
 					<div className="Product__info" style={{ padding: "10px" }}>
 						<div style={{ marginBottom: "0px" }}>
