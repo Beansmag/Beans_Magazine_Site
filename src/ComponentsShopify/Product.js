@@ -174,7 +174,7 @@ export default (props) => {
 									style={{ 
 										transform: `${i === index ? "scale(2.2)" : "scale(1.5)"}`,
 										transition: "transform 0.5s",
-										// zIndex: `${i === index ? 20 : 5}`
+										// zIndex: `${i === index ? 1000 : 1}`
 									}}
 									onClick={() => setProdModal(false)}
 								/>

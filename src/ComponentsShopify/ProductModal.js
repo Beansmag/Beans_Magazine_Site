@@ -7,7 +7,7 @@ import "../Styles/productModal.css"
 
 export default (props) => {
     const {
-        products,
+        // products,
 		featured,
 		fetchProduct,
 		openCart,
@@ -58,49 +58,70 @@ export default (props) => {
 		  });
 	}
 
+	console.log(imageIndex)
+
     return (
-        <Container className="product-modal-background" >
+        <Container className="product-modal-background"  style={{ overflowY: "hidden"}}>
 			<Row style={{ height: "100%" }} >
-				<Col lg={6} style={{ borderBottom: `${document.documentElement.clientWidth < 600 ? "solid 1px black" : ""}` }}>
-					<div style={{ display: 'table', content: "", position: "relative" }} >
-						<img 
-							src={featured[props.index].images[0] !== undefined ? featured[props.index].images[imageIndex].src : ""}
-							alt={`${featured[props.index] !== undefined ? featured[props.index].images[imageIndex].src : "...Loading"}`}
-							className="prod-modal-product-image"
+				<Col lg={6} style={{ borderBottom: `${document.documentElement.clientWidth < 600 ? "solid 1px black" : ""}`, minHeight: "250px" }} >
+						<div 
 							style={{ 
-								width: `${document.documentElement.clientWidth > 600 ? "87%" : "55%"}`,
-								marginBottom: `${featured[props.index].images.length === 1 ? "-40%" : ""}`,
-								marginTop: `${featured[props.index].images.length === 1 ? "8%" : ""}`
+								height: `${featured[props.index].images.length > 1 ? "70%" : "100%"}`, 
+								backgroundImage: `url(${featured[props.index].images[0] !== undefined ? featured[props.index].images[imageIndex].src : ""})`,
+								backgroundPosition: "center",
+								backgroundSize: "contain",
+								backgroundRepeat: "no-repeat"
 							}}
-						/> 
-					{ featured[props.index].images.length > 1 ?
-						<div  >
-							<img 
-									src={featured[props.index].images[0] !== undefined ? featured[props.index].images[0].src : ""}
-									alt={`${featured[props.index].images[0] !== undefined ? featured[props.index].images[0].src : ""}`}
-									className="prod-modal-product-image-below"
-									onClick={() => setImageIndex(0)}
-									style={{ width: `${document.documentElement.clientWidth > 600 ? "33.33%" : "20%"}` }}
-								/> 
-							<img 
-									src={featured[props.index].images[1] !== undefined ? featured[props.index].images[1].src : ""}
-									alt={`${featured[props.index].images[1] !== undefined ? featured[props.index].images[1].src : ""}`}
-									className="prod-modal-product-image-below"
-									onClick={() => setImageIndex(1)}
-									style={{ width: `${document.documentElement.clientWidth > 600 ? "33.33%" : "20%"}` }}
-								/> 
-							<img 
-									src={featured[props.index].images[2] !== undefined ? featured[props.index].images[2].src : ""}
-									alt={`${featured[props.index].images[2] !== undefined ? featured[props.index].images[2].src : ""}`}
-									className="prod-modal-product-image-below"
-									onClick={() => setImageIndex(2)}
-									style={{ width: `${document.documentElement.clientWidth > 600 ? "33.33%" : "20%"}` }}
-								/> 
+						>
+						</div>
+						{ featured[props.index].images.length > 1 ?
+							<div style={{ height: "30%" }}>
+							<div 
+								style={{ 
+									height: "100%", 
+									width: `${100 /featured[props.index].images.length}%`, 
+									float: "left",
+									backgroundImage: `url(${featured[props.index].images[0] !== undefined ? featured[props.index].images[0].src : ""})`,
+									backgroundPosition: "center",
+									backgroundSize: "contain",
+									backgroundRepeat: "no-repeat",
+									zIndex: "20"
+								}}
+								onClick={() => setImageIndex(0)}
+							> 
+							</div>
+							<div 
+								style={{ 
+									height: "100%", 
+									width: `${100 /featured[props.index].images.length}%`, 
+									float: "left",
+									backgroundImage: `url(${featured[props.index].images[1] !== undefined ? featured[props.index].images[1].src : ""})`,
+									backgroundPosition: "center",
+									backgroundSize: "contain",
+									backgroundRepeat: "no-repeat",
+									zIndex: "20"
+								}}
+								onClick={() => setImageIndex(1)}
+							>
+							</div>
+							<div 
+								style={{ 
+									height: "100%", 
+									width: `${100 /featured[props.index].images.length}%`, 
+									float: "left",
+									backgroundImage: `url(${featured[props.index].images[2] !== undefined ? featured[props.index].images[2].src : ""})`,
+									backgroundPosition: "center",
+									backgroundSize: "contain",
+									backgroundRepeat: "no-repeat",
+									zIndex: "20" 
+								}}
+								onClick={() => setImageIndex(2)}
+							>
+							</div>
 						</div>
 						:
 						<span></span>
-					}
-					</div>
+						}
 				</Col>
 				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: `${document.documentElement.clientWidth > 600 ? "100%" : "40%"}` }} >
 					<div style={{ height: "70%" }}>
