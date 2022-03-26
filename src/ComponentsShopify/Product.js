@@ -22,6 +22,7 @@ export default (props) => {
 	const window = document.documentElement.clientWidth 
 	const prodLength = featured && featured.length
 	const [videoData, setVideoData] = useState()
+	const [videoDataMobile, setVideoDataMobile] = useState()
 	const isEven =  prodLength % 2 == 0 ? -38 : -34
 
 	// console.log(prodLength)
@@ -38,6 +39,21 @@ export default (props) => {
               },
         }`)
         .then((data) => setVideoData(data))
+        .catch(console.error)
+      },[])
+
+	  useEffect(() => {
+        sanityClient.fetch(`*[_type == "backgroundVideoMobile"]{
+			title,
+			backgroundGifMobile{
+                asset->{
+                  _id,
+                  url
+                },
+                alt
+              },
+        }`)
+        .then((data) => setVideoDataMobile(data))
         .catch(console.error)
       },[])
 
@@ -184,7 +200,8 @@ export default (props) => {
 				})
 				}
 			</animated.div>
-			{prodModal && videoData[index + 1] !== undefined  ? 
+			{/* background for desktop */}
+			{prodModal && videoData[index + 1] !== undefined  && window > 600 ? 
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
@@ -199,6 +216,22 @@ export default (props) => {
 				>
 				</div>
 			}
+			{/* background for mobile */}
+			{/* {prodModal && videoDataMobile[index + 1] !== null  && window < 600 ? 
+				<div 
+					alt="background Video" 
+					className="home-bg-vid"
+					style={{ backgroundImage: `url(${videoDataMobile[(index + 1)].backgroundGifMobile !== null ? videoDataMobile[(index + 1)].backgroundGif.asset.url : videoDataMobile[0].backgroundGif.asset.url})` }}
+				>
+				</div>
+				:
+				<div 
+					alt="background Video" 
+					className="home-bg-vid"
+					style={{ backgroundImage: `url(${videoDataMobile && videoDataMobile[0].backgroundGifMobile.asset.url})` }}
+				>
+				</div>
+			} */}
 		</Container>
 	)
 }

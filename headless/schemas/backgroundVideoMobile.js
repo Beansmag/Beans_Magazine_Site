@@ -1,6 +1,6 @@
 export default {
-    name: 'backgroundVideo',
-    title: 'Background Video Upload',
+    name: 'backgroundVideoMobile',
+    title: 'Background Video Mobile Upload',
     type: 'document',
     fields: [
       {

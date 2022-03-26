@@ -9,6 +9,7 @@ import blockContent from './blockContent'
 import lookbook from './lookbook'
 import about from './about'
 import backgroundVideo from './backgroundVideo'
+import backgroundVideoMobile from './backgroundVideoMobile'
 // import category from './category'
 // import author from './author'
 
@@ -24,6 +25,7 @@ export default createSchema({
     lookbook,
     about,
     backgroundVideo,
+    backgroundVideoMobile,
     // author,
     // category,
     // When added to this list, object types can be used as
