@@ -217,11 +217,11 @@ export default (props) => {
 				</div>
 			}
 			{/* background for mobile */}
-			{prodModal && videoDataMobile[index + 1] !== null  && window < 600 ? 
+			{prodModal && videoDataMobile[index + 1] !== undefined  && window < 600 ? 
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${videoDataMobile[(index + 1)] !== undefined ? videoDataMobile[(index + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})` }}
+					style={{ backgroundImage: `url(${videoDataMobile[(index + 1)] !== null ? videoDataMobile[(index + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})` }}
 				>
 				</div>
 				:
