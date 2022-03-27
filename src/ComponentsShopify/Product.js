@@ -212,26 +212,26 @@ export default (props) => {
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${videoData && videoData[0].backgroundGif.asset.url})` }}
+					style={{ backgroundImage: `url(${window > 600 ? videoData && videoData[0].backgroundGif.asset.url : ""})` }}
 				>
 				</div>
 			}
 			{/* background for mobile */}
-			{/* {prodModal && videoDataMobile[index + 1] !== null  && window < 600 ? 
+			{prodModal && videoDataMobile[index + 1] !== null  && window < 600 ? 
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${videoDataMobile[(index + 1)].backgroundGifMobile !== null ? videoDataMobile[(index + 1)].backgroundGif.asset.url : videoDataMobile[0].backgroundGif.asset.url})` }}
+					style={{ backgroundImage: `url(${videoDataMobile[(index + 1)].backgroundGifMobile !== null ? videoDataMobile[(index + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})` }}
 				>
 				</div>
 				:
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${videoDataMobile && videoDataMobile[0].backgroundGifMobile.asset.url})` }}
+					style={{ backgroundImage: `url(${window < 600 ? videoDataMobile && videoDataMobile[0].backgroundGifMobile.asset.url : "" })` }}
 				>
 				</div>
-			} */}
+			}
 		</Container>
 	)
 }
