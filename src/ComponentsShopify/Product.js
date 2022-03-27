@@ -205,7 +205,7 @@ export default (props) => {
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${videoData[(index + 1)].backgroundGif !== null ? videoData[(index + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})` }}
+					style={{ backgroundImage: `url(${videoData[(index + 1)] !== null ? videoData[(index + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})` }}
 				>
 				</div>
 				:
@@ -221,7 +221,7 @@ export default (props) => {
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${videoDataMobile[(index + 1)].backgroundGifMobile !== null ? videoDataMobile[(index + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})` }}
+					style={{ backgroundImage: `url(${videoDataMobile[(index + 1)] !== undefined ? videoDataMobile[(index + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})` }}
 				>
 				</div>
 				:
