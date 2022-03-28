@@ -21,6 +21,7 @@
 .prod-modal-description {
     color: black;
     font-family: sans-serif;
+    line-height: 1.6;
     font-weight: 300;
     font-style: normal;
     font-size: clamp(8pt, 3vw, 12pt);

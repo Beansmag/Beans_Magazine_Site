@@ -13,7 +13,7 @@ import '../Styles/Home.css'
 import Arrow from '../Assets/Arrow.svg';
 
 export default (props) => {
-	const { products, featured } = useShopify()
+	const { featured } = useShopify()
 	const [translate, setTranslate] = useState(0)
 	const [index, setIndex] = useState(null)
 	const [prodModal, setProdModal] = useState(false)
@@ -23,9 +23,10 @@ export default (props) => {
 	const prodLength = featured && featured.length
 	const [videoData, setVideoData] = useState()
 	const [videoDataMobile, setVideoDataMobile] = useState()
+	const [modalIndex, setModalIndex] = useState()
 	const isEven =  prodLength % 2 == 0 ? -38 : -34
 
-	// console.log(prodLength)
+	// console.log(modalIndex)
 
 	useEffect(() => {
         sanityClient.fetch(`*[_type == "backgroundVideo"]{
@@ -162,7 +163,7 @@ export default (props) => {
 							className="close-product-modal"
 							onClick={() => setProdModal(false)}
 						/>
-						<ProductModal index={index} />
+						<ProductModal index={index} modalIndex={modalIndex} />
 					</div>
 				:
 				<span></span>
@@ -184,7 +185,14 @@ export default (props) => {
 				featured.map((product, i) => {
 					const image = product.images[0]
 					return (
-						<div className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} onClick={() => setProdModal(i === index ? true : false)} >
+						<div 
+							className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} 
+							// onClick={() => setProdModal(i === index ? true : false)} 
+							onClick={e => {
+								setProdModal(true)
+								setModalIndex(i)
+							}}
+						>
 							{image ? (
 								<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
 									style={{ 
@@ -192,7 +200,6 @@ export default (props) => {
 										transition: "transform 0.5s",
 										// zIndex: `${i === index ? 1000 : 1}`
 									}}
-									onClick={() => setProdModal(false)}
 								/>
 							) : null}
 						</div>
