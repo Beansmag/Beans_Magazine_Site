@@ -196,7 +196,7 @@ export default (props) => {
 							{image ? (
 								<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
 									style={{ 
-										transform: `${i === index ? "scale(2.2)" : "scale(1.5)"}`,
+										transform: `${i === index ? "scale(1.8)" : "scale(1.3)"}`,
 										transition: "transform 0.5s",
 										// zIndex: `${i === index ? 1000 : 1}`
 									}}

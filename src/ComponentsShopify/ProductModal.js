@@ -58,8 +58,6 @@ export default (props) => {
 		  });
 	}
 
-	console.log(imageIndex)
-
     return (
         <Container className="product-modal-background"  style={{ overflowY: "hidden"}}>
 			<Row style={{ height: "100%" }} >
