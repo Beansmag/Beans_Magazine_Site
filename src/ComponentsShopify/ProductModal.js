@@ -17,6 +17,7 @@ export default (props) => {
 
 	useEffect(() => {
 		ReactGA.initialize('UA-211860604-30');
+		setSoldOut(featured[props.modalIndex].variants[0].available)
 	},[])
 
     const id = featured[props.modalIndex] !== undefined ? featured[props.modalIndex].id : "...Loading"
@@ -24,7 +25,11 @@ export default (props) => {
     const [size, setSize] = useState("")
 	const [quantity, setQuantity] = useState(1)
 	const [imageIndex, setImageIndex ] = useState(0)
+	const [soldOut, setSoldOut] = useState()
     const description = featured[props.modalIndex] !== undefined ? featured[props.modalIndex].description.split(".") : "...Loading"
+	const CartSoldOutButtonVariant = featured[props.modalIndex].variants[0].available
+
+	console.log(soldOut)
 
     function changeSize(sizeId, quantity) {
 		openCart()
@@ -142,8 +147,13 @@ export default (props) => {
 									featured[props.modalIndex].variants.map((item, i) => {
 										return (
 											<option
-											value={item.id.toString()}
-											key={item.title + i}
+												style={{ 
+													color: `${item.available ? "black" : "grey" }`,
+													cursor: `${item.available ? "pointer" : "not-allowed" }`
+												}}
+												value={item.id.toString()}
+												onClick={() => setSoldOut(item.available ? true : false)}
+												key={item.title + i}
 										>{`${item.title}`}</option>
 										)
 									})
@@ -162,6 +172,8 @@ export default (props) => {
 							></input>
 						</div>
 						<div style={{ width: "100%", textAlign: "center"}}>
+
+						{soldOut ?
 							<button
 								className="prodBuy button"
 								onClick={e => {
@@ -171,6 +183,14 @@ export default (props) => {
 							>
 								ADD TO CART
 							</button>
+							:
+							<button
+								className="prodBuy button"
+								style={{ background: "grey" }}
+							>
+								SOLD OUT
+							</button>
+						}
 						</div>
 					</div>
 				</Col>      

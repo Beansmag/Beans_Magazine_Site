@@ -44,7 +44,15 @@
 }
 
 .prod-modal-product-image-below{
-    /* width: 33.33%; */
     float: left;
     height: auto;
+}
+
+.not-for-sale {
+    color: #D8D8D8;
+	cursor: not-allowed;
+}
+
+.for-sale {
+    color: black;
 }
