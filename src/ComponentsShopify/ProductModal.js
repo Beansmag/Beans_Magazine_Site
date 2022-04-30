@@ -3,6 +3,8 @@ import { Container, Col, Row } from 'react-bootstrap'
 import { useShopify } from "../hooks";
 import ReactGA from 'react-ga';
 
+import DropDownArrow from '../Assets/dropDownArrow.svg'
+
 import "../Styles/productModal.css"
 
 export default (props) => {
@@ -26,10 +28,14 @@ export default (props) => {
 	const [quantity, setQuantity] = useState(1)
 	const [imageIndex, setImageIndex ] = useState(0)
 	const [soldOut, setSoldOut] = useState()
+	const [dropDownMenu, setdropDownMenu] = useState(false);
+	const [sizeTitle, setSizeTitle] = useState("");
+	const [rotate, setRotate] = useState();
     const description = featured[props.modalIndex] !== undefined ? featured[props.modalIndex].description.split(".") : "...Loading"
-	const CartSoldOutButtonVariant = featured[props.modalIndex].variants[0].available
+	// const item = featured[props.modalIndex].availableForSale
 
-	console.log(soldOut)
+
+	// console.log(featured[props.modalIndex])
 
     function changeSize(sizeId, quantity) {
 		openCart()
@@ -62,6 +68,17 @@ export default (props) => {
 			label: `${featured[props.modalIndex].title} added to cart`
 		  });
 	}
+
+	function clickFunction(item, i) {
+		if (item.available) {
+			setSize(item.id.toString());
+			setSizeTitle(item.title);
+			setRotate(!rotate);
+			setdropDownMenu(!dropDownMenu);
+		} else {
+			return
+		}
+	} 
 
     return (
         <Container className="product-modal-background"  style={{ overflowY: "hidden"}}>
@@ -133,33 +150,41 @@ export default (props) => {
 						<h5 className="prod-modal-description" ><mark style={{ backgroundColor: "#DDDDDD" }}>{description}</mark></h5>
 					</div>
 					<div className="Product__info" style={{ padding: "10px" }}>
-						<div style={{ marginBottom: "0px" }}>
-							<select
-								id="prodOptions"
-								name={size}
-								onChange={(e) => {
-									setSize(e.target.value)
-								}}
-							>	
-								{featured[props.modalIndex] === undefined ?
-									"...Loading"
-									:
-									featured[props.modalIndex].variants.map((item, i) => {
-										return (
-											<option
-												style={{ 
-													color: `${item.available ? "black" : "grey" }`,
-													cursor: `${item.available ? "pointer" : "not-allowed" }`
-												}}
-												value={item.id.toString()}
-												onPointerDown={() => setSoldOut(item.available ? true : false)}
-												// onChange={() => setSoldOut(item.available ? true : false)}
-												key={item.title + i}
-										>{`${item.title}`}</option>
-										)
-									})
-								}
-							</select>
+					<div style={{ width: "90%", position: "relative" }}>
+							<div style={{ width: "90%", position: "relative" }}>
+									<div 
+										className="style__dropdown" 
+										id="prodOptions" 
+										onClick={e => {
+											setdropDownMenu(!dropDownMenu);
+											setRotate(!rotate);
+										}}>
+										{sizeTitle ? sizeTitle : "Pick a Size"}
+										<img src={DropDownArrow} alt="drop down arrow" style={{ transform: !rotate ? `rotate(0deg)` : `rotate(180deg)` }} className="dropDownArrow"/>
+									</div>
+									{featured[props.modalIndex] === undefined ?
+										"...Loading"
+										:
+										<div className="style__dropdownDiv" style={{ opacity: dropDownMenu ? 1 : 0, transform: dropDownMenu ? `translateY(50px) scaleY(1)` : `translateY(-130%) scaleY(0)` }}>	
+										{featured[props.modalIndex] &&
+											featured[props.modalIndex].variants.map((item, i) => {
+												return (
+													<li
+														onClick={e => {
+															clickFunction(item, i)
+															setSoldOut(item.available ? true : false)
+														}}
+														style={{ 
+															color: `${item.available ? "black" : "grey" }`,
+															cursor: `${item.available ? "pointer" : "not-allowed" }`
+														}}												
+														key={item.title + i}
+													>{`${item.title}`}</li>	
+												)
+										})}
+										</div>
+									}
+								</div>
 						</div>
 						<div>
 							<input
