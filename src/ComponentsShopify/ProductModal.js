@@ -6,6 +6,7 @@ import ReactGA from 'react-ga';
 import DropDownArrow from '../Assets/dropDownArrow.svg'
 
 import "../Styles/productModal.css"
+import clamp from 'lodash.clamp';
 
 export default (props) => {
     const {
@@ -159,13 +160,13 @@ export default (props) => {
 											setdropDownMenu(!dropDownMenu);
 											setRotate(!rotate);
 										}}>
-										{sizeTitle ? sizeTitle : "Pick a Size"}
+										<h4 style={{ fontSize: "clamp(8pt, 3vw, 20pt)", fontWeight: "800" }} >{sizeTitle ? sizeTitle : "Pick a Size"}</h4>
 										<img src={DropDownArrow} alt="drop down arrow" style={{ transform: !rotate ? `rotate(0deg)` : `rotate(180deg)` }} className="dropDownArrow"/>
 									</div>
 									{featured[props.modalIndex] === undefined ?
 										"...Loading"
 										:
-										<div className="style__dropdownDiv" style={{ opacity: dropDownMenu ? 1 : 0, transform: dropDownMenu ? `translateY(50px) scaleY(1)` : `translateY(-130%) scaleY(0)` }}>	
+										<div className="style__dropdownDiv" style={{ opacity: dropDownMenu ? 1 : 0, transform: dropDownMenu ? `translateY(0) scaleY(1)` : `translateY(-130%) scaleY(0)` }}>	
 										{featured[props.modalIndex] &&
 											featured[props.modalIndex].variants.map((item, i) => {
 												return (
@@ -212,9 +213,9 @@ export default (props) => {
 							:
 							<button
 								className="prodBuy button"
-								style={{ background: "grey" }}
+								style={{ background: "grey", fontSize: "15px" }}
 							>
-								NOT AVAILABLE
+								SIZE NOT AVAILABLE
 							</button>
 						}
 						</div>
