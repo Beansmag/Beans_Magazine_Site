@@ -152,7 +152,8 @@ export default (props) => {
 													cursor: `${item.available ? "pointer" : "not-allowed" }`
 												}}
 												value={item.id.toString()}
-												onClick={() => setSoldOut(item.available ? true : false)}
+												onPointerDown={() => setSoldOut(item.available ? true : false)}
+												// onChange={() => setSoldOut(item.available ? true : false)}
 												key={item.title + i}
 										>{`${item.title}`}</option>
 										)
@@ -188,7 +189,7 @@ export default (props) => {
 								className="prodBuy button"
 								style={{ background: "grey" }}
 							>
-								SOLD OUT
+								NOT AVAILABLE
 							</button>
 						}
 						</div>
