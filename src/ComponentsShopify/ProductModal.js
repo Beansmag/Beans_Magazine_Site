@@ -165,7 +165,7 @@ export default (props) => {
 									{featured[props.modalIndex] === undefined ?
 										"...Loading"
 										:
-										<div className="style__dropdownDiv" style={{ opacity: dropDownMenu ? 1 : 0, transform: dropDownMenu ? `translateY(-40px) scaleY(1)` : `translateY(-130%) scaleY(0)` }}>	
+										<div className="style__dropdownDiv" style={{ opacity: dropDownMenu ? 1 : 0, transform: dropDownMenu ? `translateY(-60px) scaleY(1)` : `translateY(-130%) scaleY(0)` }}>	
 										{featured[props.modalIndex] &&
 											featured[props.modalIndex].variants.map((item, i) => {
 												return (
