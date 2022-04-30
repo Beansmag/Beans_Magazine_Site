@@ -151,8 +151,7 @@ export default (props) => {
 						<h5 className="prod-modal-description" ><mark style={{ backgroundColor: "#DDDDDD" }}>{description}</mark></h5>
 					</div>
 					<div className="Product__info" style={{ padding: "10px" }}>
-					<div style={{ width: "90%", position: "relative" }}>
-							<div style={{ width: "90%", position: "relative" }}>
+							<div style={{ width: "100%", position: "relative" }}>
 									<div 
 										className="style__dropdown" 
 										id="prodOptions" 
@@ -166,7 +165,7 @@ export default (props) => {
 									{featured[props.modalIndex] === undefined ?
 										"...Loading"
 										:
-										<div className="style__dropdownDiv" style={{ opacity: dropDownMenu ? 1 : 0, transform: dropDownMenu ? `translateY(0) scaleY(1)` : `translateY(-130%) scaleY(0)` }}>	
+										<div className="style__dropdownDiv" style={{ opacity: dropDownMenu ? 1 : 0, transform: dropDownMenu ? `translateY(-40px) scaleY(1)` : `translateY(-130%) scaleY(0)` }}>	
 										{featured[props.modalIndex] &&
 											featured[props.modalIndex].variants.map((item, i) => {
 												return (
@@ -186,7 +185,6 @@ export default (props) => {
 										</div>
 									}
 								</div>
-						</div>
 						<div>
 							<input
 								className="quantity"
