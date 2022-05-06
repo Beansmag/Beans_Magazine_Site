@@ -146,9 +146,9 @@ export default (props) => {
 				</Col>
 				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: `${document.documentElement.clientWidth > 600 ? "100%" : "40%"}` }} >
 					<div style={{ height: "70%" }}>
-						<h1 className="prod-modal-title" ><mark style={{ backgroundColor: "#DDDDDD" }}>{featured[props.modalIndex] !== undefined ? featured[props.modalIndex].title : "...Loading"}</mark></h1>
-						<h1 className="prod-modal-price" ><mark style={{ backgroundColor: "#DDDDDD" }}>{`$${featured[props.modalIndex] !== undefined ? featured[props.modalIndex].variants[0].price : "...Loading"}`}</mark></h1>
-						<h5 className="prod-modal-description" ><mark style={{ backgroundColor: "#DDDDDD" }}>{description}</mark></h5>
+						<h1 className="prod-modal-title"><mark style={{ backgroundColor: "#DDDDDD" }}>{featured[props.modalIndex] !== undefined ? featured[props.modalIndex].title : "...Loading"}</mark></h1>
+						<h1 className="prod-modal-price"><mark style={{ backgroundColor: "#DDDDDD" }}>{`$${featured[props.modalIndex] !== undefined ? featured[props.modalIndex].variants[0].price : "...Loading"}`}</mark></h1>
+						<h5 className="prod-modal-description"><mark style={{ backgroundColor: "#DDDDDD" }}>{description}</mark></h5>
 					</div>
 					<div className="Product__info" style={{ padding: "10px" }}>
 							<div style={{ width: "100%", position: "relative" }}>

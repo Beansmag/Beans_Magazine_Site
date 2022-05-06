@@ -14,7 +14,7 @@
     font-family: sans-serif;
     font-weight: 800;
     font-style: normal;
-    font-size: clamp(20pt, 5vw, 35pt);
+    font-size: clamp(15pt, 4vw, 35pt);
     padding: 8% 2% 2% 2%;
 }
 
@@ -33,7 +33,7 @@
     font-family: sans-serif;
     font-weight: 500;
     font-style: normal;
-    font-size: clamp(18pt, 5vw, 35pt);
+    font-size: clamp(15pt, 4vw, 35pt);
     padding: 0% 2% 2% 2%;
 }
 
