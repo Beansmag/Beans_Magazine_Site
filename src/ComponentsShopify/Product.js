@@ -170,6 +170,24 @@ export default (props) => {
 				:
 				<span></span>
 			}
+			<div className="grid-wrapper d-block d-md-none" style={{ marginTop: "15vh" }}>
+					{featured && 
+						featured.map((product, i) => {
+							const image = product.images[0]
+							return (
+								<div
+									style={{ width: "50%", display: "inline-flex", opacity: `${prodModal ? "0" : "1"}` }}
+									onClick={e => {
+										setProdModal(true)
+										setModalIndex(i)
+										}}
+								>
+									<img src={image.src} />
+								</div>
+							)
+						})
+					}
+			</div>
 			<animated.div 
 				className="Product-wrapper d-xs-none d-md-none d-none d-lg-block d-md-block" 
 				style={{ 
@@ -203,24 +221,6 @@ export default (props) => {
 					})
 				}
 			</animated.div>
-				<div className="d-block d-md-none" style={{ marginTop: "15vh" }}>
-					{featured && 
-						featured.map((product, i) => {
-							const image = product.images[0]
-							return (
-								<div
-									style={{ width: "50%", display: "inline-flex" }}
-									onClick={e => {
-										setProdModal(true)
-										setModalIndex(i)
-										}}
-								>
-									<img src={image.src} />
-								</div>
-							)
-						})
-					}
-				</div>
 			{prodModal && videoData[index + 1] !== undefined  && window > 600 ? 
 				<div 
 					alt="background Video" 
