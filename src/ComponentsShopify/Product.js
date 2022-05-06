@@ -203,8 +203,7 @@ export default (props) => {
 					})
 				}
 			</animated.div>
-			{!prodModal ? 
-				<div className="d-block d-md-none" style={{ marginTop: "15vh" }}>
+				<div className="d-block d-md-none" style={{ marginTop: "15vh", opacity: `${prodModal ? "0" : "1"}` }}>
 					{featured && 
 						featured.map((product, i) => {
 							const image = product.images[0]
@@ -222,9 +221,6 @@ export default (props) => {
 						})
 					}
 				</div>
-				:
-				<span></span>
-			}
 			{prodModal && videoData[index + 1] !== undefined  && window > 600 ? 
 				<div 
 					alt="background Video" 
