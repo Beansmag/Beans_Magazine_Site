@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useShopify } from "../hooks";
 import { Container, Col, Row } from 'react-bootstrap';
 import { animated } from '@react-spring/web';
-import { useDrag } from '@use-gesture/react';
+// import { useDrag } from '@use-gesture/react';
 import ReactGa from 'react-ga'
 import sanityClient from '../client';
 
 import ProductModal from "./ProductModal";
 import Close from '../Assets/Close.svg'
+import Arrow from '../Assets/Arrow.svg';
 
 import '../Styles/Home.css'
-import Arrow from '../Assets/Arrow.svg';
 
 export default (props) => {
 	const { featured } = useShopify()
@@ -118,36 +118,38 @@ export default (props) => {
 	}
 
 	return (
-		<Container style={{ position: "fixed", height: "100vh", width: "100vw"}}>
-			{!prodModal ? 
-				<div>
-					<div className="prod-button-left" style={{ top: `${window > 600 ? "70vh" : "53vh"}` }}>
-						<img 
-							src={Arrow} 
-							alt="Move clothing carousel left" 
-							className="arrow"
-							onClick={() => clickLeft()}
-							/>
-					</div>
-					<div className="prod-button-right" style={{ top: `${window > 600 ? "70vh" : "53vh"}` }}>
-						<img 
-							src={Arrow} 
-							alt="Move clothing carousel right" 
-							className="arrow"
-							onClick={() => clickRight()}
-							style={{ transform: "rotate(180deg)" }}
-							/>
-					</div>
-				</div>	
-				:
-				<span></span>
-			}
-			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
+		<Container style={{ position: "fixed", height: "100vh", width: "100vw", overflowY: "scroll" }}>
+			<div className="d-xs-none d-md-none d-none d-lg-block d-md-block">
+				{!prodModal ? 
+					<div>
+						<div className="prod-button-left" style={{ top: `${window > 600 ? "70vh" : "53vh"}` }}>
+							<img 
+								src={Arrow} 
+								alt="Move clothing carousel left" 
+								className="arrow"
+								onClick={() => clickLeft()}
+								/>
+						</div>
+						<div className="prod-button-right" style={{ top: `${window > 600 ? "70vh" : "53vh"}` }}>
+							<img 
+								src={Arrow} 
+								alt="Move clothing carousel right" 
+								className="arrow"
+								onClick={() => clickRight()}
+								style={{ transform: "rotate(180deg)" }}
+								/>
+						</div>
+					</div>	
+					:
+					<span></span>
+				}
+			</div>
+			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }} className="d-xs-none d-md-none d-none d-lg-block d-md-block" >
 				<Col lg={{ offset: 4, span: 8 }} xs={{offset: 2, span: 10}} className="prod-title" style={{ marginTop: `${window > 600 ? "23vh" : "28vh"}` }} >
 					<h1 className="prod-title-text" >{featured[index] !== undefined ? featured[index].title : ""}</h1>
 				</Col>
 			</Row>
-			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }}>
+			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }} className="d-xs-none d-md-none d-none d-lg-block d-md-block">
 				{/* <Col lg={{ offset: 4, span: 1 }} xs={{ offset: 2, span: 3 }} className="prod-view" style={{ marginTop: `${window > 600 ? "72vh" : "55vh"}` }}>
 					<img src={Arrow} onClick={() => setProdModal(true)} alt="click to view clothes" style={{ height: "90px", transform: "rotate(135deg)" }} />
 					<h1 className="prod-view-text" onClick={() => setProdModal(true)} >View</h1>
@@ -156,7 +158,7 @@ export default (props) => {
 					<h1 className="prod-price-text">{`$${featured[index] !== undefined ? featured[index].variants[0].price : ""}*`}</h1>
 				</Col>
 			</Row>
-			{prodModal ? 
+			{prodModal ?
 					<div style={{ width: "100vw", height: "100vh", position: "fixed", marginLeft: "-15px", zIndex: "25"}}>
 						<img 
 							src={Close} alt="close modal window" 
@@ -167,47 +169,62 @@ export default (props) => {
 					</div>
 				:
 				<span></span>
-			} 
+			}
 			<animated.div 
-				className="Product-wrapper" 
+				className="Product-wrapper d-xs-none d-md-none d-none d-lg-block d-md-block" 
 				style={{ 
-
 					transform: `translateX(${isEven + translate}%)`, 
-					// fix prod length = this isn't the problem
-					// width: `${prodLength * 19}vw`,
 					width: `${18 * 19}vw`,
 					marginTop: `${window > 600 ? "30vh" : "40vh"}`,
 					opacity: `${prodModal ? "0" : "1"}`
 				}}
-				// {...bind()} 
 			>
 				{featured &&
-				featured.map((product, i) => {
-					const image = product.images[0]
-					return (
-						<div 
-							className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} 
-							// onClick={() => setProdModal(i === index ? true : false)} 
-							onClick={e => {
-								setProdModal(true)
-								setModalIndex(i)
-							}}
-						>
-							{image ? (
-								<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
-									style={{ 
-										transform: `${i === index ? "scale(1.8)" : "scale(1.3)"}`,
-										transition: "transform 0.5s",
-										// zIndex: `${i === index ? 1000 : 1}`
-									}}
-								/>
-							) : null}
-						</div>
-					)
-				})
+					featured.map((product, i) => {
+						const image = product.images[0]
+						return (
+							<div 
+								className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} 
+								onClick={e => {
+									setProdModal(true)
+									setModalIndex(i)
+								}}
+							>
+								{image ? (
+									<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
+										style={{ 
+											transform: `${i === index ? "scale(1.8)" : "scale(1.3)"}`,
+											transition: "transform 0.5s",
+										}}
+									/>
+								) : null}
+							</div>
+						)
+					})
 				}
 			</animated.div>
-			{/* background for desktop */}
+			{!prodModal ? 
+				<div className="d-block d-md-none" style={{ marginTop: "15vh" }}>
+					{featured && 
+						featured.map((product, i) => {
+							const image = product.images[0]
+							return (
+								<div
+									style={{ width: "50%", display: "inline-flex" }}
+									onClick={e => {
+										setProdModal(true)
+										setModalIndex(i)
+										}}
+								>
+									<img src={image.src} />
+								</div>
+							)
+						})
+					}
+				</div>
+				:
+				<span></span>
+			}
 			{prodModal && videoData[index + 1] !== undefined  && window > 600 ? 
 				<div 
 					alt="background Video" 
@@ -223,7 +240,6 @@ export default (props) => {
 				>
 				</div>
 			}
-			{/* background for mobile */}
 			{prodModal && videoDataMobile[index + 1] !== undefined  && window < 600 ? 
 				<div 
 					alt="background Video" 

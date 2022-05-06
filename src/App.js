@@ -6,7 +6,6 @@ import Products from './ComponentsShopify/Products' ;
 import LoadingPage from './Components/LoadingPage';
 import Navbar from './Components/navigation/Navbar'
 
-
 import About from './Components/About';
 import LookbookPage from './Components/LookbookPage';
 
