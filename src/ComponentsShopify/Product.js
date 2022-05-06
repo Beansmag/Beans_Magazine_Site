@@ -203,7 +203,7 @@ export default (props) => {
 					})
 				}
 			</animated.div>
-				<div className="d-block d-md-none" style={{ marginTop: "15vh", opacity: `${prodModal ? "0" : "1"}` }}>
+				<div className="d-block d-md-none" style={{ marginTop: "15vh" }}>
 					{featured && 
 						featured.map((product, i) => {
 							const image = product.images[0]
