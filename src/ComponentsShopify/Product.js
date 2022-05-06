@@ -120,7 +120,7 @@ export default (props) => {
 	return (
 		<Container style={{ position: "fixed", height: "100vh", width: "100vw", overflowY: "scroll" }}>
 			<div className="d-xs-none d-md-none d-none d-lg-block d-md-block">
-				{!prodModal ? 
+				{!prodModal ?
 					<div>
 						<div className="prod-button-left" style={{ top: `${window > 600 ? "70vh" : "53vh"}` }}>
 							<img 
@@ -170,7 +170,7 @@ export default (props) => {
 				:
 				<span></span>
 			}
-			<div className="grid-wrapper d-block d-md-none" style={{ marginTop: "15vh" }}>
+			<div className="grid-wrapper d-block d-md-none" style={{ marginTop: "15vh", paddingBottom: "15vh" }}>
 					{featured && 
 						featured.map((product, i) => {
 							const image = product.images[0]
@@ -225,14 +225,14 @@ export default (props) => {
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${videoData[(index + 1)] !== null ? videoData[(index + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})` }}
+					style={{ backgroundImage: `url(${videoData[(index + 1)] !== null ? videoData[(index + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})`, overflow: "none" }}
 				>
 				</div>
 				:
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${window > 600 ? videoData && videoData[0].backgroundGif.asset.url : ""})` }}
+					style={{ backgroundImage: `url(${window > 600 ? videoData && videoData[0].backgroundGif.asset.url : ""})`, overflow: "none" }}
 				>
 				</div>
 			}
@@ -240,14 +240,14 @@ export default (props) => {
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${videoDataMobile[(index + 1)] !== null ? videoDataMobile[(index + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})` }}
+					style={{ backgroundImage: `url(${videoDataMobile[(index + 1)] !== null ? videoDataMobile[(index + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})`, overflow: "none" }}
 				>
 				</div>
 				:
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${window < 600 ? videoDataMobile && videoDataMobile[0].backgroundGifMobile.asset.url : "" })` }}
+					style={{ backgroundImage: `url(${window < 600 ? videoDataMobile && videoDataMobile[0].backgroundGifMobile.asset.url : "" })`, overflow: "none" }}
 				>
 				</div>
 			}
