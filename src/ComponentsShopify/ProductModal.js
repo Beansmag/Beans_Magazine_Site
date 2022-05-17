@@ -6,7 +6,7 @@ import ReactGA from 'react-ga';
 import DropDownArrow from '../Assets/dropDownArrow.svg'
 
 import "../Styles/productModal.css"
-import clamp from 'lodash.clamp';
+// import clamp from 'lodash.clamp';
 
 export default (props) => {
     const {
@@ -154,6 +154,7 @@ export default (props) => {
 							<div style={{ width: "100%", position: "relative" }}>
 									<div 
 										className="style__dropdown" 
+										style={{ backgroundColor: "#DDDDDD" }}
 										id="prodOptions" 
 										onClick={e => {
 											setdropDownMenu(!dropDownMenu);
@@ -176,7 +177,7 @@ export default (props) => {
 														}}
 														style={{ 
 															color: `${item.available ? "black" : "grey" }`,
-															cursor: `${item.available ? "pointer" : "not-allowed" }`
+															cursor: `${item.available ? "pointer" : "not-allowed" }`,
 														}}												
 														key={item.title + i}
 													>{`${item.title}`}</li>	
@@ -189,6 +190,7 @@ export default (props) => {
 							<input
 								className="quantity"
 								type="number"
+								style={{ background: "#DDDDDD" }}
 								min={1}
 								value={quantity}
 								onChange={(e) => {
@@ -197,7 +199,6 @@ export default (props) => {
 							></input>
 						</div>
 						<div style={{ width: "100%", textAlign: "center"}}>
-
 						{soldOut ?
 							<button
 								className="prodBuy button"

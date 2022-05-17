@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useShopify } from "../hooks";
 import { Container, Col, Row } from 'react-bootstrap';
 import { animated } from '@react-spring/web';
-// import { useDrag } from '@use-gesture/react';
 import ReactGa from 'react-ga'
 import sanityClient from '../client';
 
@@ -12,7 +11,7 @@ import Arrow from '../Assets/Arrow.svg';
 
 import '../Styles/Home.css'
 
-export default (props) => {
+export default () => {
 	const { featured } = useShopify()
 	const [translate, setTranslate] = useState(0)
 	const [index, setIndex] = useState(null)
@@ -25,8 +24,7 @@ export default (props) => {
 	const [videoDataMobile, setVideoDataMobile] = useState()
 	const [modalIndex, setModalIndex] = useState()
 	const isEven =  prodLength % 2 == 0 ? -38 : -34
-
-	// console.log(modalIndex)
+	const [galleryImage, setGalleryImage] = useState()
 
 	useEffect(() => {
         sanityClient.fetch(`*[_type == "backgroundVideo"]{
@@ -41,6 +39,8 @@ export default (props) => {
         }`)
         .then((data) => setVideoData(data))
         .catch(console.error)
+
+		setGalleryImage()
       },[])
 
 	  useEffect(() => {
@@ -150,17 +150,14 @@ export default (props) => {
 				</Col>
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }} className="d-xs-none d-md-none d-none d-lg-block d-md-block">
-				{/* <Col lg={{ offset: 4, span: 1 }} xs={{ offset: 2, span: 3 }} className="prod-view" style={{ marginTop: `${window > 600 ? "72vh" : "55vh"}` }}>
-					<img src={Arrow} onClick={() => setProdModal(true)} alt="click to view clothes" style={{ height: "90px", transform: "rotate(135deg)" }} />
-					<h1 className="prod-view-text" onClick={() => setProdModal(true)} >View</h1>
-				</Col> */}
 				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 6, span: 3 }} className="prod-price" style={{ marginTop: `${window > 600 ? "72vh" : "60vh"}` }}>
 					<h1 className="prod-price-text">{`$${featured[index] !== undefined ? featured[index].variants[0].price : ""}*`}</h1>
 				</Col>
 			</Row>
 			{prodModal ?
-					<div style={{ width: "100vw", height: "100vh", position: "fixed", marginLeft: "-15px", zIndex: "25"}}>
+					<div style={{ width: "100vw", height: "100vh", position: "fixed", marginLeft: "-15px", zIndex: "25" }}>
 						<img 
+							style={{ backgroundColor: "#DDDDDD" }}
 							src={Close} alt="close modal window" 
 							className="close-product-modal"
 							onClick={() => setProdModal(false)}
@@ -225,14 +222,25 @@ export default (props) => {
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${videoData[(index + 1)] !== null ? videoData[(index + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})`, overflow: "none" }}
+					style={{ 
+						backgroundImage: `url(${videoData[(index + 1)] !== null ? videoData[(index + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})`, 
+						overflow: "none",
+						opacity: prodModal ? 0.8 : 0,
+						transition: "opacity 4s",
+						transitionDelay: "2s"
+					 }}
 				>
 				</div>
 				:
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${window > 600 ? videoData && videoData[0].backgroundGif.asset.url : ""})`, overflow: "none" }}
+					style={{ 
+						backgroundImage: `url(${window > 600 ? videoData && videoData[0].backgroundGif.asset.url : ""})`, 
+						overflow: "none",
+						// opacity: prodModal ? 1 : 0,
+						// transition: "opacity 2s"
+					}}
 				>
 				</div>
 			}
@@ -240,14 +248,21 @@ export default (props) => {
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${videoDataMobile[(index + 1)] !== null ? videoDataMobile[(index + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})`, overflow: "none" }}
+					style={{ 
+						backgroundImage: `url(${videoDataMobile[(index + 1)] !== null ? videoDataMobile[(index + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})`, 
+						overflow: "none",
+					}}
 				>
 				</div>
 				:
 				<div 
 					alt="background Video" 
 					className="home-bg-vid"
-					style={{ backgroundImage: `url(${window < 600 ? videoDataMobile && videoDataMobile[0].backgroundGifMobile.asset.url : "" })`, overflow: "none" }}
+					style={{ 
+						backgroundImage: `url(${window < 600 ? videoDataMobile && videoDataMobile[0].backgroundGifMobile.asset.url : "" })`, 
+						overflow: "none",
+
+					}}
 				>
 				</div>
 			}
