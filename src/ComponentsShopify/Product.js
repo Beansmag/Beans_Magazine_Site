@@ -223,11 +223,11 @@ export default () => {
 					alt="background Video" 
 					className="home-bg-vid"
 					style={{ 
-						backgroundImage: `url(${videoData[(index + 1)] !== null ? videoData[(index + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})`, 
+						backgroundImage: `url(${videoData[(modalIndex + 1)] !== null ? videoData[(modalIndex + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})`, 
 						overflow: "none",
 						opacity: prodModal ? 0.8 : 0,
-						transition: "opacity 4s",
-						transitionDelay: "2s"
+						// transition: "opacity 4s",
+						// transitionDelay: "2s"
 					 }}
 				>
 				</div>
@@ -249,7 +249,7 @@ export default () => {
 					alt="background Video" 
 					className="home-bg-vid"
 					style={{ 
-						backgroundImage: `url(${videoDataMobile[(index + 1)] !== null ? videoDataMobile[(index + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})`, 
+						backgroundImage: `url(${videoDataMobile[(modalIndex + 1)] !== null ? videoDataMobile[(modalIndex + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})`, 
 						overflow: "none",
 					}}
 				>
