@@ -1,8 +1,10 @@
-import React, { useEffect } from "react"
-import LineItem from "./LineItem"
-import { useShopify } from "../hooks"
-import { MdRemoveShoppingCart } from "react-icons/md"
-import ReactGA from 'react-ga';
+import React, { useEffect, useState } from "react";
+import LineItem from "./LineItem";
+import { useShopify } from "../hooks";
+import { MdRemoveShoppingCart } from "react-icons/md";
+import BlockContent from '@sanity/block-content-to-react';
+import sanityClient from '../client';
+import ReactGA from 'react-ga';;
 
 export default (props) => {
 	const {
@@ -12,6 +14,8 @@ export default (props) => {
 		checkoutState,
 		setCount,
 	} = useShopify()
+
+	const [cartInfo, setCartInfo] = useState()
 
 	function handleOpen(e) {
 		e.preventDefault()
@@ -29,6 +33,14 @@ export default (props) => {
 		window.location.replace(checkoutState.webUrl) // opens checkout in same window
 		localStorage.setItem('checkout', checkoutState.completedAt)
 	}
+
+	useEffect(() => {
+		sanityClient.fetch(`*[_type == "missionCartInfo"]{
+			cartInfo
+		}`)
+		.then((data) => setCartInfo(data))
+		.catch(console.error)
+	  },[])
 
 	useEffect(() => {
 		const button = document.querySelector("button.App__view-cart")
@@ -78,6 +90,13 @@ export default (props) => {
 							<MdRemoveShoppingCart />
 						</button>
 					</header>
+					<h4 style={{ padding: '15px', fontWeight: '800' }}>
+						<BlockContent 
+							blocks={cartInfo && cartInfo[0].cartInfo} 
+							projectId="m7j507qg"
+							dataset="headless"
+						/>
+					</h4>
 					<ul className="Cart__line-items">
 						<LineItem />
 					</ul>

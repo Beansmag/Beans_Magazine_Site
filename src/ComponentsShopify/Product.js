@@ -3,6 +3,7 @@ import { useShopify } from "../hooks";
 import { Container, Col, Row } from 'react-bootstrap';
 import { animated } from '@react-spring/web';
 import ReactGa from 'react-ga'
+import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '../client';
 
 import ProductModal from "./ProductModal";
@@ -23,6 +24,7 @@ export default () => {
 	const [videoData, setVideoData] = useState()
 	const [videoDataMobile, setVideoDataMobile] = useState()
 	const [modalIndex, setModalIndex] = useState()
+	const [missionCartInfo, setMissionCartInfo] = useState()
 	const isEven =  prodLength % 2 == 0 ? -38 : -34
 	const [galleryImage, setGalleryImage] = useState()
 
@@ -57,6 +59,15 @@ export default () => {
         .then((data) => setVideoDataMobile(data))
         .catch(console.error)
       },[])
+
+	  useEffect(() => {
+		sanityClient.fetch(`*[_type == "missionCartInfo"]{
+			missionHeader,
+			missionStatementText
+		}`)
+		.then((data) => setMissionCartInfo(data))
+		.catch(console.error)
+	  },[])
 
 	useEffect(() => {
 		const indexStart = Math.trunc(featured.length / 2) 
@@ -118,7 +129,8 @@ export default () => {
 	}
 
 	return (
-		<Container style={{ position: "fixed", height: "100vh", width: "100vw", overflowY: "scroll" }}>
+		// overflowY: `${window.innerWidth < 700 ? "scroll" : "none" }`
+		<Container style={{ position: "fixed", height: "100vh", width: "100vw" }}>
 			<div className="d-xs-none d-md-none d-none d-lg-block d-md-block">
 				{!prodModal ?
 					<div>
@@ -167,23 +179,40 @@ export default () => {
 				:
 				<span></span>
 			}
-			<div className="grid-wrapper d-block d-md-none" style={{ marginTop: "15vh", paddingBottom: "15vh" }}>
-					{featured && 
-						featured.map((product, i) => {
-							const image = product.images[0]
-							return (
-								<div
-									style={{ width: "50%", display: "inline-flex", opacity: `${prodModal ? "0" : "1"}` }}
-									onClick={e => {
-										setProdModal(true)
-										setModalIndex(i)
-										}}
-								>
-									<img src={image.src} />
-								</div>
-							)
-						})
-					}
+			<div style={{ height: "100%", overflow: "scroll", width: '100%' }} className='d-block d-md-none'>
+				<div className="grid-wrapper" style={{ marginTop: "15vh", paddingBottom: "5vh" }}>
+						{featured && 
+							featured.map((product, i) => {
+								const image = product.images[0]
+								return (
+									<div
+										key={i}
+										style={{ width: "50%", display: "inline-flex", opacity: `${prodModal ? "0" : "1"}` }}
+										onClick={e => {
+											setProdModal(true)
+											setModalIndex(i)
+											}}
+									>
+										<img src={image.src} />
+									</div>
+								)
+							})
+						}
+				</div>
+				{prodModal ?
+				<span></span>
+				:
+				<div style={{ textAlign: 'center' }} className='d-block d-md-none'>
+					<h3 style={{ fontWeight: '800', fontSize: '30px' }} >{missionCartInfo && missionCartInfo[0].missionHeader}</h3>
+					<h3 style={{ paddingBottom: '12vh', fontWeight: '800' }}>
+						<BlockContent 
+							blocks={missionCartInfo && missionCartInfo[0].missionStatementText} 
+							projectId="m7j507qg"
+							dataset="headless"
+						/>
+					</h3>
+				</div>
+			}
 			</div>
 			<animated.div 
 				className="Product-wrapper d-xs-none d-md-none d-none d-lg-block d-md-block" 
@@ -224,7 +253,7 @@ export default () => {
 					className="home-bg-vid"
 					style={{ 
 						backgroundImage: `url(${videoData[(modalIndex + 1)] !== null ? videoData[(modalIndex + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})`, 
-						overflow: "none",
+						// overflow: "none",
 						opacity: prodModal ? 0.8 : 0,
 						// transition: "opacity 4s",
 						// transitionDelay: "2s"
@@ -237,9 +266,7 @@ export default () => {
 					className="home-bg-vid"
 					style={{ 
 						backgroundImage: `url(${window > 600 ? videoData && videoData[0].backgroundGif.asset.url : ""})`, 
-						overflow: "none",
-						// opacity: prodModal ? 1 : 0,
-						// transition: "opacity 2s"
+						// overflow: "none",
 					}}
 				>
 				</div>
@@ -250,7 +277,7 @@ export default () => {
 					className="home-bg-vid"
 					style={{ 
 						backgroundImage: `url(${videoDataMobile[(modalIndex + 1)] !== null ? videoDataMobile[(modalIndex + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})`, 
-						overflow: "none",
+						// overflow: "none",
 					}}
 				>
 				</div>
@@ -260,7 +287,7 @@ export default () => {
 					className="home-bg-vid"
 					style={{ 
 						backgroundImage: `url(${window < 600 ? videoDataMobile && videoDataMobile[0].backgroundGifMobile.asset.url : "" })`, 
-						overflow: "none",
+						// overflow: "none",
 
 					}}
 				>

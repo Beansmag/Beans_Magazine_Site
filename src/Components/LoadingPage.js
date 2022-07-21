@@ -11,10 +11,10 @@ const LoadingPage = () => {
         <div style={{ 
                 height: "100vh", 
                 width: "100vw", 
-                position: "relative",
+                position: "fixed",
                 backgroundColor: "white",
                 zIndex: "20",
-                overflow: 'hidden',
+                overflow: 'none',
             }}
         >
             <img src={BGGif} alt="Loading Video"

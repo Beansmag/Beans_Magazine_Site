@@ -2,6 +2,11 @@
  * ============================== */
  @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700");
 
+/* .App {
+    position: fixed;
+    overflow: none;
+} */
+
  *,
  *:before,
  *:after {
@@ -39,13 +44,6 @@
  
  /* BASE APP
    * ============================== */
- .App__header {
-     background-color: #222;
-     background-image: url("https://unsplash.it/1000/300?image=823");
-     background-size: cover;
-     color: white;
-     padding: 10px 10px;
- }
  
  .App__nav {
      width: 100%;
@@ -65,7 +63,7 @@
  .Product-wrapper {
      transition: transform 1s;
      touch-action: none;
-     overflow: none;
+     /* overflow: none; */
 
      right: 0;
      left: 0;
@@ -75,7 +73,7 @@
  }
 
  .grid-wrapper {
-    overflow: scroll;
+    /* overflow: scroll; */
     right: 0;
     left: 0;
     margin-right: auto;
@@ -329,7 +327,7 @@
    * ============================== */
  .Line-item {
      margin-bottom: 20px;
-     overflow: hidden;
+     /* overflow: hidden; */
      backface-visibility: visible;
      min-height: 65px;
      position: relative;

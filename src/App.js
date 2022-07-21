@@ -35,13 +35,14 @@ function App(props) {
 	},[])
 
   return (
+	<div className="App">
 	  <Router>
 		  	{!completed ?
 				<LoadingPage />
 				:
 				<span></span>
 			}
-			<div className="App">
+			<div>
 				<Navbar />
 				<Switch>
 					<Route exact path='/' component={Products} />
@@ -49,7 +50,8 @@ function App(props) {
 					<Route path='/about' component={About} />
 				</Switch>
 			</div>
-	</Router>
+		</Router>
+	</div>
   );
 }
 
