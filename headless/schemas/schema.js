@@ -8,6 +8,7 @@ import about from './about'
 import backgroundVideo from './backgroundVideo'
 import backgroundVideoMobile from './backgroundVideoMobile'
 import missionCartInfo from './missionCartInfo'
+import LoadingAnimation from './LoadingAnim'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -18,6 +19,7 @@ export default createSchema({
   types: schemaTypes.concat([
     // The following are document types which will appear
     // in the studio.
+    LoadingAnimation,
     lookbook,
     about,
     backgroundVideo,

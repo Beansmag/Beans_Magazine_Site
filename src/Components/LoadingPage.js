@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // import BGVideo from '../Assets/Backprint_1.webm';
 import BGGif from '../Assets/Backprint_1.gif';
+import sanityClient from '../client';
 
 import '../Styles/Home.css'
 
 const LoadingPage = () => {
+    const [ videoData ,setVideoData] = useState()
+
+    useEffect(() => {
+        sanityClient.fetch(`*[_type == "loadingAnimation"]{
+			LoadingAnimation{
+                asset->{
+                  _id,
+                  url
+                },
+                alt
+              },
+        }`)
+        .then((data) => setVideoData(data))
+        .catch(console.error)
+      },[])
+
+      console.log(videoData && videoData[0].LoadingAnimation.asset.url)
+
+      //videoData.loadingAnimation !== undefined ? videoData.loadingAnimation.asset.url : 
+
 
     return (
         <div style={{ 
@@ -17,7 +38,7 @@ const LoadingPage = () => {
                 overflow: 'none',
             }}
         >
-            <img src={BGGif} alt="Loading Video"
+            <img src={videoData && videoData[0].LoadingAnimation.asset.url} alt="Loading Video"
                 style={{ 
                     width: "auto",
                     minWidth: "600px",

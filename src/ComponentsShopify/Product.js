@@ -179,7 +179,7 @@ export default () => {
 				:
 				<span></span>
 			}
-			<div style={{ height: "100%", overflow: "scroll", width: '100%' }} className='d-block d-md-none'>
+			<div style={{ height: "100%", overflow: "scroll", width: 'yarn sta' }} className='d-block d-md-none'>
 				<div className="grid-wrapper" style={{ marginTop: "15vh", paddingBottom: "5vh" }}>
 						{featured && 
 							featured.map((product, i) => {
