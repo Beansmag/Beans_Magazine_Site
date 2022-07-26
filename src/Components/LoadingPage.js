@@ -23,11 +23,6 @@ const LoadingPage = () => {
         .catch(console.error)
       },[])
 
-      console.log(videoData && videoData[0].LoadingAnimation.asset.url)
-
-      //videoData.loadingAnimation !== undefined ? videoData.loadingAnimation.asset.url : 
-
-
     return (
         <div style={{ 
                 height: "100vh", 

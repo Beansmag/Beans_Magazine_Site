@@ -286,7 +286,13 @@
      flex: 1 0 auto;
      margin: 0;
      padding: 20px;
+     overflow-y: scroll;
+     height: 40%;
  }
+
+ .Cart__line-items::-webkit-scrollbar {
+    display: none;
+  }
  
  .Cart__footer {
      padding: 20px;

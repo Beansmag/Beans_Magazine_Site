@@ -16,6 +16,12 @@ export default {
         hotspot: true,
       },
     },
+    {
+      title: 'Loading Animation Time',
+      name: 'loadingTime',
+      type: 'number'
+    }
+    
     ],
   
     preview: {

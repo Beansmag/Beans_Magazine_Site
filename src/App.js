@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { useShopify } from "./hooks";
+import sanityClient from './client';
 
 import Products from './ComponentsShopify/Products' ;
 import LoadingPage from './Components/LoadingPage';
@@ -13,12 +14,21 @@ import './App.css';
 
 function App(props) {
 	const [completed, setCompleted] = useState(false)
+	const [videoData ,setVideoData] = useState()
+
+    useEffect(() => {
+        sanityClient.fetch(`*[_type == "loadingAnimation"]{
+			loadingTime,
+        }`)
+        .then((data) => setVideoData(data))
+        .catch(console.error)
+      },[])
 
 	useEffect(() => {
 		setTimeout(() => {
 			setCompleted(true)
-		  }, 3000);
-	  }, []);
+		  }, `${videoData === undefined ? 3 : videoData[0].loadingTime}000`);
+	  }, [videoData]);
 
 	const {
 		createShop,
