@@ -20,15 +20,21 @@ function App(props) {
         sanityClient.fetch(`*[_type == "loadingAnimation"]{
 			loadingTime,
         }`)
-        .then((data) => setVideoData(data))
+        .then(
+			(data) => {
+				setVideoData(data)
+
+			})
         .catch(console.error)
       },[])
 
 	useEffect(() => {
-		setTimeout(() => {
-			setCompleted(true)
-		  }, `${videoData === undefined ? 3 : videoData[0].loadingTime}000`);
-	  }, [videoData]);
+		if (videoData) {
+			setTimeout(() => {
+				setCompleted(true)
+			}, `${videoData[0].loadingTime}000`)
+		}
+	}, [videoData]);
 
 	const {
 		createShop,

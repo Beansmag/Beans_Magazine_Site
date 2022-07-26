@@ -33,7 +33,7 @@ const LoadingPage = () => {
                 overflow: 'none',
             }}
         >
-            <img src={videoData && videoData[0].LoadingAnimation.asset.url} alt="Loading Video"
+            <img src={videoData && videoData[0].LoadingAnimation.asset.url}
                 style={{ 
                     width: "auto",
                     minWidth: "600px",
