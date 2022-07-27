@@ -83,7 +83,7 @@ export default (props) => {
 				</button>
 			</div>
 			<div id="cart" >
-				<div className={`Cart ${cartStatus ? "Cart--open" : ""}`} style={{ width: `${document.documentElement.clientWidth > 600 ? "350px" : " 100%"}` }}>
+				<div className={`Cart ${cartStatus ? "Cart--open" : ""}`} style={{ width: `${document.documentElement.clientWidth > 600 ? "350px" : " 90%"}` }}>
 					<header className="Cart__header">
 						<h4>CART</h4>
 						<button className="Cart__close" onClick={(e) => handleClose(e)}>
