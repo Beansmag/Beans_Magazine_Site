@@ -16,6 +16,7 @@ export default (props) => {
 	} = useShopify()
 
 	const [cartInfo, setCartInfo] = useState()
+	const cartEmpty = checkoutState.lineItems && checkoutState.lineItems.length === 0
 
 	function handleOpen(e) {
 		e.preventDefault()
@@ -72,6 +73,8 @@ export default (props) => {
 		  });
 	}
 
+	console.log(cartEmpty)
+
 	return (
 		<div style={{ position: "fixed", zIndex: "999999999999" }}>
 			<div className="App__view-cart-wrapper2">
@@ -83,7 +86,7 @@ export default (props) => {
 				</button>
 			</div>
 			<div id="cart" >
-				<div className={`Cart ${cartStatus ? "Cart--open" : ""}`} style={{ width: `${document.documentElement.clientWidth > 600 ? "350px" : " 90%"}` }}>
+				<div className={`Cart ${cartStatus ? "Cart--open" : ""}`} style={{ width: `${document.documentElement.clientWidth > 600 ? "350px" : "85%"}` }}>
 					<header className="Cart__header">
 						<h4>CART</h4>
 						<button className="Cart__close" onClick={(e) => handleClose(e)}>
@@ -119,18 +122,29 @@ export default (props) => {
 								<span className="pricing">$ {checkoutState.totalPrice}</span>
 							</div>
 						</div>
-						<button
-							className="Cart__checkout button"
-							onClick={(e) => { 
-								openCheckout(e) 
-								GAEvent()
-							}}
-						>
-							Checkout
-						</button>
+						{cartEmpty ?
+							<button className="Cart__checkout button">
+								Checkout
+							</button>							
+							:
+							<button
+								className="Cart__checkout button"
+								onClick={(e) => { 
+									openCheckout(e) 
+									GAEvent()
+								}}
+							>
+								Checkout
+							</button>						
+						}
 					</footer>
 				</div>
 			</div>
+			{cartStatus ?
+				<div className='cart-background' onClick={() => closeCart()}></div>
+				:
+				<span></span>
+			}
 		</div>
 	)
 }

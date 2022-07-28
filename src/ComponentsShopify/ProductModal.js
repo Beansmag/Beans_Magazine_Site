@@ -10,7 +10,6 @@ import "../Styles/productModal.css"
 
 export default (props) => {
     const {
-        // products,
 		featured,
 		fetchProduct,
 		openCart,
@@ -33,10 +32,6 @@ export default (props) => {
 	const [sizeTitle, setSizeTitle] = useState("");
 	const [rotate, setRotate] = useState();
     const description = featured[props.modalIndex] !== undefined ? featured[props.modalIndex].description.split(".") : "...Loading"
-	// const item = featured[props.modalIndex].availableForSale
-
-
-	// console.log(featured[props.modalIndex])
 
     function changeSize(sizeId, quantity) {
 		openCart()
@@ -79,7 +74,7 @@ export default (props) => {
 		} else {
 			return
 		}
-	} 
+	}
 
     return (
         <Container className="product-modal-background"  style={{ overflowY: "hidden"}}>

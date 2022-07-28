@@ -170,6 +170,12 @@
      /* cursor: pointer; */
  }
 
+ .cart-background {
+    height: 100vh;
+    width: 100vw;
+    background: transparent;
+ }
+
  .App__view-cart:hover {
     cursor: url('./Assets/diamondSword.png'),auto;
     color: grey;

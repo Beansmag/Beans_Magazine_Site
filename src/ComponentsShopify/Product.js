@@ -130,7 +130,7 @@ export default () => {
 
 	return (
 		// overflowY: `${window.innerWidth < 700 ? "scroll" : "none" }`
-		<Container style={{ position: "fixed", height: "100vh", width: "100vw" }}>
+		<Container style={{ position: "fixed", height: "100vh", width: "100vw" }} >
 			<div className="d-xs-none d-md-none d-none d-lg-block d-md-block">
 				{!prodModal ?
 					<div>
