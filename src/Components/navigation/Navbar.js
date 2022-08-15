@@ -1,18 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 import Cart from '../../ComponentsShopify/Cart'
 import HamburgerMenu from './HamburgerMenu.js'
+import sanityClient from '../../client';
 
-import Branding from '../../Assets/Branding.svg'
+// import Branding from '../../Assets/Branding.svg'
 
 import './navbar.css'
 
 const Navbar = (props) => {
+    const [brandingData, setBrandingData] = useState()
+
+    useEffect(() => {
+        sanityClient.fetch(`*[_type == "branding"]{
+            logo{
+                asset->{
+                  _id,
+                  url
+                },
+                alt
+              },
+        }`)
+        .then((data) => setBrandingData(data))
+        .catch(console.error)
+    },[])
 
     return (
         <Container fluid className="nav_master_container" >
-           <img src={Branding} alt='Beans Logo' className="nav-logo" />
+           <img src={brandingData && brandingData[0].logo.asset.url} alt='Beans Logo' className="nav-logo" />
             <Row className="row-style">
                 <Col lg={{ offset: 3, span: 6}} md={{ offset: 3, span: 6 }} className="d-xs-none d-none d-lg-block d-md-block">
                     <ul className="nav-container">

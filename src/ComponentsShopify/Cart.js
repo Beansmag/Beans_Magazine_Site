@@ -73,8 +73,6 @@ export default (props) => {
 		  });
 	}
 
-	console.log(cartEmpty)
-
 	return (
 		<div style={{ position: "fixed", zIndex: "999999999999" }}>
 			<div className="App__view-cart-wrapper2">

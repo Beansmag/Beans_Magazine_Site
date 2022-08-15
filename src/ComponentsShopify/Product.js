@@ -103,6 +103,7 @@ export default () => {
 
 	useEffect(() => {
 	const indexStart = Math.trunc(featured.length / 2) 
+		// console.log(indexStart - count)
 		setIndex(indexStart - count)
 		setTranslate(count === "null" ? 0 * rowWidth : count * rowWidth)
 	},[count])
@@ -119,9 +120,12 @@ export default () => {
 
 	function clickRight() {
 		const amount = featured.length - 1
+		const indexStart = Math.trunc(featured.length / 2) 
 		if (index >= amount) {
 			setTranslate(translate)
 			setIndex(amount)
+			// setIndex(0)
+			// setCount(indexStart)
 		} else {
 			setIndex(index + 1)
 			setCount(count - 1)
@@ -185,16 +189,16 @@ export default () => {
 							featured.map((product, i) => {
 								const image = product.images[0]
 								return (
-									<div
-										key={i}
-										style={{ width: "50%", display: "inline-flex", opacity: `${prodModal ? "0" : "1"}` }}
-										onClick={e => {
-											setProdModal(true)
-											setModalIndex(i)
-											}}
-									>
-										<img src={image.src} />
-									</div>
+										<div
+											key={i}
+											style={{ width: "50%", display: "inline-flex", opacity: `${prodModal ? "0" : "1"}` }}
+											onClick={e => {
+												setProdModal(true)
+												setModalIndex(i)
+												}}
+										>
+											<img src={image.src} />
+										</div>
 								)
 							})
 						}
@@ -227,21 +231,23 @@ export default () => {
 					featured.map((product, i) => {
 						const image = product.images[0]
 						return (
-							<div 
-								className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} 
-								onClick={e => {
-									setProdModal(true)
-									setModalIndex(i)
-								}}
-							>
-								{image ? (
-									<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
-										style={{ 
-											transform: `${i === index ? "scale(1.8)" : "scale(1.3)"}`,
-											transition: "transform 0.5s",
-										}}
-									/>
-								) : null}
+							<div>
+								<div 
+									className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} 
+									onClick={e => {
+										setProdModal(true)
+										setModalIndex(i)
+									}}
+								>
+									{image ? (
+										<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
+											style={{ 
+												transform: `${i === index ? "scale(1.8)" : "scale(1.3)"}`,
+												transition: "transform 0.5s",
+											}}
+										/>
+									) : null}
+								</div>
 							</div>
 						)
 					})
@@ -253,10 +259,7 @@ export default () => {
 					className="home-bg-vid"
 					style={{ 
 						backgroundImage: `url(${videoData[(modalIndex + 1)] !== null ? videoData[(modalIndex + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})`, 
-						// overflow: "none",
 						opacity: prodModal ? 0.8 : 0,
-						// transition: "opacity 4s",
-						// transitionDelay: "2s"
 					 }}
 				>
 				</div>
@@ -266,7 +269,6 @@ export default () => {
 					className="home-bg-vid"
 					style={{ 
 						backgroundImage: `url(${window > 600 ? videoData && videoData[0].backgroundGif.asset.url : ""})`, 
-						// overflow: "none",
 					}}
 				>
 				</div>
@@ -277,7 +279,6 @@ export default () => {
 					className="home-bg-vid"
 					style={{ 
 						backgroundImage: `url(${videoDataMobile[(modalIndex + 1)] !== null ? videoDataMobile[(modalIndex + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})`, 
-						// overflow: "none",
 					}}
 				>
 				</div>
@@ -287,7 +288,6 @@ export default () => {
 					className="home-bg-vid"
 					style={{ 
 						backgroundImage: `url(${window < 600 ? videoDataMobile && videoDataMobile[0].backgroundGifMobile.asset.url : "" })`, 
-						// overflow: "none",
 
 					}}
 				>

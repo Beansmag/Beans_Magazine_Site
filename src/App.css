@@ -1,11 +1,4 @@
-/* INITIALIZERS + DEFAULTS
- * ============================== */
  @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700");
-
-/* .App {
-    position: fixed;
-    overflow: none;
-} */
 
  *,
  *:before,
@@ -30,18 +23,6 @@
      max-height: 100%;
  }
  
- /* h1 {
-     font-weight: 300;
-     margin: 0 0 15px;
-     font-size: 3rem;
- }
- 
- h2 {
-     font-weight: 300;
-     margin: 0;
-     font-size: 2rem;
- } */
- 
  /* BASE APP
    * ============================== */
  
@@ -63,8 +44,6 @@
  .Product-wrapper {
      transition: transform 1s;
      touch-action: none;
-     /* overflow: none; */
-
      right: 0;
      left: 0;
      margin-right: auto;
@@ -73,7 +52,6 @@
  }
 
  .grid-wrapper {
-    /* overflow: scroll; */
     right: 0;
     left: 0;
     margin-right: auto;

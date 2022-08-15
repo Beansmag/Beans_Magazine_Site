@@ -7,7 +7,7 @@ const LoadingPage = () => {
     const [ videoData ,setVideoData] = useState()
 
     useEffect(() => {
-        sanityClient.fetch(`*[_type == "loadingAnimation"]{
+        sanityClient.fetch(`*[_type == "checkoutAnimation"]{
 			LoadingAnimation{
                 asset->{
                   _id,
@@ -33,6 +33,7 @@ const LoadingPage = () => {
             <img src={videoData && videoData[0].LoadingAnimation.asset.url}
                 style={{ 
                     width: "auto",
+                    minWidth: "600px",
                     height: "100%",
                     position: "absolute",
                     top: "50%",
