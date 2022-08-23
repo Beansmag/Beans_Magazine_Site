@@ -10,6 +10,7 @@ import LoadingAnimation from './LoadingAnim';
 import branding from './branding';
 import siteBackgroundColor from './siteBackground';
 import checkoutAnimation from './checkoutAnim'
+import cartIcon from './cartIcon'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -27,5 +28,6 @@ export default createSchema({
     blockContent,
     siteBackgroundColor,
     checkoutAnimation,
+    cartIcon
   ]),
 })

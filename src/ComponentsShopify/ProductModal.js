@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Col, Row } from 'react-bootstrap'
+import { Container, Col, Row } from 'react-bootstrap';
 import { useShopify } from "../hooks";
 import ReactGA from 'react-ga';
 
-import DropDownArrow from '../Assets/dropDownArrow.svg'
+import DropDownArrow from '../Assets/dropDownArrow.svg';
 
 import "../Styles/productModal.css"
-// import clamp from 'lodash.clamp';
 
 export default (props) => {
     const {
@@ -199,6 +198,7 @@ export default (props) => {
 								className="prodBuy button"
 								onClick={e => {
 									changeSize(size, quantity)
+									// fireAnimation(size,quantity)
 									GAEvent()
 								}}
 							>

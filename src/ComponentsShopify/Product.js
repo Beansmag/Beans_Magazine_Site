@@ -109,9 +109,14 @@ export default () => {
 	},[count])
 
 	function clickLeft() {
+		const amount = featured.length - 1
+		const indexStart = Math.trunc(featured.length / 2)
+		const newCount = indexStart - amount
 		if (index <= 0) {
-			setTranslate(translate)
-			setIndex(0)
+			// setTranslate(translate)
+			// setIndex(0)
+			setIndex(amount)
+			setCount(newCount)
 		} else {
 			setIndex(index - 1)
 			setCount(count + 1)
@@ -122,10 +127,10 @@ export default () => {
 		const amount = featured.length - 1
 		const indexStart = Math.trunc(featured.length / 2) 
 		if (index >= amount) {
-			setTranslate(translate)
-			setIndex(amount)
-			// setIndex(0)
-			// setCount(indexStart)
+			// setTranslate(translate)
+			// setIndex(amount)
+			setIndex(0)
+			setCount(indexStart)
 		} else {
 			setIndex(index + 1)
 			setCount(count - 1)

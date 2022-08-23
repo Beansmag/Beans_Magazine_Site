@@ -4,7 +4,9 @@ import { useShopify } from "../hooks";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '../client';
-import ReactGA from 'react-ga';;
+import ReactGA from 'react-ga';
+
+import CheckoutPage from '../Components/checkoutAnimation'
 
 export default (props) => {
 	const {
@@ -15,7 +17,19 @@ export default (props) => {
 		setCount,
 	} = useShopify()
 
+	useEffect(() => {
+        sanityClient.fetch(`*[_type == "checkoutAnimation"]{
+			checkoutAnimation,
+			checkoutAnimationDuration
+        }`)
+        .then((data) => setCheckoutVideo(data))
+        .catch(console.error)
+	},[])
+
 	const [cartInfo, setCartInfo] = useState()
+	const [checkoutVideo, setCheckoutVideo] = useState();
+	const [completed, setCompleted] = useState(false)
+	const [cartIconData, setCartIconData] = useState()
 	const cartEmpty = checkoutState.lineItems && checkoutState.lineItems.length === 0
 
 	function handleOpen(e) {
@@ -35,6 +49,17 @@ export default (props) => {
 		localStorage.setItem('checkout', checkoutState.completedAt)
 	}
 
+	function fireAnimation(e){
+		if(checkoutVideo && checkoutVideo[0].checkoutAnimation) { 
+			setCompleted(true)
+			setTimeout(() => {
+				openCheckout(e)
+			}, `${checkoutVideo[0].checkoutAnimationDuration}000`)
+		} else {
+			openCheckout(e)
+		}
+	}
+
 	useEffect(() => {
 		sanityClient.fetch(`*[_type == "missionCartInfo"]{
 			cartInfo
@@ -42,6 +67,20 @@ export default (props) => {
 		.then((data) => setCartInfo(data))
 		.catch(console.error)
 	  },[])
+
+	useEffect(() => {
+		sanityClient.fetch(`*[_type == "cartIconUpload"]{
+			cartIcon{
+				asset->{
+					_id,
+					url
+				},
+			alt
+			},
+		}`)
+		.then((data) => setCartIconData(data))
+		.catch(console.error)
+	},[])
 
 	useEffect(() => {
 		const button = document.querySelector("button.App__view-cart")
@@ -75,12 +114,21 @@ export default (props) => {
 
 	return (
 		<div style={{ position: "fixed", zIndex: "999999999999" }}>
+			{completed ?
+				<CheckoutPage />
+				:
+				<span></span>
+			}
 			<div className="App__view-cart-wrapper2">
 				<button 
 					onClick={(e) => { cartStatus ? handleClose(e) : handleOpen(e) }} 
 					className="App__view-cart"
 				>
-					Cart
+					{cartIconData && cartIconData[0].cartIcon ? 
+						<img src={cartIconData[0].cartIcon.asset.url} alt="open cart" style={{ height: "40px"}} />
+						:
+						<span>Cart</span>
+					}
 				</button>
 			</div>
 			<div id="cart" >
@@ -128,7 +176,8 @@ export default (props) => {
 							<button
 								className="Cart__checkout button"
 								onClick={(e) => { 
-									openCheckout(e) 
+									// openCheckout(e)
+									fireAnimation(e)
 									GAEvent()
 								}}
 							>

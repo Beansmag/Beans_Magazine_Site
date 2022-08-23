@@ -3,12 +3,12 @@ import sanityClient from '../client';
 
 import '../Styles/Home.css'
 
-const LoadingPage = () => {
-    const [ videoData ,setVideoData] = useState()
+const CheckoutPage = () => {
+    const [videoData ,setVideoData] = useState()
 
     useEffect(() => {
         sanityClient.fetch(`*[_type == "checkoutAnimation"]{
-			LoadingAnimation{
+			checkoutAnimation{
                 asset->{
                   _id,
                   url
@@ -28,12 +28,14 @@ const LoadingPage = () => {
                 backgroundColor: "white",
                 zIndex: "20",
                 overflow: 'none',
+                top: 0,
+                left: 0
             }}
         >
-            <img src={videoData && videoData[0].LoadingAnimation.asset.url}
+            <img src={videoData && videoData[0].checkoutAnimation.asset.url}
                 style={{ 
                     width: "auto",
-                    minWidth: "600px",
+                    // minWidth: "600px",
                     height: "100%",
                     position: "absolute",
                     top: "50%",
@@ -46,4 +48,4 @@ const LoadingPage = () => {
     )
 }
 
-export default LoadingPage
+export default CheckoutPage

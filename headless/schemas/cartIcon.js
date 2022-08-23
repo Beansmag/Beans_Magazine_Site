@@ -1,11 +1,11 @@
 export default {
-    name: 'branding',
-    title: 'Logo goes here',
+    name: 'cartIconUpload',
+    title: 'Cart Icon Here',
     type: 'document',
     fields: [
         {
-            name: 'logo',
-            title: 'Replace this when you want a new logo',
+            name: 'cartIcon',
+            title: 'Replace this when you want a new cart Icon',
             type: 'image',
             options: {
               hotspot: true

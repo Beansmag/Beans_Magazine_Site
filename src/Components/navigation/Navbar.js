@@ -28,7 +28,11 @@ const Navbar = (props) => {
 
     return (
         <Container fluid className="nav_master_container" >
-           <img src={brandingData && brandingData[0].logo.asset.url} alt='Beans Logo' className="nav-logo" />
+            {brandingData && brandingData[0].logo ?
+                <img src={brandingData[0].logo.asset.url} alt='Beans Logo' className="nav-logo" />
+                :
+                <span></span>
+            }
             <Row className="row-style">
                 <Col lg={{ offset: 3, span: 6}} md={{ offset: 3, span: 6 }} className="d-xs-none d-none d-lg-block d-md-block">
                     <ul className="nav-container">
