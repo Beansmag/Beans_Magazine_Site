@@ -9,6 +9,7 @@
     background-size: cover;
     background-position: center;
     overflow: hidden;
+    transition: opacity 3s;
   }
 
   .home-prod-row{

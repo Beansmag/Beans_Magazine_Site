@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useShopify } from "../hooks";
 import { Container, Col, Row } from 'react-bootstrap';
-import { animated } from '@react-spring/web';
+import { animated, useSpring } from '@react-spring/web';
 import ReactGa from 'react-ga'
 import BlockContent from '@sanity/block-content-to-react';
+
 import sanityClient from '../client';
 
 import ProductModal from "./ProductModal";
@@ -13,20 +14,24 @@ import Arrow from '../Assets/Arrow.svg';
 import '../Styles/Home.css'
 
 export default () => {
-	const { featured } = useShopify()
-	const [translate, setTranslate] = useState(0)
-	const [index, setIndex] = useState(null)
-	const [prodModal, setProdModal] = useState(false)
-	const [rowWidth, setRowWidth] = useState()
-	const [count, setCount] = useState(0)
-	const window = document.documentElement.clientWidth 
-	const prodLength = featured && featured.length
-	const [videoData, setVideoData] = useState()
-	const [videoDataMobile, setVideoDataMobile] = useState()
-	const [modalIndex, setModalIndex] = useState()
-	const [missionCartInfo, setMissionCartInfo] = useState()
+	const { featured } = useShopify();
+	const [translate, setTranslate] = useState(0);
+	const [index, setIndex] = useState(null);
+	const [prodModal, setProdModal] = useState(false);
+	const [rowWidth, setRowWidth] = useState();
+	const [count, setCount] = useState(0);
+	const window = document.documentElement.clientWidth;
+	const prodLength = featured && featured.length;
+	const [videoData, setVideoData] = useState();
+	const [videoDataMobile, setVideoDataMobile] = useState();
+	const [modalIndex, setModalIndex] = useState();
+	const [missionCartInfo, setMissionCartInfo] = useState();
 	const isEven =  prodLength % 2 == 0 ? -38 : -34
-	const [galleryImage, setGalleryImage] = useState()
+	const [galleryImage, setGalleryImage] = useState();
+	const [imageLoaded, setImageLoaded] = useState(false);
+	const [imageLoadedMobile, setImageLoadedMobile] = useState(false);
+	const image = useRef();
+	const imageMobile = useRef();
 
 	useEffect(() => {
         sanityClient.fetch(`*[_type == "backgroundVideo"]{
@@ -137,8 +142,34 @@ export default () => {
 		}
 	}
 
+	useEffect(() => {
+        var bgImg = new Image();
+		bgImg.src = videoData && videoData[(modalIndex + 1)] && videoData[(modalIndex + 1)].backgroundGif.asset.url
+        if(image.current !== undefined){
+            bgImg.onload = function(){
+				setImageLoaded(true)
+            }
+        }
+    },[modalIndex])
+
+	useEffect(() => {
+        var bgImg = new Image();
+		bgImg.src = videoDataMobile && videoDataMobile[(modalIndex + 1)] && videoDataMobile[(modalIndex + 1)].backgroundGifMobile.asset.url
+        if(imageMobile.current !== undefined){
+            bgImg.onload = function(){
+				setImageLoadedMobile(true)
+				console.log("fired")
+            };
+        }
+    },[modalIndex])
+
+	console.log(modalIndex, "modalIndex")
+	console.log(imageLoadedMobile, "imageLoaded")
+
+	const styles = useSpring({ opacity: imageLoaded ? 0.8 : 0 })
+	const stylesMobile = useSpring({ opacity: imageLoadedMobile ? 0.8 : 0 })
+
 	return (
-		// overflowY: `${window.innerWidth < 700 ? "scroll" : "none" }`
 		<Container style={{ position: "fixed", height: "100vh", width: "100vw" }} >
 			<div className="d-xs-none d-md-none d-none d-lg-block d-md-block">
 				{!prodModal ?
@@ -181,7 +212,12 @@ export default () => {
 							style={{ backgroundColor: "#DDDDDD" }}
 							src={Close} alt="close modal window" 
 							className="close-product-modal"
-							onClick={() => setProdModal(false)}
+							onClick={e => {
+								setProdModal(false)
+								setImageLoaded(false)
+								setImageLoadedMobile(false)
+								setModalIndex()
+							}}
 						/>
 						<ProductModal index={index} modalIndex={modalIndex} />
 					</div>
@@ -259,15 +295,17 @@ export default () => {
 				}
 			</animated.div>
 			{prodModal && videoData[index + 1] !== undefined  && window > 600 ? 
-				<div 
-					alt="background Video" 
-					className="home-bg-vid"
-					style={{ 
-						backgroundImage: `url(${videoData[(modalIndex + 1)] !== null ? videoData[(modalIndex + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})`, 
-						opacity: prodModal ? 0.8 : 0,
-					 }}
-				>
-				</div>
+				<animated.div style={styles} >
+					<div
+						alt="background Video" 
+						className="home-bg-vid"
+						ref={image}
+						style={{ 
+							backgroundImage: `url(${videoData[(modalIndex + 1)] !== null ? videoData[(modalIndex + 1)].backgroundGif.asset.url : videoData[0].backgroundGif.asset.url})`, 
+						}}
+					>
+					</div>
+				</animated.div>
 				:
 				<div 
 					alt="background Video" 
@@ -278,15 +316,18 @@ export default () => {
 				>
 				</div>
 			}
-			{prodModal && videoDataMobile[index + 1] !== undefined  && window < 600 ? 
-				<div 
-					alt="background Video" 
-					className="home-bg-vid"
-					style={{ 
-						backgroundImage: `url(${videoDataMobile[(modalIndex + 1)] !== null ? videoDataMobile[(modalIndex + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})`, 
-					}}
-				>
-				</div>
+			{prodModal && videoDataMobile[index + 1] !== undefined  && window < 600 ?
+				<animated.div style={stylesMobile}>
+					<div 
+						alt="background Video" 
+						className="home-bg-vid"
+						ref={imageMobile}
+						style={{ 
+							backgroundImage: `url(${videoDataMobile[(modalIndex + 1)] !== null ? videoDataMobile[(modalIndex + 1)].backgroundGifMobile.asset.url : videoDataMobile[0].backgroundGifMobile.asset.url})`
+						}}
+					>
+					</div>
+				</animated.div>
 				:
 				<div 
 					alt="background Video" 
