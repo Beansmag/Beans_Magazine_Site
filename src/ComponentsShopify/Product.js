@@ -14,24 +14,31 @@ import Arrow from '../Assets/Arrow.svg';
 import '../Styles/Home.css'
 
 export default () => {
-	const { featured } = useShopify();
+	const { featured, tops, bottoms, magazines, accessories } = useShopify();
 	const [translate, setTranslate] = useState(0);
 	const [index, setIndex] = useState(null);
 	const [prodModal, setProdModal] = useState(false);
 	const [rowWidth, setRowWidth] = useState();
 	const [count, setCount] = useState(0);
-	const window = document.documentElement.clientWidth;
-	const prodLength = featured && featured.length;
 	const [videoData, setVideoData] = useState();
 	const [videoDataMobile, setVideoDataMobile] = useState();
 	const [modalIndex, setModalIndex] = useState();
 	const [missionCartInfo, setMissionCartInfo] = useState();
-	const isEven =  prodLength % 2 == 0 ? -38 : -34
-	const [galleryImage, setGalleryImage] = useState();
 	const [imageLoaded, setImageLoaded] = useState(false);
-	const [imageLoadedMobile, setImageLoadedMobile] = useState(false);
+ 	const [imageLoadedMobile, setImageLoadedMobile] = useState(false);
+	const [category, setCategory] = useState(featured);
+	const [rowPositionStart, setrowPositionStart] = useState()
 	const image = useRef();
 	const imageMobile = useRef();
+	const window = document.documentElement.clientWidth;
+	const mobileView = document.documentElement.clientWidth < 600
+
+	console.log(mobileView)
+
+	useEffect(() => {
+		setCategory(featured)
+		setrowPositionStart(Math.round(featured.length / 2) * (-100 / featured.length) - ((-100 / featured.length) * 3.25))
+	},[featured])
 
 	useEffect(() => {
         sanityClient.fetch(`*[_type == "backgroundVideo"]{
@@ -46,8 +53,6 @@ export default () => {
         }`)
         .then((data) => setVideoData(data))
         .catch(console.error)
-
-		setGalleryImage()
       },[])
 
 	  useEffect(() => {
@@ -75,22 +80,22 @@ export default () => {
 	  },[])
 
 	useEffect(() => {
-		const indexStart = Math.trunc(featured.length / 2) 
-		const halfIndex = 100 / featured.length
-		if (featured[1] !== undefined) {
+		const indexStart = Math.round(category.length / 2) - 1
+		const rowWidthPercent = 100 / category.length
+		if (category[1] !== undefined) {
 			setIndex(indexStart)
-			setRowWidth(halfIndex)
+			setRowWidth(rowWidthPercent)
 			ReactGa.initialize('UA-211860604-30')
 			ReactGa.pageview(`/home`)
 		}
 		setTranslate(0)
-	},[featured])
+	},[category])
 
 	useEffect(()=> {
 		if(prodModal) {
 			if(prodModal){
 				ReactGa.initialize('UA-211860604-30')
-				ReactGa.pageview(`/home/${featured[index].title}`)
+				ReactGa.pageview(`/home/${category[index].title}`)
 			}
 		}
 	},[prodModal])
@@ -106,22 +111,23 @@ export default () => {
 	// 	}
 	//   })
 
+	// this translates the product images and changes the index
 	useEffect(() => {
-	const indexStart = Math.trunc(featured.length / 2) 
-		// console.log(indexStart - count)
+	const indexStart = Math.round(category.length / 2) - 1
 		setIndex(indexStart - count)
 		setTranslate(count === "null" ? 0 * rowWidth : count * rowWidth)
+		// setTranslate(count === "null" ? 0 * "250px" : count * "250px")
 	},[count])
 
 	function clickLeft() {
-		const amount = featured.length - 1
-		const indexStart = Math.trunc(featured.length / 2)
+		const amount = category.length - 1
+		const indexStart = Math.round(category.length / 2)
 		const newCount = indexStart - amount
 		if (index <= 0) {
 			// setTranslate(translate)
 			// setIndex(0)
 			setIndex(amount)
-			setCount(newCount)
+			setCount(newCount - 1)
 		} else {
 			setIndex(index - 1)
 			setCount(count + 1)
@@ -129,13 +135,13 @@ export default () => {
 	}
 
 	function clickRight() {
-		const amount = featured.length - 1
-		const indexStart = Math.trunc(featured.length / 2) 
+		const amount = category.length - 1
+		const indexStart = Math.round(category.length / 2)
 		if (index >= amount) {
 			// setTranslate(translate)
 			// setIndex(amount)
 			setIndex(0)
-			setCount(indexStart)
+			setCount(indexStart - 1)
 		} else {
 			setIndex(index + 1)
 			setCount(count - 1)
@@ -158,13 +164,9 @@ export default () => {
         if(imageMobile.current !== undefined){
             bgImg.onload = function(){
 				setImageLoadedMobile(true)
-				console.log("fired")
             };
         }
     },[modalIndex])
-
-	console.log(modalIndex, "modalIndex")
-	console.log(imageLoadedMobile, "imageLoaded")
 
 	const styles = useSpring({ opacity: imageLoaded ? 0.8 : 0 })
 	const stylesMobile = useSpring({ opacity: imageLoadedMobile ? 0.8 : 0 })
@@ -196,16 +198,18 @@ export default () => {
 					<span></span>
 				}
 			</div>
+
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }} className="d-xs-none d-md-none d-none d-lg-block d-md-block" >
 				<Col lg={{ offset: 4, span: 8 }} xs={{offset: 2, span: 10}} className="prod-title" style={{ marginTop: `${window > 600 ? "23vh" : "28vh"}` }} >
-					<h1 className="prod-title-text" >{featured[index] !== undefined ? featured[index].title : ""}</h1>
+					<h1 className="prod-title-text" >{category[index] !== undefined ? category[index].title : ""}</h1>
 				</Col>
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }} className="d-xs-none d-md-none d-none d-lg-block d-md-block">
 				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 6, span: 3 }} className="prod-price" style={{ marginTop: `${window > 600 ? "72vh" : "60vh"}` }}>
-					<h1 className="prod-price-text">{`$${featured[index] !== undefined ? featured[index].variants[0].price : ""}*`}</h1>
+					<h1 className="prod-price-text">{`$${category[index] !== undefined ? category[index].variants[0].price : ""}*`}</h1>
 				</Col>
 			</Row>
+
 			{prodModal ?
 					<div style={{ width: "100vw", height: "100vh", position: "fixed", marginLeft: "-15px", zIndex: "25" }}>
 						<img 
@@ -219,31 +223,72 @@ export default () => {
 								setModalIndex()
 							}}
 						/>
-						<ProductModal index={index} modalIndex={modalIndex} />
+						<ProductModal index={index} modalIndex={modalIndex} category={category} />
 					</div>
 				:
 				<span></span>
 			}
-			<div style={{ height: "100%", overflow: "scroll", width: 'yarn sta' }} className='d-block d-md-none'>
-				<div className="grid-wrapper" style={{ marginTop: "15vh", paddingBottom: "5vh" }}>
-						{featured && 
-							featured.map((product, i) => {
-								const image = product.images[0]
-								return (
-										<div
-											key={i}
-											style={{ width: "50%", display: "inline-flex", opacity: `${prodModal ? "0" : "1"}` }}
-											onClick={e => {
-												setProdModal(true)
-												setModalIndex(i)
-												}}
-										>
-											<img src={image.src} />
-										</div>
-								)
-							})
-						}
-				</div>
+
+			{!prodModal ?
+				<ul className='mainMenu-ul' style={{ marginTop: mobileView ? "10vh" : "15vh" }} >
+					<li className='mainMenu-li'><h5 
+												className={category === featured ? "product-category-text-selected" : "product-category-text" }
+						onClick={e => {
+							setCategory(featured)
+							setrowPositionStart(Math.round(featured.length / 2) * (-100 / featured.length) - ((-100 / featured.length) * 3.25))}}>
+							ALL
+					</h5></li>
+					<li className='mainMenu-li'><h5
+						className={category === tops ? "product-category-text-selected" : "product-category-text" }
+						onClick={e => {
+							setCategory(tops)
+							setrowPositionStart(Math.round(tops.length / 2) * (-100 / tops.length) - ((-100 / tops.length) * 3.25))}}>
+							TOPS
+					</h5></li>
+					<li className='mainMenu-li'><h5
+						className={category === bottoms ? "product-category-text-selected" : "product-category-text" }
+						onClick={e => {setCategory(bottoms)
+						 setrowPositionStart(Math.round(bottoms.length / 2) * (-100 / bottoms.length) - ((-100 / bottoms.length) * 3.25))}}>
+							BOTTOMS
+					</h5></li>
+					<li className='mainMenu-li'><h5
+						className={category === magazines ? "product-category-text-selected" : "product-category-text" }
+						onClick={e => {setCategory(magazines)
+						 setrowPositionStart(Math.round(magazines.length / 2) * (-100 / magazines.length) - ((-100 / magazines.length) * 3.25))}}>
+							MAGAZINE
+					</h5></li>
+					<li className='mainMenu-li'><h5
+						className={category === accessories ? "product-category-text-selected" : "product-category-text" }
+						onClick={e => {
+							setCategory(accessories)
+							setrowPositionStart(Math.round(accessories.length / 2) * (-100 / accessories.length) - ((-100 / accessories.length) * 3.25))}}>
+							ACCESSORIES
+					</h5></li>
+				</ul> : null
+			}
+
+			{/* this is mobile */}
+				<div style={{ height: "100%", overflow: "scroll", width: '100%' }} className='d-block d-md-none'>
+					<div className="grid-wrapper" style={{ marginTop: "15vh", paddingBottom: "5vh" }}>
+							{category && category !== null &&
+								category.map((product, i) => {
+									const image = product.images[0]
+									return (
+											<div
+												key={i}
+												style={{ width: "50%", display: "inline-flex", opacity: `${prodModal ? "0" : "1"}` }}
+												onClick={e => {
+													setProdModal(true)
+													setModalIndex(i)
+													}}
+											>
+												<img src={image.src} />
+											</div>
+									)
+								})
+							}
+					</div>
+
 				{prodModal ?
 				<span></span>
 				:
@@ -259,41 +304,50 @@ export default () => {
 				</div>
 			}
 			</div>
-			<animated.div 
-				className="Product-wrapper d-xs-none d-md-none d-none d-lg-block d-md-block" 
-				style={{ 
-					transform: `translateX(${isEven + translate}%)`, 
-					width: `${18 * 19}vw`,
-					marginTop: `${window > 600 ? "30vh" : "40vh"}`,
-					opacity: `${prodModal ? "0" : "1"}`
-				}}
-			>
-				{featured &&
-					featured.map((product, i) => {
-						const image = product.images[0]
-						return (
-							<div>
-								<div 
-									className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} 
-									onClick={e => {
-										setProdModal(true)
-										setModalIndex(i)
-									}}
-								>
-									{image ? (
-										<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
-											style={{ 
-												transform: `${i === index ? "scale(1.8)" : "scale(1.3)"}`,
-												transition: "transform 0.5s",
-											}}
-										/>
-									) : null}
-								</div>
-							</div>
-						)
-					})
-				}
-			</animated.div>
+
+			{category.length !== 0 ?
+				<animated.div 
+					className="Product-wrapper d-xs-none d-md-none d-none d-lg-block d-md-block" 
+					style={{ 
+						transform: `translateX(${rowPositionStart + translate}%)`, 
+						width: `${18 * category.length}vw`,
+						marginTop: `${window > 600 ? "30vh" : "40vh"}`,
+						opacity: `${prodModal ? "0" : "1"}`,
+					}}
+				>
+					{category &&
+						category.map((product, i) => {
+							const image = product.images[0]
+							return (
+									<div 
+										className='home-prod-row' key={i} style={{ width: `${rowWidth && rowWidth}%` }} 
+										// className='home-prod-row' key={i} style={{ width: "220px", background: "green" }} 
+										onClick={e => {
+											setProdModal(true)
+											setModalIndex(i)
+										}}
+									>
+										{image ? (
+											<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
+												style={{
+													transform: `${i === index ? "scale(1.8)" : "scale(1.3)"}`,
+													transition: "transform 0.5s",
+												}}
+											/>
+										) : null}
+									</div>
+							)
+						})
+					}
+				</animated.div>
+				:
+				<div style={{ width: "100vw", top: "40vh", position: "fixed", marginLeft: "-15px" }}>
+					<h4 style={{ fontWeight: "800", fontSize: "40pt", textAlign: "center" }}>
+						Nothing to see here
+					</h4>
+				</div>
+			}
+			
 			{prodModal && videoData[index + 1] !== undefined  && window > 600 ? 
 				<animated.div style={styles} >
 					<div

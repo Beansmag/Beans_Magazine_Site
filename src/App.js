@@ -43,6 +43,10 @@ function App(props) {
 		createCheckout,
 		fetchProducts,
 		fetchCollection,
+		fetchTops,
+		fetchBottoms,
+		fetchMagazines,
+		fetchAccessories,
 	} = useShopify()
 
 	useEffect(() => {
@@ -50,6 +54,10 @@ function App(props) {
 		fetchProducts()
 		createCheckout()
 		fetchCollection()
+		fetchTops()
+		fetchBottoms()
+		fetchMagazines()
+		fetchAccessories()
 	},[])
 
 	useEffect(() => {
@@ -61,11 +69,11 @@ function App(props) {
   return (
 	<div className="App">
 	  <Router>
-		  	{!completed ?
+		  	{/* {!completed ?
 				<LoadingPage />
 				:
 				<span></span>
-			}
+			} */}
 			<div>
 				<Navbar />
 				<Switch>

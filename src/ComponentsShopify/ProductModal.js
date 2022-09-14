@@ -9,7 +9,6 @@ import "../Styles/productModal.css"
 
 export default (props) => {
     const {
-		featured,
 		fetchProduct,
 		openCart,
 		checkoutState,
@@ -18,11 +17,12 @@ export default (props) => {
 
 	useEffect(() => {
 		ReactGA.initialize('UA-211860604-30');
-		setSoldOut(featured[props.modalIndex].variants[0].available)
+		setSoldOut(category[props.modalIndex].variants[0].available)
 	},[])
 
-    const id = featured[props.modalIndex] !== undefined ? featured[props.modalIndex].id : "...Loading"
-    const defaultSize = featured[props.modalIndex] !== undefined ? featured[props.modalIndex].variants[0].id.toString() : "...Loading"
+	const { category } = props
+    const id = category[props.modalIndex] !== undefined ? category[props.modalIndex].id : "...Loading"
+    const defaultSize = category[props.modalIndex] !== undefined ? category[props.modalIndex].variants[0].id.toString() : "...Loading"
     const [size, setSize] = useState("")
 	const [quantity, setQuantity] = useState(1)
 	const [imageIndex, setImageIndex ] = useState(0)
@@ -30,7 +30,7 @@ export default (props) => {
 	const [dropDownMenu, setdropDownMenu] = useState(false);
 	const [sizeTitle, setSizeTitle] = useState("");
 	const [rotate, setRotate] = useState();
-    const description = featured[props.modalIndex] !== undefined ? featured[props.modalIndex].description.split(".") : "...Loading"
+    const description = category[props.modalIndex] !== undefined ? category[props.modalIndex].description.split(".") : "...Loading"
 
     function changeSize(sizeId, quantity) {
 		openCart()
@@ -60,7 +60,7 @@ export default (props) => {
 		ReactGA.event({
 			category: 'User',
 			action: 'Add to Cart',
-			label: `${featured[props.modalIndex].title} added to cart`
+			label: `${category[props.modalIndex].title} added to cart`
 		  });
 	}
 
@@ -81,22 +81,22 @@ export default (props) => {
 				<Col lg={6} style={{ borderBottom: `${document.documentElement.clientWidth < 600 ? "solid 1px black" : ""}`, minHeight: "250px" }} >
 						<div 
 							style={{ 
-								height: `${featured[props.modalIndex].images.length > 1 ? "70%" : "100%"}`, 
-								backgroundImage: `url(${featured[props.modalIndex].images[0] !== undefined ? featured[props.modalIndex].images[imageIndex].src : ""})`,
+								height: `${category[props.modalIndex].images.length > 1 ? "70%" : "100%"}`, 
+								backgroundImage: `url(${category[props.modalIndex].images[0] !== undefined ? category[props.modalIndex].images[imageIndex].src : ""})`,
 								backgroundPosition: "center",
 								backgroundSize: "contain",
 								backgroundRepeat: "no-repeat"
 							}}
 						>
 						</div>
-						{ featured[props.modalIndex].images.length > 1 ?
+						{ category[props.modalIndex].images.length > 1 ?
 							<div style={{ height: "30%" }}>
 							<div 
 								style={{ 
 									height: "100%", 
-									width: `${100 /featured[props.modalIndex].images.length}%`, 
+									width: `${100 /category[props.modalIndex].images.length}%`, 
 									float: "left",
-									backgroundImage: `url(${featured[props.modalIndex].images[0] !== undefined ? featured[props.modalIndex].images[0].src : ""})`,
+									backgroundImage: `url(${category[props.modalIndex].images[0] !== undefined ? category[props.modalIndex].images[0].src : ""})`,
 									backgroundPosition: "center",
 									backgroundSize: "contain",
 									backgroundRepeat: "no-repeat",
@@ -108,9 +108,9 @@ export default (props) => {
 							<div 
 								style={{ 
 									height: "100%", 
-									width: `${100 /featured[props.modalIndex].images.length}%`, 
+									width: `${100 /category[props.modalIndex].images.length}%`, 
 									float: "left",
-									backgroundImage: `url(${featured[props.modalIndex].images[1] !== undefined ? featured[props.modalIndex].images[1].src : ""})`,
+									backgroundImage: `url(${category[props.modalIndex].images[1] !== undefined ? category[props.modalIndex].images[1].src : ""})`,
 									backgroundPosition: "center",
 									backgroundSize: "contain",
 									backgroundRepeat: "no-repeat",
@@ -122,9 +122,9 @@ export default (props) => {
 							<div 
 								style={{ 
 									height: "100%", 
-									width: `${100 /featured[props.modalIndex].images.length}%`, 
+									width: `${100 /category[props.modalIndex].images.length}%`, 
 									float: "left",
-									backgroundImage: `url(${featured[props.modalIndex].images[2] !== undefined ? featured[props.modalIndex].images[2].src : ""})`,
+									backgroundImage: `url(${category[props.modalIndex].images[2] !== undefined ? category[props.modalIndex].images[2].src : ""})`,
 									backgroundPosition: "center",
 									backgroundSize: "contain",
 									backgroundRepeat: "no-repeat",
@@ -140,8 +140,8 @@ export default (props) => {
 				</Col>
 				<Col lg={6} style={{ borderLeft: `${document.documentElement.clientWidth > 600 ? "solid 1px black" : ""}`, height: `${document.documentElement.clientWidth > 600 ? "100%" : "40%"}` }} >
 					<div style={{ height: "70%" }}>
-						<h1 className="prod-modal-title"><mark style={{ backgroundColor: "#DDDDDD" }}>{featured[props.modalIndex] !== undefined ? featured[props.modalIndex].title : "...Loading"}</mark></h1>
-						<h1 className="prod-modal-price"><mark style={{ backgroundColor: "#DDDDDD" }}>{`$${featured[props.modalIndex] !== undefined ? featured[props.modalIndex].variants[0].price : "...Loading"}`}</mark></h1>
+						<h1 className="prod-modal-title"><mark style={{ backgroundColor: "#DDDDDD" }}>{category[props.modalIndex] !== undefined ? category[props.modalIndex].title : "...Loading"}</mark></h1>
+						<h1 className="prod-modal-price"><mark style={{ backgroundColor: "#DDDDDD" }}>{`$${category[props.modalIndex] !== undefined ? category[props.modalIndex].variants[0].price : "...Loading"}`}</mark></h1>
 						<h5 className="prod-modal-description"><mark style={{ backgroundColor: "#DDDDDD" }}>{description}</mark></h5>
 					</div>
 					<div className="Product__info" style={{ padding: "10px" }}>
@@ -157,12 +157,12 @@ export default (props) => {
 										<h4 style={{ fontSize: "clamp(8pt, 3vw, 20pt)", fontWeight: "800" }} >{sizeTitle ? sizeTitle : "Pick a Size"}</h4>
 										<img src={DropDownArrow} alt="drop down arrow" style={{ transform: !rotate ? `rotate(0deg)` : `rotate(180deg)` }} className="dropDownArrow"/>
 									</div>
-									{featured[props.modalIndex] === undefined ?
+									{category[props.modalIndex] === undefined ?
 										"...Loading"
 										:
 										<div className="style__dropdownDiv" style={{ opacity: dropDownMenu ? 1 : 0, transform: dropDownMenu ? `translateY(-60px) scaleY(1)` : `translateY(-130%) scaleY(0)` }}>	
-										{featured[props.modalIndex] &&
-											featured[props.modalIndex].variants.map((item, i) => {
+										{category[props.modalIndex] &&
+											category[props.modalIndex].variants.map((item, i) => {
 												return (
 													<li
 														onClick={e => {
