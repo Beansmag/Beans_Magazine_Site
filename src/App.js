@@ -69,11 +69,11 @@ function App(props) {
   return (
 	<div className="App">
 	  <Router>
-		  	{/* {!completed ?
+		  	{!completed ?
 				<LoadingPage />
 				:
 				<span></span>
-			} */}
+			}
 			<div>
 				<Navbar />
 				<Switch>
