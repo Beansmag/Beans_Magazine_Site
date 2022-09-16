@@ -75,6 +75,8 @@ export default (props) => {
 		}
 	}
 
+	// console.log(category[props.modalIndex].variants.length > 1)
+
     return (
         <Container className="product-modal-background"  style={{ overflowY: "hidden"}}>
 			<Row style={{ height: "100%" }} >
@@ -154,7 +156,7 @@ export default (props) => {
 											setdropDownMenu(!dropDownMenu);
 											setRotate(!rotate);
 										}}>
-										<h4 style={{ fontSize: "clamp(8pt, 3vw, 20pt)", fontWeight: "800" }} >{sizeTitle ? sizeTitle : "Pick a Size"}</h4>
+										<h4 style={{ fontSize: "clamp(8pt, 3vw, 20pt)", fontWeight: "800" }} >{sizeTitle ? sizeTitle : `${category[props.modalIndex].variants.length > 1 ?  "Small" : "One Size"}`}</h4>
 										<img src={DropDownArrow} alt="drop down arrow" style={{ transform: !rotate ? `rotate(0deg)` : `rotate(180deg)` }} className="dropDownArrow"/>
 									</div>
 									{category[props.modalIndex] === undefined ?
@@ -168,10 +170,12 @@ export default (props) => {
 														onClick={e => {
 															clickFunction(item, i)
 															setSoldOut(item.available ? true : false)
+															setdropDownMenu(!dropDownMenu)
+															setRotate(!rotate);
 														}}
 														style={{ 
 															color: `${item.available ? "black" : "grey" }`,
-															cursor: `${item.available ? "pointer" : "not-allowed" }`,
+															// cursor: `${item.available ? "pointer" : "not-allowed" }`,
 														}}												
 														key={item.title + i}
 													>{`${item.title}`}</li>	

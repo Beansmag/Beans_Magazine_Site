@@ -33,8 +33,6 @@ export default () => {
 	const window = document.documentElement.clientWidth;
 	const mobileView = document.documentElement.clientWidth < 600
 
-	console.log(mobileView)
-
 	useEffect(() => {
 		setCategory(featured)
 		setrowPositionStart(Math.round(featured.length / 2) * (-100 / featured.length) - ((-100 / featured.length) * 3.25))
