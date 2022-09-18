@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import sanityClient from '../client';
-import ReactGa from 'react-ga'
+import ReactGa from 'react-ga';
+import { Helmet } from 'react-helmet';
 
 import "../Styles/Lookbook.css"
 
@@ -117,6 +118,13 @@ const LookbookPage = () => {
 
     return (
         <Container fluid style={{ paddingTop: "30vh", overflowX: "hidden", height: "100vh"}}>
+          <Helmet>
+            <title>Lookbook</title>
+            <meta
+              name="Lookbook"
+              content="View new clothing items here"
+            />
+          </Helmet>
             <Row>
                 <Col lg={4} sm={6}>
                     <img 

@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '../client';
-import ReactGa from 'react-ga'
+import ReactGa from 'react-ga';
+import { Helmet } from 'react-helmet';
 
 import MailChimpForm from '../Components/newsletter/MailchimpForm';
 
@@ -25,6 +26,13 @@ const About = () => {
 
     return (
         <Container fluid style={{ marginTop: `${document.documentElement.clientWidth > 600 ? "40vh" : "10vh"}` }}>
+          <Helmet>
+            <title>About Page</title>
+            <meta
+              name="About Page"
+              content="View return-policy, read about the company, check shirt sizing and contact the guys all from this page"
+            />
+          </Helmet>
             <Row>
                 <Col 
                     lg={{ offset: 1, span: 3}}

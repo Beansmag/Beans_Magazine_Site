@@ -4,6 +4,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { animated, useSpring } from '@react-spring/web';
 import ReactGa from 'react-ga'
 import BlockContent from '@sanity/block-content-to-react';
+import Helmet from 'react-helmet'
 
 import sanityClient from '../client';
 
@@ -171,6 +172,13 @@ export default () => {
 
 	return (
 		<Container style={{ position: "fixed", height: "100vh", width: "100vw" }} >
+			<Helmet>
+				<title>Home</title>
+				<meta
+					name="Home Page"
+					content="View all the products here on the home page. Browse categories and find your favourite items"
+				/>
+			</Helmet>
 			<div className="d-xs-none d-md-none d-none d-lg-block d-md-block">
 				{!prodModal ?
 					<div>
