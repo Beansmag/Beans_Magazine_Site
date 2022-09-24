@@ -81,7 +81,7 @@ export default () => {
 	useEffect(() => {
 		const indexStart = Math.round(category.length / 2) - 1
 		const rowWidthPercent = 100 / category.length
-		if (category[1] !== undefined) {
+		if (category[0] !== undefined) {
 			setIndex(indexStart)
 			setRowWidth(rowWidthPercent)
 			ReactGa.initialize('UA-211860604-30')
@@ -238,37 +238,39 @@ export default () => {
 			{!prodModal ?
 				<ul className='mainMenu-ul' style={{ marginTop: mobileView ? "10vh" : "15vh" }} >
 					<li className='mainMenu-li'><h5 
-												className={category === featured ? "product-category-text-selected" : "product-category-text" }
+						className={category === featured ? "product-category-text-selected" : "product-category-text" }
 						onClick={e => {
 							setCategory(featured)
-							setrowPositionStart(Math.round(featured.length / 2) * (-100 / featured.length) - ((-100 / featured.length) * 3.25))}}>
-							ALL
+							setrowPositionStart(featured.length === 1 ? 0 : Math.round(featured.length / 2) * (-100 / featured.length) - ((-100 / featured.length) * 3.25))}}>
+								ALL
 					</h5></li>
 					<li className='mainMenu-li'><h5
 						className={category === tops ? "product-category-text-selected" : "product-category-text" }
 						onClick={e => {
 							setCategory(tops)
-							setrowPositionStart(Math.round(tops.length / 2) * (-100 / tops.length) - ((-100 / tops.length) * 3.25))}}>
-							TOPS
+							setrowPositionStart(tops.length === 1 ? 0 : Math.round(tops.length / 2) * (-100 / tops.length) - ((-100 / tops.length) * 3.25))}}>
+								TOPS
 					</h5></li>
 					<li className='mainMenu-li'><h5
 						className={category === bottoms ? "product-category-text-selected" : "product-category-text" }
-						onClick={e => {setCategory(bottoms)
-						 setrowPositionStart(Math.round(bottoms.length / 2) * (-100 / bottoms.length) - ((-100 / bottoms.length) * 3.25))}}>
-							BOTTOMS
+						onClick={e => {
+							setCategory(bottoms)
+						 	setrowPositionStart(bottoms.length === 1 ? 0 : Math.round(bottoms.length / 2) * (-100 / bottoms.length) - ((-100 / bottoms.length) * 3.25))}}>
+								BOTTOMS
 					</h5></li>
 					<li className='mainMenu-li'><h5
 						className={category === magazines ? "product-category-text-selected" : "product-category-text" }
-						onClick={e => {setCategory(magazines)
-						 setrowPositionStart(Math.round(magazines.length / 2) * (-100 / magazines.length) - ((-100 / magazines.length) * 3.25))}}>
-							MAGAZINE
+						onClick={e => {
+							setCategory(magazines) 
+						 	setrowPositionStart(magazines.length === 1 ? 0 : Math.round(magazines.length / 2) * (-100 / magazines.length) - ((-100 / magazines.length) * 3.25))}}>
+								MAGAZINE
 					</h5></li>
 					<li className='mainMenu-li'><h5
 						className={category === accessories ? "product-category-text-selected" : "product-category-text" }
 						onClick={e => {
 							setCategory(accessories)
-							setrowPositionStart(Math.round(accessories.length / 2) * (-100 / accessories.length) - ((-100 / accessories.length) * 3.25))}}>
-							ACCESSORIES
+							setrowPositionStart(accessories.length === 1 ? 0 : Math.round(accessories.length / 2) * (-100 / accessories.length) - ((-100 / accessories.length) * 3.25))}}>
+								ACCESSORIES
 					</h5></li>
 				</ul> : null
 			}
