@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux"
 import Client from "shopify-buy/index.unoptimized.umd"
 
   const client = Client.buildClient({
-	storefrontAccessToken: 'cf54d30fe1ebe608e5affc7a5fbccaaf',
+	storefrontAccessToken: process.env.REACT_APP_STOREFRONT_API,
 	domain: 'beansmag.myshopify.com/'
   });
 
