@@ -106,13 +106,19 @@ export default (props) => {
                 ? "solid 1px black"
                 : ""
             }`,
-            minHeight: "300px",
+            minHeight: `${
+              document.documentElement.clientWidth < 600 ? "300px" : "250px"
+            }`,
           }}
         >
           <div
             style={{
               height: `${
-                category[props.modalIndex].images.length > 1 ? "100%" : "100%"
+                document.documentElement.clientWidth > 600
+                  ? "70%"
+                  : category[props.modalIndex].images.length > 1
+                  ? "100%"
+                  : "100%"
               }`,
               backgroundImage: `url(${
                 category[props.modalIndex].images[0] !== undefined
@@ -124,13 +130,6 @@ export default (props) => {
               backgroundRepeat: "no-repeat",
             }}
           ></div>
-          {/* <div
-            style={{
-              display: `${
-                document.documentElement.clientWidth > 600 ? "block" : "none"
-              }`,
-            }}
-          > */}
           {category[props.modalIndex].images.length > 1 ? (
             <div style={{ height: "50%" }}>
               <div
@@ -188,7 +187,6 @@ export default (props) => {
           ) : (
             <span></span>
           )}
-          {/* </div> */}
         </Col>
         <Col
           lg={6}
