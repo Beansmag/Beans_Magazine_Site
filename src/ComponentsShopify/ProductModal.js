@@ -86,7 +86,18 @@ export default (props) => {
       className="product-modal-background"
       style={{ overflowY: "hidden" }}
     >
-      <Row style={{ height: "100%" }}>
+      <Row
+        style={{
+          height: "100%",
+          gap: `${
+            document.documentElement.clientWidth < 600
+              ? category[props.modalIndex].images.length > 1
+                ? "10em"
+                : "0"
+              : "0"
+          }`,
+        }}
+      >
         <Col
           lg={6}
           style={{
@@ -95,7 +106,7 @@ export default (props) => {
                 ? "solid 1px black"
                 : ""
             }`,
-            minHeight: "250px",
+            minHeight: "300px",
           }}
         >
           <div
@@ -113,71 +124,71 @@ export default (props) => {
               backgroundRepeat: "no-repeat",
             }}
           ></div>
-          <div
+          {/* <div
             style={{
               display: `${
                 document.documentElement.clientWidth > 600 ? "block" : "none"
               }`,
             }}
-          >
-            {category[props.modalIndex].images.length > 1 ? (
-              <div style={{ height: "30%" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: `${100 / category[props.modalIndex].images.length}%`,
-                    float: "left",
-                    backgroundImage: `url(${
-                      category[props.modalIndex].images[0] !== undefined
-                        ? category[props.modalIndex].images[0].src
-                        : ""
-                    })`,
-                    backgroundPosition: "center",
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    zIndex: "20",
-                  }}
-                  onClick={() => setImageIndex(0)}
-                ></div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: `${100 / category[props.modalIndex].images.length}%`,
-                    float: "left",
-                    backgroundImage: `url(${
-                      category[props.modalIndex].images[1] !== undefined
-                        ? category[props.modalIndex].images[1].src
-                        : ""
-                    })`,
-                    backgroundPosition: "center",
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    zIndex: "20",
-                  }}
-                  onClick={() => setImageIndex(1)}
-                ></div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: `${100 / category[props.modalIndex].images.length}%`,
-                    float: "left",
-                    backgroundImage: `url(${
-                      category[props.modalIndex].images[2] !== undefined
-                        ? category[props.modalIndex].images[2].src
-                        : ""
-                    })`,
-                    backgroundPosition: "center",
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    zIndex: "20",
-                  }}
-                  onClick={() => setImageIndex(2)}
-                ></div>
-              </div>
-            ) : (
-              <span></span>
-            )}
-          </div>
+          > */}
+          {category[props.modalIndex].images.length > 1 ? (
+            <div style={{ height: "50%" }}>
+              <div
+                style={{
+                  height: "100%",
+                  width: `${100 / category[props.modalIndex].images.length}%`,
+                  float: "left",
+                  backgroundImage: `url(${
+                    category[props.modalIndex].images[0] !== undefined
+                      ? category[props.modalIndex].images[0].src
+                      : ""
+                  })`,
+                  backgroundPosition: "center",
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  zIndex: "20",
+                }}
+                onClick={() => setImageIndex(0)}
+              ></div>
+              <div
+                style={{
+                  height: "100%",
+                  width: `${100 / category[props.modalIndex].images.length}%`,
+                  float: "left",
+                  backgroundImage: `url(${
+                    category[props.modalIndex].images[1] !== undefined
+                      ? category[props.modalIndex].images[1].src
+                      : ""
+                  })`,
+                  backgroundPosition: "center",
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  zIndex: "20",
+                }}
+                onClick={() => setImageIndex(1)}
+              ></div>
+              <div
+                style={{
+                  height: "100%",
+                  width: `${100 / category[props.modalIndex].images.length}%`,
+                  float: "left",
+                  backgroundImage: `url(${
+                    category[props.modalIndex].images[2] !== undefined
+                      ? category[props.modalIndex].images[2].src
+                      : ""
+                  })`,
+                  backgroundPosition: "center",
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  zIndex: "20",
+                }}
+                onClick={() => setImageIndex(2)}
+              ></div>
+            </div>
+          ) : (
+            <span></span>
+          )}
+          {/* </div> */}
         </Col>
         <Col
           lg={6}
