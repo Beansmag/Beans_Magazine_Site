@@ -1,84 +1,121 @@
 .product-modal-background {
-    height: 80vh;
-    width: 80vw;
-    margin-left: 10vw;
-    /* background-color: rgba(255, 255, 255, 0.5);  */
-    margin-top: 10vh; 
-    z-index: 20;
-    overflow-y: auto;
-    overflow-X: hidden;
+  height: 80vh;
+  width: 80vw;
+  margin-left: 10vw;
+  /* background-color: rgba(255, 255, 255, 0.5);  */
+  margin-top: 10vh;
+  z-index: 20;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .prod-modal-title {
-    color: black;
-    font-family: sans-serif;
-    font-weight: 800;
-    font-style: normal;
-    font-size: clamp(15pt, 4vw, 35pt);
-    padding: 8% 2% 2% 2%;
+  color: black;
+  font-family: sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: clamp(15pt, 4vw, 35pt);
+  padding: 8% 2% 2% 2%;
 }
 
 .prod-modal-description {
-    color: black;
-    font-family: sans-serif;
-    line-height: 1.6;
-    font-weight: 300;
-    font-style: normal;
-    font-size: clamp(8pt, 3vw, 12pt);
-    padding: 2%;
+  color: black;
+  font-family: sans-serif;
+  line-height: 1.6;
+  font-weight: 300;
+  font-style: normal;
+  font-size: clamp(8pt, 3vw, 12pt);
+  padding: 2%;
 }
 
 .prod-modal-price {
-    color: black;
-    font-family: sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: clamp(15pt, 4vw, 35pt);
-    padding: 0% 2% 2% 2%;
+  color: black;
+  font-family: sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: clamp(15pt, 4vw, 35pt);
+  padding: 0% 2% 2% 2%;
 }
 
 .prod-modal-product-image {
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.prod-modal-product-image-below{
-    float: left;
-    height: auto;
+.prod-modal-product-image-below {
+  float: left;
+  height: auto;
 }
 
 .not-for-sale {
-    color: #D8D8D8;
-	cursor: not-allowed;
+  color: #d8d8d8;
+  cursor: not-allowed;
 }
 
 .for-sale {
-    color: black;
+  color: black;
 }
 
 .style__dropdownDiv {
-    cursor: pointer;
-	padding: 1%;
-	background: white;
-	border-radius: 5px;
-	width: 50%;
-	color: black;
-	position: absolute;
-    font-size: 20px;
+  cursor: pointer;
+  padding: 1%;
+  background: white;
+  border-radius: 5px;
+  width: 50%;
+  color: black;
+  position: absolute;
+  font-size: 20px;
 }
 
 .style__dropdown {
-    cursor: pointer;
-	align-items: center;
-	vertical-align: middle;
-	display: flex;
-	height: 50px;
-    width: 50%;
-	padding: 20px;
+  cursor: pointer;
+  align-items: center;
+  vertical-align: middle;
+  display: flex;
+  height: 50px;
+  width: 50%;
+  padding: 20px;
 
-	background: black;
-	border: #ffffff solid 1px;
-	color: white;
-	font-size: 10rem;
+  background: black;
+  border: #ffffff solid 1px;
+  color: white;
+  font-size: 10rem;
+}
+
+@media (max-width: 600px) {
+  .prod-modal-price {
+    margin: 10px 0;
+  }
+  .product-modal-background {
+    overflow-y: scroll !important;
+    height: 100%;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10vh;
+    z-index: 20;
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  .prod-modal-title {
+    font-size: 17px !important;
+  }
+  h5.prod-modal-description {
+    font-size: 13px !important;
+  }
+  .App__view-cart {
+    position: unset;
+    text-decoration: none;
+    font-size: 16px !important;
+    padding-top: 3px !important;
+  }
+  div#prodOptions img {
+    margin-left: 11px;
+    line-height: 0;
+  }
+  div#prodOptions h4 {
+    margin-bottom: 0;
+  }
 }
