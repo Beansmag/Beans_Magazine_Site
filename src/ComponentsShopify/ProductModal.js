@@ -92,7 +92,7 @@ export default (props) => {
           gap: `${
             document.documentElement.clientWidth < 600
               ? category[props.modalIndex].images.length > 1
-                ? "10em"
+                ? "12em"
                 : "0"
               : "0"
           }`,
@@ -107,7 +107,7 @@ export default (props) => {
                 : ""
             }`,
             minHeight: `${
-              document.documentElement.clientWidth < 600 ? "300px" : "250px"
+              document.documentElement.clientWidth < 600 ? "350px" : "250px"
             }`,
           }}
         >
