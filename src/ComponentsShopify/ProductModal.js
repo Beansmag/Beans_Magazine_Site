@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import { useShopify } from "../hooks";
 import ReactGA from "react-ga";
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 
 import DropDownArrow from "../Assets/dropDownArrow.svg";
 
@@ -31,6 +33,8 @@ export default (props) => {
   const [dropDownMenu, setdropDownMenu] = useState(false);
   const [sizeTitle, setSizeTitle] = useState("");
   const [rotate, setRotate] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+  const [lightboxImage, setlightboxImage] = useState("");
   const description =
     category[props.modalIndex] !== undefined
       ? category[props.modalIndex].description.split(".")
@@ -79,7 +83,11 @@ export default (props) => {
     }
   }
 
-  // console.log(category[props.modalIndex].variants.length > 1)
+  function imageClick(){
+    console.log('i am click')
+  }
+
+  console.log(category[props.modalIndex].variants[0].price,"price")
 
   return (
     <Container
@@ -129,6 +137,8 @@ export default (props) => {
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
             }}
+            onClick={() => {setIsOpen(true); setlightboxImage(category[props.modalIndex].images[imageIndex].src)}}
+            className="main-image-hello"
           ></div>
           {category[props.modalIndex].images.length > 1 ? (
             <div style={{ height: "50%" }}>
@@ -165,6 +175,7 @@ export default (props) => {
                   zIndex: "20",
                 }}
                 onClick={() => setImageIndex(1)}
+                
               ></div>
               <div
                 style={{
@@ -218,7 +229,7 @@ export default (props) => {
             <h1 className="prod-modal-price">
               <mark style={{ backgroundColor: "#DDDDDD" }}>{`$${
                 category[props.modalIndex] !== undefined
-                  ? category[props.modalIndex].variants[0].price
+                  ? category[props.modalIndex].variants[0].price?.amount
                   : "...Loading"
               }`}</mark>
             </h1>
@@ -258,6 +269,7 @@ export default (props) => {
                     transform: !rotate ? `rotate(0deg)` : `rotate(180deg)`,
                   }}
                   className="dropDownArrow"
+                  onClick={() => console.log("Clicked")}
                 />
               </div>
               {category[props.modalIndex] === undefined ? (
@@ -329,6 +341,13 @@ export default (props) => {
           </div>
         </Col>
       </Row>
+      {isOpen && (
+          <Lightbox
+            mainSrc={lightboxImage}
+            onCloseRequest={() => setIsOpen(false) }
+            enableZoom={false}         
+          />
+        )}
     </Container>
   );
 };

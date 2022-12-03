@@ -65,7 +65,6 @@ function App(props) {
 			document.body.style.backgroundColor = bgColor && bgColor[0].backgroundColor
 		}
 	},[bgColor])
-
   return (
 	<div className="App">
 	  <Router>

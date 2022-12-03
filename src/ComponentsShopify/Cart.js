@@ -31,7 +31,6 @@ export default (props) => {
 	const [completed, setCompleted] = useState(false)
 	const [cartIconData, setCartIconData] = useState()
 	const cartEmpty = checkoutState.lineItems && checkoutState.lineItems.length === 0
-
 	function handleOpen(e) {
 		e.preventDefault()
 		openCart()
@@ -153,19 +152,19 @@ export default (props) => {
 						<div className="Cart-info clearfix">
 							<div className="Cart-info__total Cart-info__small">Subtotal</div>
 							<div className="Cart-info__pricing">
-								<span className="pricing">$ {checkoutState.subtotalPrice}</span>
+								<span className="pricing">$ {checkoutState?.subtotalPrice?.amount}</span>
 							</div>
 						</div>
 						<div className="Cart-info clearfix">
 							<div className="Cart-info__total Cart-info__small">Taxes</div>
 							<div className="Cart-info__pricing">
-								<span className="pricing">$ {checkoutState.totalTax}</span>
+								<span className="pricing">$ {checkoutState?.totalTax?.amount}</span>
 							</div>
 						</div>
 						<div className="Cart-info clearfix">
 							<div className="Cart-info__total Cart-info__small">Total</div>
 							<div className="Cart-info__pricing">
-								<span className="pricing">$ {checkoutState.totalPrice}</span>
+								<span className="pricing">$ {checkoutState?.totalPrice?.amount}</span>
 							</div>
 						</div>
 						{cartEmpty ?

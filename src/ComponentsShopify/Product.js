@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useShopify } from "../hooks";
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Modal, Button } from 'react-bootstrap';
 import { animated, useSpring } from '@react-spring/web';
 import ReactGa from 'react-ga'
 import BlockContent from '@sanity/block-content-to-react';
 import Helmet from 'react-helmet'
-
 import sanityClient from '../client';
-
 import ProductModal from "./ProductModal";
 import Close from '../Assets/Close.svg'
 import Arrow from '../Assets/Arrow.svg';
+import randomToken from 'random-token'
+
 
 import '../Styles/Home.css'
 
@@ -29,11 +29,12 @@ export default () => {
  	const [imageLoadedMobile, setImageLoadedMobile] = useState(false);
 	const [category, setCategory] = useState(featured);
 	const [rowPositionStart, setrowPositionStart] = useState()
+	const [show, setShow] = useState(false);
+	const [showSuccess, setShowSuccess] = useState(false);
 	const image = useRef();
 	const imageMobile = useRef();
 	const window = document.documentElement.clientWidth;
 	const mobileView = document.documentElement.clientWidth < 600
-
 	useEffect(() => {
 		setCategory(featured)
 		setrowPositionStart(Math.round(featured.length / 2) * (-100 / featured.length) - ((-100 / featured.length) * 3.25))
@@ -99,7 +100,11 @@ export default () => {
 		}
 	},[prodModal])
 
+	useEffect(() => !localStorage.getItem("signupReqToken") && !localStorage.getItem("signupToken") && setTimeout(() => {setShow(true)}, 5000), [])
+	useEffect(() => showSuccess && setTimeout(() => {setShowSuccess(false)}, 2000), [showSuccess])
+
 	// const bind = useDrag(({movement: [mx], cancel, active }) => {
+
 	// 	if (active && mx > 100 && index > 0) {
 	// 		setCount(count + 1)
 	// 		cancel()
@@ -188,6 +193,7 @@ export default () => {
 								alt="Move clothing carousel left" 
 								className="arrow"
 								onClick={() => clickLeft()}
+							
 								/>
 						</div>
 						<div className="prod-button-right" style={{ top: `${window > 600 ? "70vh" : "53vh"}` }}>
@@ -212,7 +218,7 @@ export default () => {
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }} className="d-xs-none d-md-none d-none d-lg-block d-md-block">
 				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 6, span: 3 }} className="prod-price" style={{ marginTop: `${window > 600 ? "72vh" : "60vh"}` }}>
-					<h1 className="prod-price-text">{`$${category[index] !== undefined ? category[index].variants[0].price : ""}*`}</h1>
+					<h1 className="prod-price-text">{`$${category[index] !== undefined ? category[index].variants[0].price?.amount : ""}*`}</h1>
 				</Col>
 			</Row>
 
@@ -227,6 +233,7 @@ export default () => {
 								setImageLoaded(false)
 								setImageLoadedMobile(false)
 								setModalIndex()
+								console.log("Main prod")
 							}}
 						/>
 						<ProductModal index={index} modalIndex={modalIndex} category={category} />
@@ -336,7 +343,7 @@ export default () => {
 										}}
 									>
 										{image ? (
-											<img src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
+											<img  src={image.src} alt={`${product.title} product shot`} className="home-prod-img" draggable="false"
 												style={{
 													transform: `${i === index ? "scale(1.8)" : "scale(1.3)"}`,
 													transition: "transform 0.5s",
@@ -401,6 +408,29 @@ export default () => {
 				>
 				</div>
 			}
+
+			<Modal show={show}  centered>
+				<Modal.Header  >
+				<Modal.Title className="signupModalTitle">
+					<div class="modalimgright"><img className="modalCloseSvg" src={Close}   onClick={() => {setShow(false); localStorage.setItem("signupReqToken", randomToken(32))} } /></div>
+					<div class="modalmaintext">FALL DROP SOLD OUT</div>
+				</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<p>Sign up for early access codes and special offers</p>
+					<div className="modal-form-body">
+						<input placeholder="Enter Name" type="text" />
+						<input placeholder="Enter Phone Number" type="text" />
+						<button onClick={() => {localStorage.setItem("signupToken", randomToken(32) ) ;setShow(false);setShowSuccess(true)}}>Done</button>
+					</div>
+				</Modal.Body>
+				
+			</Modal>
+			<Modal show={showSuccess}  centered>
+				<Modal.Header >
+				<Modal.Title>WELCOME TO THE FAMILY</Modal.Title>
+				</Modal.Header>			
+			</Modal>
 		</Container>
 	)
 }
