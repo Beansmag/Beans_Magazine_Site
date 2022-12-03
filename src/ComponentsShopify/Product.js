@@ -31,6 +31,7 @@ export default () => {
 	const [rowPositionStart, setrowPositionStart] = useState()
 	const [show, setShow] = useState(false);
 	const [showSuccess, setShowSuccess] = useState(false);
+	const [signUpData, setSignUpData] = useState({name : null, phoneNumber : null});
 	const image = useRef();
 	const imageMobile = useRef();
 	const window = document.documentElement.clientWidth;
@@ -171,6 +172,14 @@ export default () => {
             };
         }
     },[modalIndex])
+
+	const handleSignUpSubmit = () => {
+		console.log("Sign up form data",signUpData)
+		//Call API here
+		localStorage.setItem("signupToken", randomToken(32) ) ;
+		setShow(false);
+		setShowSuccess(true)
+	}
 
 	const styles = useSpring({ opacity: imageLoaded ? 0.8 : 0 })
 	const stylesMobile = useSpring({ opacity: imageLoadedMobile ? 0.8 : 0 })
@@ -421,9 +430,9 @@ export default () => {
 					<div class="signupModalTitle">FALL DROP SOLD OUT</div>
 					<p>Sign up for early access codes and special offers</p>
 					<div className="modal-form-body">
-						<input placeholder="Enter Name" type="text" />
-						<input placeholder="Enter Phone Number" type="text" />
-						<button onClick={() => {localStorage.setItem("signupToken", randomToken(32) ) ;setShow(false);setShowSuccess(true)}}>Done</button>
+						<input placeholder="Enter Name" type="text" onChange={(e) => setSignUpData({...signUpData, name : e.target.value})} />
+						<input placeholder="Enter Phone Number" type="text" onChange={(e) => setSignUpData({...signUpData,phoneNumber : e.target.value})}/>
+						<button onClick={() => handleSignUpSubmit()}>Done</button>
 					</div>
 					</div>
 				</Modal.Body>
