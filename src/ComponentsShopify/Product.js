@@ -411,24 +411,27 @@ export default () => {
 
 			<Modal show={show}  centered>
 				<Modal.Header  >
-				<Modal.Title className="signupModalTitle">
-					<div class="modalimgright"><img className="modalCloseSvg" src={Close}   onClick={() => {setShow(false); localStorage.setItem("signupReqToken", randomToken(32))} } /></div>
-					<div class="modalmaintext">FALL DROP SOLD OUT</div>
-				</Modal.Title>
+			
 				</Modal.Header>
 				<Modal.Body>
+				    <div class="modalimgright"><img className="modalCloseSvg" src={Close}   onClick={() => {setShow(false); localStorage.setItem("signupReqToken", randomToken(32))} } /></div>
+					
+					<div className="signupModalBody">
+
+					<div class="signupModalTitle">FALL DROP SOLD OUT</div>
 					<p>Sign up for early access codes and special offers</p>
 					<div className="modal-form-body">
 						<input placeholder="Enter Name" type="text" />
 						<input placeholder="Enter Phone Number" type="text" />
 						<button onClick={() => {localStorage.setItem("signupToken", randomToken(32) ) ;setShow(false);setShowSuccess(true)}}>Done</button>
 					</div>
+					</div>
 				</Modal.Body>
 				
 			</Modal>
 			<Modal show={showSuccess}  centered>
 				<Modal.Header >
-				<Modal.Title>WELCOME TO THE FAMILY</Modal.Title>
+				<Modal.Title className="successModalTitle">WELCOME TO THE FAMILY</Modal.Title>
 				</Modal.Header>			
 			</Modal>
 		</Container>
