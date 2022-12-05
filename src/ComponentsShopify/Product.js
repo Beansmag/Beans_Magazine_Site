@@ -101,7 +101,7 @@ export default () => {
 		}
 	},[prodModal])
 
-	useEffect(() => !localStorage.getItem("signupReqToken") && !localStorage.getItem("signupToken") && setTimeout(() => {setShow(true)}, 5000), [])
+	useEffect(() => !localStorage.getItem("signupReqToken") && !localStorage.getItem("signupToken") && setTimeout(() => {setShow(true)}, 7000), [])
 	useEffect(() => showSuccess && setTimeout(() => {setShowSuccess(false)}, 2000), [showSuccess])
 
 	// const bind = useDrag(({movement: [mx], cancel, active }) => {
