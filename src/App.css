@@ -705,6 +705,10 @@
     background-color : black !important
 }
 
+.ril__inner img{
+    max-height: none;
+}
+
 @media only screen and (max-width: 600px) {
     .signupModalTitle, .successModalTitle{
         font-size: clamp(10pt, 6vw, 15pt);
