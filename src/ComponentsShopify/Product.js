@@ -227,7 +227,7 @@ export default () => {
 			</Row>
 			<Row style={{ opacity: `${prodModal ? "0" : "1"}` }} className="d-xs-none d-md-none d-none d-lg-block d-md-block">
 				<Col lg={{ offset: 7, span: 3 }} xs={{ offset: 6, span: 3 }} className="prod-price" style={{ marginTop: `${window > 600 ? "72vh" : "60vh"}` }}>
-					<h1 className="prod-price-text">{`$${category[index] !== undefined ? category[index].variants[0].price?.amount : ""}*`}</h1>
+					<h1 className="prod-price-text">{`$${category[index] !== undefined ? category[index].variants[0].price?.amount ? category[index].variants[0].price?.amount : category[index].variants[0].price : ""}*`}</h1>
 				</Col>
 			</Row>
 

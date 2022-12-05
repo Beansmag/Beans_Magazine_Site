@@ -229,7 +229,7 @@ export default (props) => {
             <h1 className="prod-modal-price">
               <mark style={{ backgroundColor: "#DDDDDD" }}>{`$${
                 category[props.modalIndex] !== undefined
-                  ? category[props.modalIndex].variants[0].price?.amount
+                  ? category[props.modalIndex].variants[0].price?.amount ?category[props.modalIndex].variants[0].price?.amount : category[props.modalIndex].variants[0].price
                   : "...Loading"
               }`}</mark>
             </h1>
