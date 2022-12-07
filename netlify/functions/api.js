@@ -3,6 +3,8 @@ const serverless = require("serverless-http");
 const cors = require("cors");
 // const excelJS = require("exceljs");
 // const fs = require("fs");
+const dotenv = require('dotenv');
+dotenv.config();
 const bodyParser = require("body-parser");
 const {google} = require("googleapis");
 const app = express();
@@ -10,12 +12,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 const router = express.Router();
-const sheetID = "11W2_iaDgAl6Ss8HyQdFD8ztJXqGPYdrOTyYlNh6p2Ds";
+const sheetID = process.env.sheet_id;
 
 const authentication = async () => {
     const auth = new google.auth.GoogleAuth({
-        keyFile: "glass-cycle-370910-7ae5e0ed8695.json",
+        //keyFile: "glass-cycle-370910-7ae5e0ed8695.json",
         scopes: "https://www.googleapis.com/auth/spreadsheets",
+        credentials : {
+            "type": process.env.type,
+            "project_id": process.env.project_id,
+            "private_key_id": process.env.private_key_id,
+            "private_key": process.env.private_key,
+            "client_email": process.env.client_email,
+            "client_id": process.env.client_id,
+            "auth_uri": process.env.auth_uri,
+            "token_uri": process.env.token_uri,
+            "auth_provider_x509_cert_url": process.env.auth_provider_x509_cert_url,
+            "client_x509_cert_url": process.env.client_x509_cert_url
+        }
     });
 
     const client = await auth.getClient();
