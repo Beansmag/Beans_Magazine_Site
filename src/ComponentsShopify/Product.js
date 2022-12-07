@@ -188,20 +188,20 @@ export default () => {
 			]
 		  }
 		//Call API here
-		fetch(
-            `https://${proceess.env.REACT_APP_SANITY_CLIENTID}.api.sanity.io/v2021-06-07/data/mutate/production`,
-            {
-                method: "post",
-               headers: {
-                     "Content-type": "application/json",
-                    Authorization: `Bearer ${REACT_APP_SANITY_AUTH_TOKEN}`,
-              },
-                body: JSON.stringify(mutations),
-            }
-         )
-        .then((response) => response.json())
-        .then((result) => console.log(result, "result"))
-         .catch((error) => console.error(error.message));
+		// fetch(
+        //     `https://${process.env.REACT_APP_SANITY_CLIENTID}.api.sanity.io/v2021-06-07/data/mutate/production`,
+        //     {
+        //         method: "post",
+        //        headers: {
+        //              "Content-type": "application/json",
+        //             Authorization: `Bearer ${process.env.REACT_APP_SANITY_AUTH_TOKEN}`,
+        //       },
+        //         body: JSON.stringify(mutations),
+        //     }
+        //  )
+        // .then((response) => response.json())
+        // .then((result) => console.log(result, "result"))
+        //  .catch((error) => console.error(error.message));
 		localStorage.setItem("signupToken", randomToken(32) ) ;
 		setShow(false);
 		setShowSuccess(true)
