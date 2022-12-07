@@ -26,7 +26,7 @@ router.post("/saveInExcel", async (req, res) => {
 
       // const worksheet = workbook.addWorksheet("Details");
       // check files
-      workbook.xlsx.readFile("files/users.xlsx").then((data) => {
+      workbook.xlsx.readFile("./files/users.xlsx").then((data) => {
         var worksheet = workbook.getWorksheet("Details");
         var lastRow = worksheet.lastRow ? worksheet.lastRow : null;
 
