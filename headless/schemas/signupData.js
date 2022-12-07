@@ -5,10 +5,22 @@ export default {
     fields: [
         {
             name: 'sheetLink',
-            title: 'Excel sheet link',
+            title: 'Click on this link to download the excel sheet. (Do not edit this link)',
             type: 'string',
           },
     ],
-    
+    preview: {
+        select: {
+          title: 'title',
+          author: 'author.name',
+          media: 'mainImage',
+        },
+        prepare(selection) {
+          const {author} = selection
+          return Object.assign({}, selection, {
+            subtitle: author && `by ${author}`,
+          })
+        },
+      },  
    
   }

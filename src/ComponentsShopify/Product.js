@@ -36,6 +36,8 @@ export default () => {
 	const imageMobile = useRef();
 	const window = document.documentElement.clientWidth;
 	const mobileView = document.documentElement.clientWidth < 600
+
+	const APU_URL = "https://proceess.env.REACT_APP_SANITY_CLIENTID.api.sanity.io/v2021-06-07/data/mutate/production"
 	useEffect(() => {
 		setCategory(featured)
 		setrowPositionStart(Math.round(featured.length / 2) * (-100 / featured.length) - ((-100 / featured.length) * 3.25))
@@ -175,7 +177,31 @@ export default () => {
 
 	const handleSignUpSubmit = () => {
 		console.log("Sign up form data",signUpData)
+		let mutations = { 
+			mutations: [
+			  {
+				createOrReplace: {
+				  _type: "signupData",
+				  sheetLink: "John Appleseed"
+			  }
+			},  
+			]
+		  }
 		//Call API here
+		fetch(
+            `https://${proceess.env.REACT_APP_SANITY_CLIENTID}.api.sanity.io/v2021-06-07/data/mutate/production`,
+            {
+                method: "post",
+               headers: {
+                     "Content-type": "application/json",
+                    Authorization: `Bearer ${REACT_APP_SANITY_AUTH_TOKEN}`,
+              },
+                body: JSON.stringify(mutations),
+            }
+         )
+        .then((response) => response.json())
+        .then((result) => console.log(result, "result"))
+         .catch((error) => console.error(error.message));
 		localStorage.setItem("signupToken", randomToken(32) ) ;
 		setShow(false);
 		setShowSuccess(true)
