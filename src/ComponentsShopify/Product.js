@@ -187,21 +187,22 @@ export default () => {
 			},  
 			]
 		  }
-		//Call API here
-		// fetch(
-        //     `https://${process.env.REACT_APP_SANITY_CLIENTID}.api.sanity.io/v2021-06-07/data/mutate/production`,
-        //     {
-        //         method: "post",
-        //        headers: {
-        //              "Content-type": "application/json",
-        //             Authorization: `Bearer ${process.env.REACT_APP_SANITY_AUTH_TOKEN}`,
-        //       },
-        //         body: JSON.stringify(mutations),
-        //     }
-        //  )
-        // .then((response) => response.json())
-        // .then((result) => console.log(result, "result"))
-        //  .catch((error) => console.error(error.message));
+		// Call API here
+		fetch(
+            `https://m7j507qg.api.sanity.io/v2021-06-07/data/mutate/headless`,
+            {
+                method: "post",
+               headers: {
+                     "Content-type": "application/json",
+                    Authorization: `Bearer skJ9J4jYpXvGmyElqiigM6Nx0x27batj6pfSoQW3WV33SMumBkUHprOIGSZTnBCfUSGIy0rEmv46lcS3H0ZvRzdqdhvvymblA5Fg4SHJnawy7V1cLWPuWk6ImnOuxWrPvrLVvc9kSCJYXE9w7qPAIgIPPM3SbT7bxq5w23QTB2bjXCtwZE1i
+					`,
+              },
+                body: JSON.stringify(mutations),
+            }
+         )
+        .then((response) => response.json())
+        .then((result) => console.log(result, "result"))
+         .catch((error) => console.error(error.message));
 		localStorage.setItem("signupToken", randomToken(32) ) ;
 		setShow(false);
 		setShowSuccess(true)
