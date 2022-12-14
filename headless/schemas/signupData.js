@@ -3,6 +3,11 @@ export default {
     title: "Signup Data (Excel sheet link)",
     type: "document",
     fields: [
+      {
+        title: 'Do you want to show signup dropdown?',
+        name: 'signUpToggle',
+        type: 'boolean'
+      },
         {
             name: "sheetLink",
             title: "Click on this link to preview the excel sheet.",
@@ -18,6 +23,7 @@ export default {
             title: "Please enter google sheet name.",
             type: "string",
         },
+
     ],
     preview: {
         select: {

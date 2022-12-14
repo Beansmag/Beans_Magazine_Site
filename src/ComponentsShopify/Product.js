@@ -120,12 +120,26 @@ export default () => {
     }, [prodModal]);
 
     useEffect(
+
+		
         () =>
-            !localStorage.getItem("signupReqToken") &&
-            !localStorage.getItem("signupToken") &&
-            setTimeout(() => {
-                setShow(true);
-            }, 7000),
+		
+           { sanityClient
+            .fetch(
+                `*[_type == "signupData"]{
+					signUpToggle
+        }`
+            )
+            .then((data) => {
+				
+				data[0].signUpToggle && !localStorage.getItem("signupReqToken") &&
+				!localStorage.getItem("signupToken") &&
+				setTimeout(() => {
+					setShow(true);
+				}, 7000)
+			})
+            .catch(console.error);
+			},
         []
     );
     useEffect(
